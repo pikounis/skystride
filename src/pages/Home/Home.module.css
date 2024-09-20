@@ -1,0 +1,8 @@
+.chartsSection {
+    width:40%;
+}
+@media only screen and (max-width:750px) {
+    .chartsSection {
+    width:100%;
+}
+}
