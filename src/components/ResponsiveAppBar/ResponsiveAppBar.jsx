@@ -7,18 +7,16 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 
 const pages = ['Home', 'Activity', 'Leaderboard', 'Teams'];
 const settings = ['Settings', 'Logout'];
 
 function ResponsiveAppBar() {
-
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -26,6 +24,7 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -38,33 +37,30 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const handlePageNavigation = (page: string) => {
+  const handlePageNavigation = (page) => {
     handleCloseNavMenu();
     if (page === 'Home') {
       navigate('/');
     } else {
       navigate(`/${page.toLowerCase()}`);
     }
+  };
 
+  const handleUserMenuClick = (setting) => {
+    if (setting === 'Logout') {
+      // logout functionality here when we do spring
+      console.log('Logout clicked');
+    } else if (setting === 'Settings') {
+      navigate('/settings');
+    }
+    handleCloseUserMenu();
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          
-          <Box 
-            component="img"
-            sx={{
-              height: 40, 
-              display: { xs: 'none', md: 'flex' },
-              mr: 1,
-            }}
-            alt="Sky Stride Logo"
-            src='/sky_stride_no_background.png'
-          />
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Toolbar disableGutters sx={{ justifyContent: { xs: 'space-between', md: 'flex-start' } }}>
+          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -98,25 +94,18 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <Box 
+            component="img"
             sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              height: 40, 
+              display: { xs: 'flex', md: 'flex' }, 
+              mx: { xs: 'auto', md: 'inherit' }, 
+              mr: 1,
             }}
-          >
-            LOGO
-          </Typography>
+            alt="Sky Stride Logo"
+            src='/sky_stride_no_background.png'
+          />
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -131,7 +120,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <AccountCircleIcon sx={{ color: 'white', fontSize: 40 }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -151,7 +140,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => handleUserMenuClick(setting)}>
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}
@@ -162,4 +151,6 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
+ 
