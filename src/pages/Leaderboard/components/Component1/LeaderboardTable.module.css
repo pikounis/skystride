@@ -1,0 +1,13 @@
+img {
+    max-height: 2em;
+    max-width: 2em;
+}
+
+caption {
+    width: 200px;
+            height: 70px;
+            padding: 10px 10px 10px 10px;
+            border: 5px solid black;
+            margin: 0;
+    text-align: center;
+}
