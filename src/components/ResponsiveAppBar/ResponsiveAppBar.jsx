@@ -48,7 +48,7 @@ function ResponsiveAppBar() {
 
   const handleUserMenuClick = (setting) => {
     if (setting === 'Logout') {
-      // logout functionality here when we do spring
+      // logout functionality here after we do Spring booooot
       console.log('Logout clicked');
     } else if (setting === 'Settings') {
       navigate('/settings');
@@ -57,7 +57,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx = {{ backgroundColor: 'white' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: { xs: 'space-between', md: 'flex-start' } }}>
           <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
@@ -69,7 +69,7 @@ function ResponsiveAppBar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: 'black' }} /> {/* Set color to black */}
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -89,11 +89,12 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => handlePageNavigation(page)}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: 'black' }}>{page}</Typography> {/* Set text color */}
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
           <Box 
             component="img"
             sx={{
@@ -111,16 +112,17 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={() => handlePageNavigation(page)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }} // Set button text color to black
               >
                 {page}
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircleIcon sx={{ color: 'white', fontSize: 40 }} />
+                <AccountCircleIcon sx={{ color: 'black', fontSize: 40 }} /> {/* Set icon color to black */}
               </IconButton>
             </Tooltip>
             <Menu
@@ -141,7 +143,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={() => handleUserMenuClick(setting)}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: 'black' }}>{setting}</Typography> {/* Set menu item color */}
                 </MenuItem>
               ))}
             </Menu>
