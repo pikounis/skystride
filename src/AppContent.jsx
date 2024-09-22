@@ -8,7 +8,7 @@ import Settings from './pages/Settings/Settings';
 import Signup from './pages/Signup/Signup';
 import Teams from './pages/Teams/Teams';
 import Error404 from './pages/Error404/Error404';
-import AppBar from './components/AppBar/AppBar';
+import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
 
 function AppContent() {
@@ -23,7 +23,7 @@ function AppContent() {
   return (
     <div>
       {/* Conditionally render AppBar */}
-      {!hideAppBarAndFooter.includes(location.pathname) && !isErrorPage && <AppBar />}
+      {!hideAppBarAndFooter.includes(location.pathname) && !isErrorPage && <ResponsiveAppBar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
