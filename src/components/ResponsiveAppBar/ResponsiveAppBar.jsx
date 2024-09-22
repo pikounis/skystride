@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -89,38 +90,50 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => handlePageNavigation(page)}>
-                  <Typography sx={{ textAlign: 'center', color: 'black' }}>{page}</Typography> {/* Set text color */}
+                  <Typography sx={{ textAlign: 'center', color: '#707070', '&:hover': { color: '#3348d1' } }}>{page}</Typography> {/* Set text color */}
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-
-          <Box 
-            component="img"
-            sx={{
-              height: 40, 
-              display: { xs: 'flex', md: 'flex' }, 
-              mx: { xs: 'auto', md: 'inherit' }, 
-              mr: 1,
-            }}
-            alt="Sky Stride Logo"
-            src='/sky_stride_no_background.png'
-          />
+          
+          <Link to ="/">
+            <Box 
+              component="img"
+              sx={{
+                height: 34, 
+                display: { xs: 'flex', md: 'flex' }, 
+                mx: { xs: 'auto', md: 'inherit' }, 
+                pr: 1,
+                mb: 0.7,
+                mt: {xs: 1, md: 0}
+              }}
+              alt="Sky Stride Logo"
+              src='/sky_stride_no_background.png'
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={() => handlePageNavigation(page)}
-                sx={{ my: 2, color: 'black', display: 'block' }} // Set button text color to black
-              >
+                sx={{ 
+                  my: 1,
+                  ml: 1, 
+                  color: '#707070', // Set button text color to black
+                  display: 'block',
+                  textTransform: 'capitalize',
+                  fontSize: '16px',
+                  '&:hover': { color: '#3348d1' } // Set hover colour
+                }} 
+                >
                 {page}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Account settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon sx={{ color: 'black', fontSize: 40 }} /> {/* Set icon color to black */}
               </IconButton>
@@ -143,7 +156,9 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={() => handleUserMenuClick(setting)}>
-                  <Typography sx={{ textAlign: 'center', color: 'black' }}>{setting}</Typography> {/* Set menu item color */}
+                  <Typography 
+                    sx={{ textAlign: 'center', color: '#707070', '&:hover': { color: '#3348d1' } }}>{setting}
+                  </Typography> {/* Set menu item color */}
                 </MenuItem>
               ))}
             </Menu>
