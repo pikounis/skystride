@@ -2,12 +2,20 @@ import React from 'react';
 import ActivityTable from './components/ActivityTable';
 import { Typography } from '@mui/material';
 
+function createData(date, exercise, start, finish, totalTime, points) {
+  return { date, exercise, start, finish, totalTime, points };
+}
+
 const rows = [
-  { date: '2024-09-01', exercise: 'Running', start: '08:00', finish: '08:30', totalTime: '30 min', points: 10 },
-  { date: '2024-09-02', exercise: 'Cycling', start: '09:00', finish: '09:45', totalTime: '45 min', points: 15 },
+  createData('2024-09-01', 'Running', '08:00', '08:30', '30 min', 10),
+  createData('2024-09-02', 'Cycling', '09:00', '09:45', '45 min', 15),
+  createData('2024-09-03', 'Swimming', '10:00', '10:30', '30 min', 12),
+  createData('2024-09-04', 'Yoga', '07:00', '08:00', '60 min', 8),
+  createData('2024-09-05', 'Hiking', '06:30', '08:00', '90 min', 20),
+  createData('2024-09-06', 'Weightlifting', '17:00', '18:00', '60 min', 15),
 ];
 
-function Activity() {
+const Activity = () => {
   return (
     <div>
       <Typography variant="h3" component="h1" align="center" m={6}>
@@ -16,6 +24,6 @@ function Activity() {
       <ActivityTable rows={rows} />
     </div>
   );
-}
+};
 
 export default Activity;
