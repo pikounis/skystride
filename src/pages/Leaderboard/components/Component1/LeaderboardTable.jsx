@@ -28,11 +28,9 @@ const rows = [
 
 function LeaderboardTable() {
   return (
-    <div class='.justify-content-center'>
-    <TableContainer component={Paper}>
-      <caption>
-        Leaderboard
-      </caption>
+    <TableContainer 
+      sx = {{}}
+      component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -61,7 +59,6 @@ function LeaderboardTable() {
         </TableBody>
       </Table>
     </TableContainer>
-    </div>
   );
 }
 
