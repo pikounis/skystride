@@ -5,9 +5,9 @@ img {
 
 caption {
     width: 200px;
-            height: 70px;
-            padding: 10px 10px 10px 10px;
-            border: 5px solid black;
-            margin: 0;
+    height: 70px;
+    padding: 10px 10px 10px 10px;
+    border: 5px solid black;
+    margin: 0;
     text-align: center;
 }
