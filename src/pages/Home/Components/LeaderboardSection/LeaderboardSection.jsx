@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Card, Box, Pagination, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Proptype from 'prop-types';
 
-const LeaderboardSection = () => {
+const LeaderboardSection = ({ teams }) => {
   const [page, setPage] = useState(1);
-  const totalPages = 4; // For example, 4 pages
+  const totalPages = teams.length >= 1 ? teams.length : 1; 
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -35,7 +36,9 @@ const LeaderboardSection = () => {
           overflow: 'scroll'
         }}
       >
-        <Typography variant="h6">Another Component</Typography>
+        {teams.length == 0 && 
+          <Typography variant="h6">Please join teams to see your teams here!</Typography>
+        }
       </Box>
 
       {/* Pagination bar at the bottom */}
@@ -69,5 +72,21 @@ const LeaderboardSection = () => {
     </Card>
   );
 };
+
+LeaderboardSection.propType = {
+  // list of teams
+  teams: Proptype.arrayOf(Proptype.shape({
+    name: Proptype.string,
+    imgPath: Proptype.string,
+    // list of people
+    leaderboard: Proptype.arrayOf(Proptype.shape({
+      position: Proptype.number,
+      name: Proptype.string, 
+      office: Proptype.string,
+      points: Proptype.number,
+      imgPath: Proptype.string
+    }))
+  }))
+}
 
 export default LeaderboardSection;

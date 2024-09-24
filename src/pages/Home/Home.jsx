@@ -53,6 +53,65 @@ const mockDataHoursWorkedOut = [
   }
 ];
 
+const mockdataTeams = [
+  {
+    name: "Team 1",
+    imgPath: "", 
+    leaderboard: [
+      {
+        position: 1,
+        name: "Nicu",
+        office: "Osterley",
+        points: 500,
+        imgPath: ""
+      },
+      {
+        position: 2,
+        name: "Pallav",
+        office: "Osterley",
+        points: 300,
+        imgPath: ""
+      }
+    ]
+  }, 
+  {
+    name: "Team 2",
+    imgPath: "", 
+    leaderboard: [
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: ""
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: ""
+      }
+    ]
+  }
+]
+
+// {
+//   // list of teams
+//   teams: Proptype.arrayOf(Proptype.shape({
+//     name: Proptype.string,
+//     imgPath: Proptype.string,
+//     // list of people
+//     leaderboard: Proptype.arrayOf(Proptype.shape({
+//       position: Proptype.number,
+//       name: Proptype.string, 
+//       office: Proptype.string,
+//       points: Proptype.number,
+//       imgPath: Proptype.string
+//     }))
+//   }))
+// }
+
 function Home() {
   return (
     <div className={styles.container}>
@@ -78,7 +137,7 @@ function Home() {
         </Box>
 
         <Box className={styles.leaderboardSection}>
-          <LeaderboardSection />
+          <LeaderboardSection teams={mockdataTeams}/>
         </Box>
       </Box>
       
