@@ -92,7 +92,7 @@ const ActivityTable = ({ rows }) => {
 
   return (
 
-      <TableContainer component={Paper} sx={{ maxWidth: 800, margin: '0 auto' }} >
+      <TableContainer component={Paper} sx={{ maxWidth: 1000, margin: '0 auto' }} >
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
@@ -110,14 +110,14 @@ const ActivityTable = ({ rows }) => {
               : rows
             ).map((row) => (
               <TableRow key={row.date}>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" sx={{ width: '20%' }}>
                   {row.date}
                 </TableCell>
-                <TableCell style={{ width: 160 }}>{row.exercise}</TableCell>
-                <TableCell style={{ width: 160 }}>{row.start}</TableCell>
-                <TableCell style={{ width: 160 }}>{row.finish}</TableCell>
-                <TableCell style={{ width: 160 }}>{row.total_time}</TableCell>
-                <TableCell style={{ width: 50 }}>
+                <TableCell sx={{ width: '20%' }}>{row.exercise}</TableCell>
+                <TableCell sx={{ width: '20%' }}>{row.start}</TableCell>
+                <TableCell sx={{ width: '20%' }}>{row.finish}</TableCell>
+                <TableCell sx={{ width: '20%' }}>{row.total_time}</TableCell>
+                <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <EditExercise />
                 </TableCell>
               </TableRow>
