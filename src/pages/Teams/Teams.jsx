@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import RadioButtons from "./components/RadioButtons/RadioButtons";
 import TeamsSearch from './components/TeamsSearch/TeamsSearch';
 import CreateTeam from './components/CreateTeam/CreateTeam';
-import TeamCard from "./components/TeamCard/TeamCard";
+import CardWrapper from "./components/CardWrapper/CardWrapper";
 
 function Teams() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -28,7 +28,7 @@ function Teams() {
                 <CreateTeam onClick={handleButtonClick} />
             </div>
             <div>
-                <TeamCard/>
+                <CardWrapper />
             </div>
         </div>
     );
