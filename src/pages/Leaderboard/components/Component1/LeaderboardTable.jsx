@@ -15,7 +15,7 @@ import team from './teamsImages/team.jpg';
 
 // Bootstrap CSS + CSS file import
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./LeaderboardTable.module.css";
+import styles from './LeaderboardTable.module.css';
 
 function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
   return { occupiedPlace, username, teamEmoji, officeLocation, points };
@@ -28,9 +28,26 @@ const rows = [
   createData('7th', 'Player 4', team, 'Leeds', 87),
 ];
 
+const myPlace = [
+  createData('7th', 'Player 4', team, 'Leeds', 87)
+];
+
 const tableCellStyle = {
-  fontSize: 22,
-  fontWeight: 'bold'
+  fontSize: '2.5vw',
+  fontWeight: 'bold',
+  fontFamily: 'Trebuchet MS'
+};
+
+const textInTable = {
+  fontFamily: 'Trebuchet MS',
+  fontSize: '2.25vw',
+  fontStyle: 'italic'
+};
+
+const positionAndPointsStyle = {
+  fontFamily: 'Trebuchet MS',
+  fontSize: '2.25vw',
+  fontWeight: 'bold',
 };
 
 function LeaderboardTable() {
@@ -47,11 +64,12 @@ function LeaderboardTable() {
           width: '90%',
           my: '2.5%',
           borderRadius: '5%',
+          border: 1,
         }}
         component={Paper}
       >
 
-        <Typography className = "caption"
+        <Typography
           level = 'h2'
           sx = {{ flex: '1 1 100%' }}
           id = 'tableTitle'
@@ -60,31 +78,41 @@ function LeaderboardTable() {
           justifyContent = 'center'
           alignItems = 'center'
           py = '1%'
-          fontSize = {38}
-          backgroundColor = 'rgba(100, 100, 100, 0.05)'
-          
+          fontSize = '4.5vw'      
         >
           <caption>Leaderboard</caption>
         </Typography>
 
         <Table sx={{ 
-          minWidth: 100,
           backgroundColor: 'rgba(100, 100, 100, 0.12)',
           }} 
           aria-label="simple table"
-          options = {{
-
-          }}
         >
-          <TableHead>
+          
+          <TableHead
+            sx = {{
+              borderTop: 2,
+              borderBottom: 2,
+            }}>
             <TableRow>
-              <TableCell align = 'center' style = {tableCellStyle}> Position</TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>Username</TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>Team</TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>Office</TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>Points</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>
+                Position
+              </TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>
+                Username
+              </TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>
+                Team
+              </TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>
+                Office
+              </TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>
+                Points
+              </TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {rows.map((row) => (
               <TableRow
@@ -93,13 +121,53 @@ function LeaderboardTable() {
                   '&:last-child td, &:last-child th': { border: 0 },
                 }}
               >
-                <TableCell  align="center" component="th" scope="row">
+                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row">
                   {row.occupiedPlace}
                 </TableCell>
-                <TableCell align="center">{row.username}</TableCell>
-                <TableCell align="center">{<img src={row.teamEmoji} class='img-fluid' alt="team emoji"></img>}</TableCell>
-                <TableCell align="center">{row.officeLocation}</TableCell>
-                <TableCell align="center">{row.points}</TableCell>
+                <TableCell style = {textInTable} align="center">
+                  {row.username}
+                </TableCell>
+                <TableCell className = {styles.rank} align="center">
+                  {<img src={row.teamEmoji} class='img-fluid' alt="team emoji"></img>}
+                </TableCell>
+                <TableCell style = {textInTable} align="center">
+                  {row.officeLocation}
+                </TableCell>
+                <TableCell style = {positionAndPointsStyle} align="center">
+                  {row.points}
+                </TableCell>
+              </TableRow>
+            ))}
+
+            <TableRow >
+              <TableCell colSpan={5} className = {styles.dots} align='center'>
+              </TableCell>
+            </TableRow>
+
+            {myPlace.map((row) => (
+              <TableRow
+                key={row.occupiedPlace}
+                sx={{ 
+                  '&:last-child td, &:last-child th': { border: 0 },
+                  borderTop: 1,
+                }}
+                className = {styles.userRow}
+              >
+                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row">
+                  {row.occupiedPlace}
+                </TableCell>
+                <TableCell style = {textInTable} align="center">
+                  {row.username}
+                </TableCell>
+                <TableCell align="center">
+                  {<img src={row.teamEmoji} class='img-fluid' alt="team emoji"></img>}
+                </TableCell>
+                <TableCell style = {textInTable} align="center">
+                  {row.officeLocation}
+                </TableCell>
+                <TableCell style = {positionAndPointsStyle} align="center">
+                  {row.points}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
