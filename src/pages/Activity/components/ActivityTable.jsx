@@ -17,6 +17,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import EditExercise from './EditExercise';
+import styles from '../Activity.module.css'; 
 
 // Pagination Actions Component
 function TablePaginationActions(props) {
@@ -91,60 +92,60 @@ const ActivityTable = ({ rows }) => {
   };
 
   return (
-
-      <TableContainer component={Paper} sx={{ maxWidth: 1000, margin: '0 auto' }} >
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell>Exercise</TableCell>
-              <TableCell>Start</TableCell>
-              <TableCell>Finish</TableCell>
-              <TableCell>Total Time</TableCell>
-              <TableCell></TableCell>
+    <TableContainer component={Paper} className={styles.tableContainer}>
+      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow className={styles.tableHeader}>
+            <TableCell className={styles.tableHeaderCell}>Date</TableCell>
+            <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
+            <TableCell className={styles.tableHeaderCell}>Start</TableCell>
+            <TableCell className={styles.tableHeaderCell}>Finish</TableCell>
+            <TableCell className={styles.tableHeaderCell}>Total Time</TableCell>
+            <TableCell className={styles.tableHeaderCell}>Points</TableCell>
+            <TableCell className={styles.tableHeaderCell}></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(rowsPerPage > 0
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : rows
+          ).map((row) => (
+            <TableRow className={styles.tableBodyRow} key={row.date}>
+              <TableCell className={styles.tableBodyCell} component="th" scope="row">
+                {row.date}
+              </TableCell>
+              <TableCell className={styles.tableBodyCell}>{row.exercise}</TableCell>
+              <TableCell className={styles.tableBodyCell}>{row.start}</TableCell>
+              <TableCell className={styles.tableBodyCell}>{row.finish}</TableCell>
+              <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
+              <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
+              <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <EditExercise />
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <TableRow key={row.date}>
-                <TableCell component="th" scope="row" sx={{ width: '20%' }}>
-                  {row.date}
-                </TableCell>
-                <TableCell sx={{ width: '20%' }}>{row.exercise}</TableCell>
-                <TableCell sx={{ width: '20%' }}>{row.start}</TableCell>
-                <TableCell sx={{ width: '20%' }}>{row.finish}</TableCell>
-                <TableCell sx={{ width: '20%' }}>{row.total_time}</TableCell>
-                <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <EditExercise />
-                </TableCell>
-              </TableRow>
-            ))}
+          ))}
 
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[]}
-                colSpan={6}
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                ActionsComponent={TablePaginationActions}
-              />
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
             </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
-
+          )}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[]}
+              colSpan={6}
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
   );
 };
 

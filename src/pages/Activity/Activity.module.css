@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.tableContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .tableHeader {
+    background-color: #7c08f5; 
+  }
+  
+  .tableHeaderCell {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 3px solid #d72990;
+    text-transform: uppercase;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .tableBodyRow {
+    transition: background-color 0.3s;
+  }
+  
+  .tableBodyRow:hover {
+    background-color: rgb(124,8,245, 0.1);
+  }
+  
+  .tableBodyCell {
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .pointsCell {
+    font-size: 1rem;
+    color: #d72990;
+  }
+  
