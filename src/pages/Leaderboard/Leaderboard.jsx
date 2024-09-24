@@ -6,9 +6,8 @@ import kitsunelogo from './Static/kitsunelogo.jpg';
 
 // action points:
 // change the padding and shape around the team profile
-//style the team nanme font better
+//style the team name font better
 //spacing for points above the bar
-
 
 function Leaderboard() {
   return (
@@ -30,17 +29,13 @@ function Leaderboard() {
         />
         <RankingCard
           rank={3}
-          teamName="Pythonic Pavillion"
+          teamName="Pythonic Pavilion"
           points={65}
           profileImage={kitsunelogo}
         />
-            </div>
+      </div>
     </div>
   );
 }
 
 export default Leaderboard;
-
-
-
-

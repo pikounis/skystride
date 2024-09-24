@@ -20,4 +20,3 @@ function RankingCard({ rank, teamName, points, profileImage }) {
 }
 
 export default RankingCard;
-
