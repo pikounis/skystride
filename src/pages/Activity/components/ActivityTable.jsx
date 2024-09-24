@@ -1,23 +1,107 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableFooter from '@mui/material/TableFooter';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import TablePaginationActions from './TablePaginationActions';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import TableHead from '@mui/material/TableHead';
 import IconButton from '@mui/material/IconButton';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
 
-const ActivityTable = ({ rows }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
 
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
+
+function createData(date, exercise, start, finish, total_time) {
+  return { date, exercise, start, finish, total_time};
+}
+
+const rows = [
+  createData('2024-09-01', 'Running', '08:00', '08:30', '30 min', 10),
+  createData('2024-09-02', 'Cycling', '09:00', '09:45', '45 min', 15),
+  createData('2024-09-03', 'Swimming', '10:00', '10:30', '30 min', 12),
+  createData('2024-09-04', 'Yoga', '07:00', '08:00', '60 min', 8),
+  createData('2024-09-05', 'Hiking', '06:30', '08:00', '90 min', 20),
+  createData('2024-09-06', 'Weightlifting', '17:00', '18:00', '60 min', 15),
+  createData('2024-09-01', 'Running', '08:00', '08:30', '30 min', 10),
+  createData('2024-09-02', 'Cycling', '09:00', '09:45', '45 min', 15),
+  createData('2024-09-03', 'Swimming', '10:00', '10:30', '30 min', 12),
+  createData('2024-09-04', 'Yoga', '07:00', '08:00', '60 min', 8),
+  createData('2024-09-05', 'Hiking', '06:30', '08:00', '90 min', 20),
+  createData('2024-09-06', 'Weightlifting', '17:00', '18:00', '60 min', 15),
+];
+
+export default function CustomPaginationActionsTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -31,67 +115,76 @@ const ActivityTable = ({ rows }) => {
   };
 
   return (
-    <Box sx={{ mx: { xs: 0, md: 4, lg: 28 } }}> 
-        <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="activity table">
-            <TableHead>
-            <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Exercise</TableCell>
-                <TableCell>Start</TableCell>
-                <TableCell>Finish</TableCell>
-                <TableCell>Total Time</TableCell>
-                <TableCell>Points</TableCell>
-                <TableCell></TableCell> {/* Blank header */}
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell>Exercise</TableCell>
+            <TableCell>Start</TableCell>
+            <TableCell>Finish</TableCell>
+            <TableCell>Total Time</TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {(rowsPerPage > 0
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : rows
+          ).map((row) => (
+            <TableRow key={row.date}>
+              <TableCell component="th" scope="row">
+                {row.date}
+              </TableCell>
+              <TableCell style={{ width: 160 }}>
+                {row.exercise}
+              </TableCell>
+              <TableCell style={{ width: 160 }}>
+                {row.start}
+              </TableCell>
+              <TableCell style={{ width: 160 }}>
+                {row.finish}
+              </TableCell>
+              <TableCell style={{ width: 160 }}>
+                {row.total_time}
+              </TableCell>
+              <TableCell style={{ width: 160 }}>
+              {/* <IconButton>
+                <MoreVertIcon />
+              </IconButton> */}
+              </TableCell>
             </TableRow>
-            </TableHead>
-            <TableBody>
-            {(rowsPerPage > 0
-                ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : rows
-            ).map((row) => (
-                <TableRow key={row.date}>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.exercise}</TableCell>
-                <TableCell>{row.start}</TableCell>
-                <TableCell>{row.finish}</TableCell>
-                <TableCell>{row.totalTime}</TableCell>
-                <TableCell>{row.points}</TableCell>
-                <TableCell>
-                    <IconButton>
-                        <MoreVertIcon /> {/* Edit Activity Menu */}
-                    </IconButton>
-                </TableCell>
-                </TableRow>
-            ))}
-            {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={7} />
-                </TableRow>
-            )}
-            </TableBody>
-            <TableFooter>
-            <TableRow>
-                <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                colSpan={7}
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-                />
+          ))}
+
+          {emptyRows > 0 && (
+            <TableRow style={{ height: 53 * emptyRows }}>
+              <TableCell colSpan={6} />
             </TableRow>
-            </TableFooter>
-        </Table>
-        </TableContainer>
-    </Box>
+          )}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              colSpan={3}
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              slotProps={{
+                select: {
+                  inputProps: {
+                    'aria-label': 'rows per page',
+                  },
+                  native: true,
+                },
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
   );
-};
-
-ActivityTable.propTypes = {
-  rows: PropTypes.array.isRequired,
-};
-
-export default ActivityTable;
+}
