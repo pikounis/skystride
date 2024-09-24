@@ -4,6 +4,7 @@ import LeaderboardSection from './Components/LeaderboardSection/LeaderboardSecti
 import LineGraph from './Components/LineGraph/LineGraph';
 import styles from './Home.module.css';
 import { Box } from '@mui/material';
+import ProgressBar from './Components/AchievementsSection/ProgressBar';
 
 const mockDataName = "Jack";
 
@@ -140,6 +141,26 @@ function Home() {
           <LeaderboardSection teams={mockdataTeams}/>
         </Box>
       </Box>
+
+      <Box className={styles.achievementsSection}>
+        <h1 className={styles.achievementsTitle}>Achievements In Progress</h1>
+      
+      <ProgressBar 
+        achievementTitle="Novice Runner"
+        achievementProgress={60} 
+        progressLeft={40}
+        />
+
+    <ProgressBar 
+        achievementTitle="Master Novice Runner"
+        achievementProgress={90} 
+        progressLeft={10}
+        />
+
+
+      </Box>
+        
+      
       
     </div>
   );
