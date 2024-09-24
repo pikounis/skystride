@@ -1,8 +1,20 @@
 .chartsSection {
-    width:40%;
+    width:46%;
 }
-@media only screen and (max-width:750px) {
+
+.leaderboardSection {
+    border-radius: 40px;
+    height: 100%;
+    width: 46%;
+    background-color: aquamarine;
+}
+
+@media only screen and (max-width:1400px) {
     .chartsSection {
-    width:100%;
+        width: 100%;
+    }
+    .leaderboardSection {
+        width: 100%;
+    }
 }
-}
+

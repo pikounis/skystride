@@ -3,7 +3,7 @@ import { Card, Box, Pagination, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const LeaderboardsSection = () => {
+const LeaderboardSection = () => {
   const [page, setPage] = useState(1);
   const totalPages = 4; // For example, 4 pages
 
@@ -14,8 +14,8 @@ const LeaderboardsSection = () => {
   return (
     <Card
       sx={{
-        width: 300,
-        height: 500,
+        // width: 300,
+        // height: 500,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -23,7 +23,7 @@ const LeaderboardsSection = () => {
         overflow: 'hidden',
       }}
     >
-      {/* Box to hold the inner component */}
+      {/* Box to hold the inner table component */}
       <Box
         sx={{
           flexGrow: 1,
@@ -31,6 +31,8 @@ const LeaderboardsSection = () => {
           justifyContent: 'center',
           alignItems: 'center',
           padding: 2,
+          height: '70vh',
+          overflow: 'scroll'
         }}
       >
         <Typography variant="h6">Another Component</Typography>
@@ -68,4 +70,4 @@ const LeaderboardsSection = () => {
   );
 };
 
-export default LeaderboardsSection;
+export default LeaderboardSection;

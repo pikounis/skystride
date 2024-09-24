@@ -1,8 +1,9 @@
 // pages/Home.js
 import React from 'react';
-import LeaderboardsSection from './Components/LeaderboardSection/LeaderboardSection';
+import LeaderboardSection from './Components/LeaderboardSection/LeaderboardSection';
 import LineGraph from './Components/LineGraph/LineGraph';
 import styles from './Home.module.css';
+import { Box } from '@mui/material';
 
 const mockDataName = "Jack";
 
@@ -56,18 +57,30 @@ function Home() {
   return (
     <div className={styles.container}>
       <h1>Hello {mockDataName}!</h1>
+      <Box sx={{ 
+          display: 'flex', 
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignContent: 'stretch',
+          width: '98%',
+          flexWrap: 'wrap',
+          padding: '1%'
+        }}> 
+        <Box className={styles.chartsSection}>
+          <h4>Points earned in the last 5 days</h4>
+          <LineGraph data={mockDataPoints}/>
+          
+          <h4>Hours worked out in the last 5 days</h4>
+          <Box className={styles.hoursWorkedChart}>
+            {/* Add filtering component here */}
+            <LineGraph data={mockDataHoursWorkedOut} />
+          </Box>
+        </Box>
 
-      <h4>Points earned in the last 5 days</h4>
-      <div className={styles.chartsSection}>
-        <LineGraph data={mockDataPoints}/>
-        
-        <h4>Hours worked out in the last 5 days</h4>
-        <div className={styles.hoursWorkedChart}>
-          {/* Add filtering component here */}
-          <LineGraph data={mockDataHoursWorkedOut} />
-        </div>
-        
-      </div>
+        <Box className={styles.leaderboardSection}>
+          <LeaderboardSection />
+        </Box>
+      </Box>
       
     </div>
   );
