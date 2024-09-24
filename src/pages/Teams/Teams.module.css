@@ -1,0 +1,47 @@
+.container {
+    text-align: center;
+}
+
+.title {
+    padding-top: 30px;
+}
+
+.radioContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.searchContainer, .buttonContainer {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+/* Add padding to the control bar for desktop */
+.controlBar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 20px;
+    padding-left: 100px;  
+    padding-right: 100px;
+    gap: 20px; 
+    padding-bottom: 50px;
+}
+
+/* Make the components stack vertically and center them on mobile */
+@media (max-width: 768px) {
+    .controlBar {
+        flex-direction: column;
+        align-items: center; 
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .controlBar > * {
+        margin-bottom: 15px; 
+    }
+}
