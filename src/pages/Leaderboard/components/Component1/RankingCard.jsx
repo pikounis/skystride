@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './RankingCard.module.css';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+
 
 function RankingCard({ rank, teamName, points, profileImage }) {
   return (
     <div className={styles.rankingCard}>
       <div className={styles.rankBadge}>{rank}</div>
       <div className={styles.cardContent}>
+      <LeaderboardIcon className={styles.leaderboardIcon} /> 
         <img src={profileImage} alt={`${teamName} logo`} className={styles.profileImage} />
         <h2 className={styles.teamName}>{teamName}</h2>
         <div className={styles.pointsContainer}>

@@ -3,6 +3,8 @@ import RankingCard from './components/Component1/RankingCard';
 import lionlogo from './Static/lionlogo.jpeg';
 import demonlogo from './Static/demonlogo.jpeg';
 import kitsunelogo from './Static/kitsunelogo.jpg';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard'; // Import the icon
+
 
 // action points:
 // change the padding and shape around the team profile
