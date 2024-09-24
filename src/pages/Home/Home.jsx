@@ -56,41 +56,125 @@ const mockDataHoursWorkedOut = [
 const mockdataTeams = [
   {
     name: "Team 1",
-    imgPath: "", 
+    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg", 
     leaderboard: [
       {
         position: 1,
         name: "Nicu",
         office: "Osterley",
         points: 500,
-        imgPath: ""
+        imgPath: "https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100270.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1727136000&semt=ais_hybrid"
       },
       {
         position: 2,
         name: "Pallav",
         office: "Osterley",
         points: 300,
-        imgPath: ""
+        imgPath: "https://img.freepik.com/premium-photo/elevate-your-brand-with-friendly-avatar-that-reflects-professionalism-ideal-sales-managers_1283595-18531.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1727136000&semt=ais_hybrid"
       }
     ]
   }, 
   {
     name: "Team 2",
-    imgPath: "", 
+    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg", 
     leaderboard: [
       {
         position: 1,
         name: "Taso",
         office: "Osterley",
         points: 300,
-        imgPath: ""
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
       },
       {
         position: 1,
         name: "Tanya",
         office: "Osterley",
         points: 300,
-        imgPath: ""
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
+      },
+      {
+        position: 1,
+        name: "Taso",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
+      },
+      {
+        position: 1,
+        name: "Tanya",
+        office: "Osterley",
+        points: 300,
+        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
       }
     ]
   }
