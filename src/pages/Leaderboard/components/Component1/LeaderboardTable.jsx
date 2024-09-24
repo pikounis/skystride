@@ -28,6 +28,11 @@ const rows = [
   createData('7th', 'Player 4', team, 'Leeds', 87),
 ];
 
+const tableCellStyle = {
+  fontSize: 22,
+  fontWeight: 'bold'
+};
+
 function LeaderboardTable() {
   return (
     <Box
@@ -40,12 +45,13 @@ function LeaderboardTable() {
       <TableContainer 
         sx = {{
           width: '90%',
-          my: '2.5%'
+          my: '2.5%',
+          borderRadius: '5%',
         }}
         component={Paper}
       >
 
-        <Typography
+        <Typography className = "caption"
           level = 'h2'
           sx = {{ flex: '1 1 100%' }}
           id = 'tableTitle'
@@ -53,28 +59,39 @@ function LeaderboardTable() {
           display = 'flex'
           justifyContent = 'center'
           alignItems = 'center'
+          py = '1%'
+          fontSize = {38}
+          backgroundColor = 'rgba(100, 100, 100, 0.05)'
+          
         >
-          Leaderboard
+          <caption>Leaderboard</caption>
         </Typography>
 
         <Table sx={{ 
           minWidth: 100,
-          }} aria-label="simple table"
+          backgroundColor: 'rgba(100, 100, 100, 0.12)',
+          }} 
+          aria-label="simple table"
+          options = {{
+
+          }}
         >
           <TableHead>
             <TableRow>
-              <TableCell>Position</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Team</TableCell>
-              <TableCell>Office</TableCell>
-              <TableCell>Points</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}> Position</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>Username</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>Team</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>Office</TableCell>
+              <TableCell align = 'center' style = {tableCellStyle}>Points</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow
                 key={row.occupiedPlace}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
+                sx={{ 
+                  '&:last-child td, &:last-child th': { border: 0 },
+                }}
               >
                 <TableCell  align="center" component="th" scope="row">
                   {row.occupiedPlace}

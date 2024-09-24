@@ -2,3 +2,14 @@ img {
     max-height: 2em;
     max-width: 2em;
 }
+
+caption {
+  background-clip: text;
+  background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#teest {
+    font-size: 30;
+}
