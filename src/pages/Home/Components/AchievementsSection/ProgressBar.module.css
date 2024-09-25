@@ -45,7 +45,7 @@
     border-right:solid black;
     border-color: black;
     background: linear-gradient(145deg, #ff00a0 0%, #19a0ff 100%, #f80032 );
-    animation: progress 0.4s ease-in-out forwards;
+    animation: progress 0.7s ease-in-out forwards;
     opacity: 0;
 }
 
