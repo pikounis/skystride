@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import styles from '../Activity.module.css';
 
 const options = [
   'Edit',
@@ -17,8 +18,10 @@ export default function LongMenu() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+
   };
 
   return (
@@ -31,13 +34,11 @@ export default function LongMenu() {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <MoreVertIcon />
+        <MoreVertIcon className={styles.editExerciseButton}/>
       </IconButton>
+      
       <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button',
-        }}
+        id="long-menu" MenuListProps={{ 'aria-labelledby': 'long-button' }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

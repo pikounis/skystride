@@ -119,7 +119,7 @@ const ActivityTable = ({ rows }) => {
               <TableCell className={styles.tableBodyCell}>{row.finish}</TableCell>
               <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
               <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
-              <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <TableCell className={styles.tableBodyCell}>
                 <EditExercise />
               </TableCell>
             </TableRow>
@@ -127,15 +127,16 @@ const ActivityTable = ({ rows }) => {
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell colSpan={7} />
             </TableRow>
           )}
         </TableBody>
+
         <TableFooter>
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[]}
-              colSpan={6}
+              colSpan={7}
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -144,6 +145,7 @@ const ActivityTable = ({ rows }) => {
             />
           </TableRow>
         </TableFooter>
+
       </Table>
     </TableContainer>
   );

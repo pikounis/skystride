@@ -2,33 +2,33 @@ import React from 'react';
 import ActivityTable from './components/ActivityTable';
 import { Typography } from '@mui/material';
 
-
+// function creates an array of objects with these fields for the table
 function createData(date, exercise, start, finish, total_time, points) {
   return { date, exercise, start, finish, total_time, points };
 }
 
 // Sample data
 const rows = [
-  createData('2024-09-01', 'Running', '08:00', '08:30', '30 min', 5),
-  createData('2024-09-02', 'Cycling', '09:00', '09:45', '45 min', 10),
-  createData('2024-09-03', 'Swimming', '10:00', '10:30', '30 min', 5),
-  createData('2024-09-04', 'Yoga', '07:00', '08:00', '60 min', 15),
-  createData('2024-09-05', 'Hiking', '06:30', '08:00', '90 min', 20),
-  createData('2024-09-06', 'Weightlifting', '17:00', '18:00', '60 min', 15),
-  createData('2024-09-07', 'Pilates', '08:00', '09:00', '60 min', 15),
-  createData('2024-09-08', 'Dancing', '18:00', '19:00', '60 min', 15),
-  createData('2024-09-09', 'Boxing', '10:00', '11:00', '60 min', 15),
-  createData('2024-09-10', 'Skiing', '12:00', '14:00', '120 min', 25),
-  createData('2024-09-11', 'Rock Climbing', '14:00', '15:30', '90 min', 20),
-  createData('2024-09-12', 'Soccer', '16:00', '18:00', '120 min', 25),
-  createData('2024-09-13', 'Baseball', '09:00', '11:00', '120 min', 25),
-  createData('2024-09-14', 'Tennis', '15:00', '16:30', '90 min', 20),
-  createData('2024-09-15', 'Rowing', '07:00', '08:30', '90 min', 20),
-  createData('2024-09-16', 'Kickboxing', '18:00', '19:00', '60 min', 15),
-  createData('2024-09-17', 'Golf', '08:00', '10:00', '120 min', 25),
-  createData('2024-09-18', 'CrossFit', '19:00', '20:00', '60 min', 15),
-  createData('2024-09-19', 'Running', '07:00', '08:00', '60 min', 15),
-  createData('2024-09-20', 'Ballet', '20:00', '21:00', '60 min', 15)
+  createData('Sept 01, 2024', 'Running', '08:00', '08:30', '30 min', 5),
+  createData('Sept 02, 2024', 'Cycling', '09:00', '09:45', '45 min', 10),
+  createData('Sept 03, 2024', 'Swimming', '10:00', '10:30', '30 min', 5),
+  createData('Sept 04, 2024', 'Yoga', '07:00', '08:00', '60 min', 15),
+  createData('Sept 05, 2024', 'Hiking', '06:30', '08:00', '90 min', 20),
+  createData('Sept 06, 2024', 'Weightlifting', '17:00', '18:00', '60 min', 15),
+  createData('Sept 07, 2024', 'Pilates', '08:00', '09:00', '60 min', 15),
+  createData('Sept 08, 2024', 'Dancing', '18:00', '19:00', '60 min', 15),
+  createData('Sept 09, 2024', 'Boxing', '10:00', '11:00', '60 min', 15),
+  createData('Sept 10, 2024', 'Skiing', '12:00', '14:00', '120 min', 25),
+  createData('Sept 11, 2024', 'Rock Climbing', '14:00', '15:30', '90 min', 20),
+  createData('Sept 12, 2024', 'Soccer', '16:00', '18:00', '120 min', 25),
+  createData('Sept 13, 2024', 'Baseball', '09:00', '11:00', '120 min', 25),
+  createData('Sept 14, 2024', 'Tennis', '15:00', '16:30', '90 min', 20),
+  createData('Sept 15, 2024', 'Rowing', '07:00', '08:30', '90 min', 20),
+  createData('Sept 16, 2024', 'Kickboxing', '18:00', '19:00', '60 min', 15),
+  createData('Sept 17, 2024', 'Golf', '08:00', '10:00', '120 min', 25),
+  createData('Sept 18, 2024', 'CrossFit', '19:00', '20:00', '60 min', 15),
+  createData('Sept 19, 2024', 'Running', '07:00', '08:00', '60 min', 15),
+  createData('Sept 20, 2024', 'Ballet', '20:00', '21:00', '60 min', 15)
 ];
 
 
