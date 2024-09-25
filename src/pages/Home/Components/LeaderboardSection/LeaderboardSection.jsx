@@ -3,6 +3,7 @@ import { Card, Box, Pagination, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Proptype from 'prop-types';
+import LeaderboardTable from '../LeaderboardTable/LeaderboardTable';
 
 const LeaderboardSection = ({ teams }) => {
   const [page, setPage] = useState(1);
@@ -36,9 +37,12 @@ const LeaderboardSection = ({ teams }) => {
           overflow: 'scroll'
         }}
       >
-        {teams.length == 0 && 
+        {teams.length == 0 ? 
           <Typography variant="h6">Please join teams to see your teams here!</Typography>
+          :
+          <LeaderboardTable team={teams[page - 1]}/>
         }
+        
       </Box>
 
       {/* Pagination bar at the bottom */}
