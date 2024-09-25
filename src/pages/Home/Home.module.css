@@ -1,5 +1,10 @@
-.chartsSection {
+.leftSection {
     width:46%;
+}
+
+.chartsSection {
+    width: 100%;
+    height: 50%;
 }
 
 .leaderboardSection {
@@ -12,29 +17,20 @@
 /* Needs to be reconfig to not look like ass */
 .achievementsSection{
     position: relative;
-    max-width: 500px;
+    /* max-width: 500px; */
     width: 100%;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: black;
-    background: rgb(241, 241, 241);
+    /* border-radius: 5px; */
+    /* border-style: solid; */
+    /* border-color: black; */
+    /* background: rgb(241, 241, 241); */
     margin: 0 15px;
     padding: 20px;
-    
+    height: 50%;
 }
 
-.achievementsTitle{
-    /* text-align: center; */
-    /* background: rgb(198, 77, 77); */
-    font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
-    /* border-radius: 50px; */
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
 
 @media only screen and (max-width:1400px) {
-    .chartsSection {
+    .leftSection {
         width: 100%;
     }
     .leaderboardSection {
