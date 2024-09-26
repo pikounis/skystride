@@ -1,0 +1,32 @@
+ .img {
+    max-height: 2.5vw;
+    max-width: 2.5vw;
+    clip-path: circle();
+}
+
+.caption {
+  background-clip: text;
+  background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rank:hover {
+  transform: scale(1.2);
+}
+
+.dots:after {
+    content: '\2807';
+    font-size: 8vw;
+}
+
+.dots {
+    display: 'flex';
+    justify-content: 'center';
+    align-items: 'center';
+}
+
+.userRow {
+    background-color: rgba(100, 100, 100, 0.4);
+    padding-bottom: 10%;
+}
