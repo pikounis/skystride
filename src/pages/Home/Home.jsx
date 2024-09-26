@@ -230,13 +230,13 @@ function Home() {
             <Typography variant='h5' sx={{fontWeight: 'bolder'}}>Achievements In Progress</Typography>
             <ProgressBar
               achievementTitle="Novice Runner"
-              achievementProgress={90}
-              progressLeft={10}
+              achievementProgress={60}
+              progressLeft={40}
               badgeIcon={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6kco1vTUHJToNzQBlwRoI1stXwneicJ1_g&s"}
             />
             <ProgressBar
               achievementTitle="Master Novice Runner"
-              achievementProgress={70}
+              achievementProgress={40}
               progressLeft={30}
               badgeIcon={"https://png.pngtree.com/png-vector/20240723/ourlarge/pngtree-athletic-runner-vintage-badge-design-png-image_12965334.png"}
             />
