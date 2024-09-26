@@ -1,0 +1,12 @@
+.teamImg {
+    max-width: 100px;
+    max-height: 100px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 5px solid black;
+}
+
+/* .tableFont {
+    font-size: 1.5rem;
+} */
