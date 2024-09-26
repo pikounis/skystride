@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './RankingCard.module.css';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { Box, Typography } from '@mui/material';
 
-
+//"../../Static/" + profileImage
 function RankingCard({ rank, teamName, points, profileImage }) {
   return (
     <Box className={styles.rankingCard}>

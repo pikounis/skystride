@@ -1,24 +1,104 @@
 import React, { useState } from "react";
 import { Tab, Box, Typography } from "@mui/material";
 // import SwipeableViews from 'react-swipeable-views';
-import RankingCard from "./components/RankingCard/RankingCard";
 import lionlogo from "./Static/lionlogo.jpeg";
 import demonlogo from "./Static/demonlogo.jpeg";
 import kitsunelogo from "./Static/kitsunelogo.jpg";
+
 import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
-import styles from './components/LeaderboardTable/LeaderboardTable.module.css';
+import { TabContext, TabList } from "@mui/lab";
+import Podium from "./components/Podium/Podium";
+import styles from './Leaderboard.module.css';
 
 function Leaderboard() {
+  const [leaderboardGroup, setleaderboardGroup] = useState("Teams")
+  const [podiumData, setPodiumData] = useState({
+    first: {
+      img: lionlogo,
+      name: "Sky Central Coders",
+      points: 85,
+    },
+    second: {
+      img: demonlogo,
+      name: "Hub Hackers",
+      points: 75,
+    },
+    third: {
+      img: kitsunelogo,
+      name: "Pythonic Pavilion",
+      points: 65,
+    }
+  });
   const [value, setValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if(newValue === 1) {
+      // DO API CALL FOR TEAMS DATA
+      setPodiumData({
+        first: {
+          img: lionlogo,
+          name: "Sky Central Coders",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Hub Hackers",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Pythonic Pavilion",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Teams")
+    } else if (newValue === 2) {
+      // DO API CALL FOR USER DATA
+      setPodiumData({
+        first: {
+          img: lionlogo,
+          name: "Jiya",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Taso",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Tanya",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Users")
+    } else if (newValue === 3) {
+      // DO API CALL FOR OFFICE DATA
+      setPodiumData({
+        first: {
+          img: lionlogo,
+          name: "Osterley",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Leeds",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Livingston",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Offices")
+    }
   };
 
-  const handleSwipeChange = (index) => {
-    setValue(index);
-  };
+  // const handleSwipeChange = (index) => {
+  //   setValue(index);
+  // };
 
   return (
     <TabContext value={value}>
@@ -35,156 +115,20 @@ function Leaderboard() {
         </TabList>
       </Box>
 
+      <Typography
+        variant="h2"
+        className={styles.captions}
+        style={{
+          textAlign: "center",
+          marginTop: "1.5rem",
+        }}>Top {leaderboardGroup}</Typography>
+
       {/* Swipeable Views for Tab Content */}
-      <TabPanel value={1}>
-        {/* Tab 1: Leaderboard with Ranking Cards */}
-        <div>
-          <Typography
-          variant="h2"
-          className ={styles.caption}  
-            style={{
-              textAlign: "center",
-              marginTop: "1.5rem",
-            }}
-          >
-            Top Teams
-            </Typography>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="flex-end"
-            gap="20px"
-            sx={{
-              marginTop: "50px",
-              width: "100%",
-              height: "40vh",
-              "@media (max-width:1200px)": {
-                height: "40vw",
-              },
-            }}
-          >
-            {/* Second Place */}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "15%",
-                height: "100%",
-                justifyContent: "flex-end",
-                "@media (max-width:1200px)": {
-                  width: "28%",
-                },
-              }}
-            >
-              <RankingCard
-                rank={2}
-                teamName="Hub Hackers"
-                points={75}
-                profileImage={demonlogo}
-              />
-              <Box
-                sx={{
-                  height: "15%",
-                  width: "90%",
-                  backgroundColor: "silver",
-                  borderRadius: "10px",
-                }}
-              />
-            </Box>
-
-            {/* First Place */}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "15%",
-                height: "100%",
-                justifyContent: "flex-end",
-                "@media (max-width:1200px)": {
-                  width: "28%",
-                },
-              }}
-            >
-              <RankingCard
-                rank={1}
-                teamName="Sky Central Coders"
-                points={85}
-                profileImage={lionlogo}
-              />
-
-              <Box
-                sx={{
-                  height: "23%",
-                  width: "90%",
-                  backgroundColor: "gold",
-                  borderRadius: "10px",
-                }}
-              />
-            </Box>
-
-            {/* Third Place */}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "15%",
-                height: "100%",
-                justifyContent: "flex-end",
-                "@media (max-width:1200px)": {
-                  width: "28%",
-                },
-              }}
-            >
-              <RankingCard
-                rank={3}
-                teamName="Pythonic Pavilion"
-                points={65}
-                profileImage={kitsunelogo}
-              />
-              <Box
-                sx={{
-                  height: "7%",
-                  width: "90%",
-                  backgroundColor: "brown",
-                  borderRadius: "10px",
-                }}
-              />
-            </Box>
-          </Box>
-        </div>
-      </TabPanel>
-
-      {/* Tab 2: Placeholder Content for "USER" */}
-      <TabPanel value={2}>
-        <div>
-          <Box p={3}>
-            <Typography variant="h4" align="center">
-              User
-            </Typography>
-            <Typography align="center">
-              This is where the users leaderboard will be.
-            </Typography>
-          </Box>
-        </div>
-      </TabPanel>
-      {/* Tab 3: Placeholder Content for "ORGANISATION" */}
-      <TabPanel value={3}>
-        <div>
-          <Box p={3}>
-            <Typography variant="h4" align="center">
-              Offices
-            </Typography>
-            <Typography align="center">
-              This is where the offices leaderboard will be.
-            </Typography>
-          </Box>
-        </div>
-      </TabPanel>
+      
+      <Podium podium={podiumData} />
       <LeaderboardTable />
     </TabContext>
+    
   );
 }
 
