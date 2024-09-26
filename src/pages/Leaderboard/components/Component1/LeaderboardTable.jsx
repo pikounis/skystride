@@ -78,9 +78,10 @@ function LeaderboardTable() {
           justifyContent = 'center'
           alignItems = 'center'
           py = '1%'
-          fontSize = '4.5vw'      
+          fontSize = '4.5vw' 
+          className ={styles.caption}     
         >
-          <caption>Leaderboard</caption>
+          Leaderboard
         </Typography>
 
         <Table sx={{ 
@@ -128,7 +129,7 @@ function LeaderboardTable() {
                   {row.username}
                 </TableCell>
                 <TableCell className = {styles.rank} align="center">
-                  {<img src={row.teamEmoji} class='img-fluid' alt="team emoji"></img>}
+                  {<img src={row.teamEmoji} class='img-fluid' className={styles.img}alt="team emoji"></img>}
                 </TableCell>
                 <TableCell style = {textInTable} align="center">
                   {row.officeLocation}
@@ -160,7 +161,7 @@ function LeaderboardTable() {
                   {row.username}
                 </TableCell>
                 <TableCell align="center">
-                  {<img src={row.teamEmoji} class='img-fluid' alt="team emoji"></img>}
+                  {<img src={row.teamEmoji} class='img-fluid' className={styles.img} alt="team emoji"></img>}
                 </TableCell>
                 <TableCell style = {textInTable} align="center">
                   {row.officeLocation}
