@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Settings from './pages/Settings/Settings';
 import Signup from './pages/Signup/Signup';
 import Teams from './pages/Teams/Teams';
+import Test from './pages/Test/Test';
 import Error404 from './pages/Error404/Error404';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
@@ -33,6 +34,7 @@ function AppContent() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/teams" element={<Teams />} />
+        <Route path="/test" element={<Test />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
 
