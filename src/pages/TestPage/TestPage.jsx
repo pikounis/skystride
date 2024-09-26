@@ -1,7 +1,7 @@
 // pages/Test.js
 import React, { useEffect, useState } from 'react';
 
-function Test() {
+function TestPage() {
     const [testState, setTestState] = useState("None");
     async function runGet() {
         const response = await fetch(`http://localhost:8081/user/getAll`);
@@ -20,4 +20,4 @@ function Test() {
     );
 }
 
-export default Test;
+export default TestPage;
