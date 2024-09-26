@@ -1,9 +1,5 @@
 import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -12,6 +8,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import sportsData from './sports.json'; 
+import styles from './TimerDialog.module.css';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -21,14 +21,21 @@ export default function TimerDialog({ open, onClose }) {
   const [seconds, setSeconds] = React.useState(0);
   const [isActive, setIsActive] = React.useState(false);
   const [intervalId, setIntervalId] = React.useState(null);
+  const [selectedSport, setSelectedSport] = React.useState(null);
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const startTimer = () => {
     if (!isActive) {
-      setIsActive(true);
-      const newIntervalId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
-      setIntervalId(newIntervalId);
+      if (selectedSport) {
+        setIsActive(true);
+        setErrorMessage(''); // Clear error message if a sport is selected
+        const newIntervalId = setInterval(() => {
+          setSeconds((prevSeconds) => prevSeconds + 1);
+        }, 1000);
+        setIntervalId(newIntervalId);
+      } else {
+        setErrorMessage('Please select a sport before starting the timer.');
+      }
     }
   };
 
@@ -41,6 +48,15 @@ export default function TimerDialog({ open, onClose }) {
     stopTimer();
     setSeconds(0);
   };
+
+  // Cleanup interval when component is unmounted or when sport is deselected
+  React.useEffect(() => {
+    if (!selectedSport && isActive) {
+      // If the sport is cleared, stop the timer
+      stopTimer();
+      setErrorMessage('Sport was removed. Timer stopped.');
+    }
+  }, [selectedSport, isActive]);
 
   React.useEffect(() => {
     return () => clearInterval(intervalId); // Cleanup when the component is unmounted
@@ -66,21 +82,31 @@ export default function TimerDialog({ open, onClose }) {
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
             Timer
           </Typography>
-          {/* <Button autoFocus color="inherit" onClick={onClose}>
-            save
-          </Button> */}
         </Toolbar>
       </AppBar>
-      
-      {/* Timer display and controls */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-        <Typography variant="h3" component="div" sx={{ mb: 4 }}>
+
+      {/* Autocomplete for selecting sport */}
+      <Box className={styles.dialogContainer}>
+        <Autocomplete
+          options={sportsData} 
+          getOptionLabel={(option) => option}
+          onChange={(event, value) => setSelectedSport(value)}
+          renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />}
+          sx={{ width: 300, mb: 4 }}
+        />
+
+        {/* Timer display and controls */}
+        <Typography variant="h3" component="div" className={styles.timerDisplay}>
           {new Date(seconds * 1000).toISOString().substr(11, 8)}
         </Typography>
 
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box className={styles.controls}>
           {!isActive && (
-            <Button variant="contained" color="primary" onClick={startTimer}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={startTimer}
+            >
               Start
             </Button>
           )}
@@ -93,6 +119,13 @@ export default function TimerDialog({ open, onClose }) {
             Reset
           </Button>
         </Box>
+
+        {/* Display error message if sport not selected */}
+        {errorMessage && (
+          <Typography className={styles.errorMessage}>
+            {errorMessage}
+          </Typography>
+        )}
       </Box>
     </Dialog>
   );
