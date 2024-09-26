@@ -33,6 +33,7 @@ const rows = [
 
 
 const Activity = () => {
+
   return (
     <div>
       <Typography variant="h3" component="h1" align="center" m={6}>
@@ -41,6 +42,7 @@ const Activity = () => {
       <ActivityTable rows={rows} /> {/* Pass rows as props */}
     </div>
   );
+  
 };
 
 export default Activity;

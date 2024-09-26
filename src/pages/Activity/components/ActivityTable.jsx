@@ -21,27 +21,34 @@ import CollapsibleRow from './CollapsibleRow';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../Activity.module.css';
 
-
+// Component for pagination actions (First, Previous, Next, Last buttons)
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, onPageChange } = props;
 
+
+  // Function to handle clicking the first page button
   const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
+    onPageChange(event, 0); // Go to the first page
   };
 
+
+  // Function to handle clicking the previous page button
   const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
+    onPageChange(event, page - 1); // Go to the previous page
   };
 
+  // Function to handle clicking the next page button
   const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
+    onPageChange(event, page + 1); // Go to the next page
   };
 
+  // Function to handle clicking the last page button
   const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / 10) - 1));
+    onPageChange(event, Math.max(0, Math.ceil(count / 10) - 1)); // Go to the last page
   };
 
+  // Render pagination action buttons
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton
@@ -76,24 +83,32 @@ function TablePaginationActions(props) {
   );
 }
 
+// Defines the expected prop types for TablePaginationActions component
 TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired, // Total number of items
+  onPageChange: PropTypes.func.isRequired, // Function to handle page changes
 };
 
-// Modify to accept rows as props
+// Main component for the activity table
 const ActivityTable = ({ rows }) => {
-  const [page, setPage] = React.useState(0);
-  const rowsPerPage = 10;
+  const [page, setPage] = React.useState(0); // State to track the current page
+  const rowsPerPage = 10; // Number of rows to display per page
 
+
+  // Check if the viewport is mobile size
   const isMobile = useMediaQuery('(max-width:600px)');
 
+
+  // Calculate the number of empty rows to fill the table
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+
+  // Function to change the current page
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    setPage(newPage); // Update the current page
   };
+
 
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
@@ -125,13 +140,16 @@ const ActivityTable = ({ rows }) => {
         </TableHead>
 
         <TableBody>
+          {/* Render rows for the current page */}
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
             isMobile ? ( 
+              // Render a collapsible row in mobile view
               <CollapsibleRow key={row.date} row={row} /> 
             ) : (
+              // Render a regular table row in desktop view
               <TableRow className={styles.tableBodyRow} key={row.date}>
                 <TableCell className={styles.tableBodyCell} component="th" scope="row">
                   {row.date}
@@ -148,6 +166,7 @@ const ActivityTable = ({ rows }) => {
             )
           ))}
 
+          {/* Render empty rows if needed for spacing */}
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={7} />
@@ -174,6 +193,7 @@ const ActivityTable = ({ rows }) => {
   );
 };
 
+// Define expected prop types for ActivityTable component
 ActivityTable.propTypes = {
   rows: PropTypes.array.isRequired,
 };
