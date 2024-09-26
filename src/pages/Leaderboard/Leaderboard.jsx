@@ -4,6 +4,8 @@ import lionlogo from './Static/lionlogo.jpeg';
 import demonlogo from './Static/demonlogo.jpeg';
 import kitsunelogo from './Static/kitsunelogo.jpg';
 import { Box } from '@mui/material';
+import LeaderboardTable from './components/Component1/LeaderboardTable';
+
 
 function Leaderboard() {
   return (
@@ -91,6 +93,10 @@ function Leaderboard() {
           />
         </Box>
       </Box>
+
+      <h1>Leaderboard Page</h1>
+      <LeaderboardTable />
+        
     </div>
   );
 }
