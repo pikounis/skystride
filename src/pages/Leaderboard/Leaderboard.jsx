@@ -10,7 +10,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import styles from './components/LeaderboardTable/LeaderboardTable.module.css';
 
 function Leaderboard() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
