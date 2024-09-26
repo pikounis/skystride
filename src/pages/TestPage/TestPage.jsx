@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 function TestPage() {
     async function runGet() {
-        const response = await fetch(`http://localhost:8081/user/getAll`);
+        const response = await fetch(`http://35.176.106.162:8081/user/getAll`);
         const json = await response.json();
         console.log(json);
     }
