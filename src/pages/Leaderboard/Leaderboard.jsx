@@ -5,6 +5,7 @@ import RankingCard from './components/Component1/RankingCard';
 import lionlogo from './Static/lionlogo.jpeg';
 import demonlogo from './Static/demonlogo.jpeg';
 import kitsunelogo from './Static/kitsunelogo.jpg';
+import LeaderboardTable from './components/Component1/LeaderboardTable';
 
 function Leaderboard() {
   const [value, setValue] = useState(0);
@@ -106,8 +107,8 @@ function Leaderboard() {
             </Typography>
           </Box>
         </div>
-
       </SwipeableViews>
+      <LeaderboardTable/>
     </div>
   );
 }
