@@ -1,25 +1,29 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TableHead from '@mui/material/TableHead';
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
+import { useTheme, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TablePagination,
+  TableRow,
+  Paper,
+  TableHead,
+  IconButton,
+} from '@mui/material';
+import {
+  FirstPage as FirstPageIcon,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  LastPage as LastPageIcon,
+} from '@mui/icons-material';
 import EditExercise from './EditExercise';
 import CollapsibleRow from './CollapsibleRow';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import styles from '../Activity.module.css';
+
 
 // Component for pagination actions (First, Previous, Next, Last buttons)
 function TablePaginationActions(props) {

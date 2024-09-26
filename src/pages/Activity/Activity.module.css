@@ -84,8 +84,3 @@ h1 {
 .rowOpenContent { /* For mobile view */
   background-color: rgb(124, 8, 245, 0.2);
 } 
-
-.AddExerciseButton {
-  display: flex !important;
-  justify-content: flex-end !important;
-}
