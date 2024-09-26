@@ -43,20 +43,15 @@ const CollapsibleRow = ({ row }) => {
 
                 <TableBody>
 
-                    <TableRow>
-                        <TableCell className={styles.tableMobileCell}>Start: {row.start}</TableCell>
-                        <TableCell className={styles.tableMobileCell}>Finish: {row.finish}</TableCell>
-                    </TableRow>
+                  <TableRow>
+                      <TableCell className={`${styles.tableMobileCell} ${styles.leftAlignCenter}`}>Start: {row.start}</TableCell>
+                      <TableCell className={`${styles.tableMobileCell} ${styles.leftAlignCenter}`}>Finish: {row.finish}</TableCell>
+                  </TableRow>
 
-                    <TableRow>
-                        <TableCell className={styles.tableMobileCell}>Total Time:</TableCell>
-                        <TableCell className={styles.tableMobileCell}>{row.total_time}</TableCell>
-                    </TableRow>
-
-                    <TableRow>
-                        <TableCell className={styles.tableMobileCell}>Points</TableCell>
-                        <TableCell className={styles.tableMobileCell}>{row.points}</TableCell>
-                    </TableRow>
+                  <TableRow>
+                      <TableCell className={`${styles.tableMobileCell} ${styles.leftAlignCenter}`}>Total Time: {row.total_time}</TableCell>
+                      <TableCell className={`${styles.tableMobileCell} ${styles.leftAlignCenter} ${styles.pointsColour}`}>Points: {row.points}</TableCell>
+                  </TableRow>
 
                 </TableBody>
 

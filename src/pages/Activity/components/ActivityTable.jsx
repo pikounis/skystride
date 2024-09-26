@@ -96,7 +96,7 @@ const ActivityTable = ({ rows }) => {
 
 
   // Check if the viewport is mobile size
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:700px)');
 
 
   // Calculate the number of empty rows to fill the table
@@ -112,7 +112,7 @@ const ActivityTable = ({ rows }) => {
 
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
-      <Table sx={{ minWidth: 500 }} aria-label="collapsible table">
+      <Table sx={{ width: '100%'}} aria-label="collapsible table">
 
         <TableHead>
           <TableRow className={styles.tableHeader}>

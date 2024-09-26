@@ -42,7 +42,6 @@ h1 {
 }
   
 .tableBodyCell {
-  padding: 16px;
   font-weight: bold !important;
   font-family: 'Nunito', sans-serif !important;
   font-size: 1.2rem !important;
@@ -51,8 +50,7 @@ h1 {
 }
 
 .tableMobileCell {
-  padding: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: bold !important;
   font-family: 'Nunito', sans-serif !important;
   font-size: 1rem !important;
@@ -63,4 +61,14 @@ h1 {
 .editExerciseButton {
   width: 30px !important;
   height: auto !important;
+}
+
+.leftAlignCenter { /* For mobile view */
+  text-align: left !important;      
+  vertical-align: middle !important; 
+  padding: 25px !important; 
+}
+
+.pointsColour { /* For mobile view */
+  color: #d72990 !important;
 }
