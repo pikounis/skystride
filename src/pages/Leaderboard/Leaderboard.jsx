@@ -29,22 +29,37 @@ function Leaderboard() {
 
       {/* Swipeable Views for Tab Content */}
       <SwipeableViews index={value} onChangeIndex={handleSwipeChange}>
-        
+
         {/* Tab 1: Leaderboard with Ranking Cards */}
         <div>
-          <h1 style={{ textAlign: 'center', color: '#6a11cb' }}>Top Teams</h1>
+          <h1 style={{ textAlign: 'center', color: '#6a11cb', marginTop: '1.5rem' }}>Top Teams</h1>
           <Box
             display="flex"
             justifyContent="center"
             alignItems="flex-end"
             gap="20px"
-            style={{ marginTop: '50px', height: '300px' }}
+            sx={{ 
+              marginTop: '50px', 
+              width: "100%", 
+              height: "40vh",
+              '@media (max-width:1200px)': {
+                height: "40vw"
+              }
+            }}
           >
             {/* Second Place */}
             <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: '15%',
+                height: '100%',
+                justifyContent: "flex-end",
+                '@media (max-width:1200px)': { 
+                  width: '28%'
+                }
+              }}
             >
               <RankingCard
                 rank={2}
@@ -52,13 +67,22 @@ function Leaderboard() {
                 points={75}
                 profileImage={demonlogo}
               />
+              <Box sx={{ height: '15%', width: '90%', backgroundColor: 'silver', borderRadius: '10px' }} />
             </Box>
 
             {/* First Place */}
             <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: '15%',
+                height: '100%',
+                justifyContent: "flex-end",
+                '@media (max-width:1200px)': { 
+                  width: '28%'
+                }
+              }}
             >
               <RankingCard
                 rank={1}
@@ -66,13 +90,23 @@ function Leaderboard() {
                 points={85}
                 profileImage={lionlogo}
               />
+
+              <Box sx={{ height: '23%', width: '90%', backgroundColor: 'gold', borderRadius: '10px' }} />
             </Box>
 
             {/* Third Place */}
             <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: '15%',
+                height: '100%',
+                justifyContent: "flex-end",
+                '@media (max-width:1200px)': { 
+                  width: '28%'
+                }
+              }}
             >
               <RankingCard
                 rank={3}
@@ -80,6 +114,7 @@ function Leaderboard() {
                 points={65}
                 profileImage={kitsunelogo}
               />
+              <Box sx={{ height: '7%', width: '90%', backgroundColor: 'brown', borderRadius: '10px' }} />
             </Box>
           </Box>
         </div>
@@ -88,7 +123,7 @@ function Leaderboard() {
         <div>
           <Box p={3}>
             <Typography variant="h4" align="center">
-                User 
+              User
             </Typography>
             <Typography align="center">
               This is where the users leaderboard will be.
@@ -108,7 +143,7 @@ function Leaderboard() {
           </Box>
         </div>
       </SwipeableViews>
-      <LeaderboardTable/>
+      <LeaderboardTable />
     </div>
   );
 }
