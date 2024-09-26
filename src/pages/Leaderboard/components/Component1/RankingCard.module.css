@@ -68,7 +68,7 @@
   height: 80px;
   border-radius: 10px;
   margin-right: 20px;
-  border: 3px solid #fff;
+  border: 2px solid #fff;
   transition: transform 0.3s ease;
 }
 
@@ -112,7 +112,7 @@
 }
 
 /* For Phones */
-@media (max-width: 650px) {
+@media (max-width: 700px) {
   /* .rankingCard {
     width: 100%;
     height: 220px;
@@ -120,7 +120,9 @@
   } */
 
   .profileImage {
-    visibility: hidden;
+    width: 40%;
+    height: 40%;
+    border: 0px;
   }
 
   .teamName {
