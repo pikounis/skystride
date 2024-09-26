@@ -17,9 +17,11 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import EditExercise from './EditExercise';
-import styles from '../Activity.module.css'; 
+import CollapsibleRow from './CollapsibleRow';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import styles from '../Activity.module.css';
 
-// Pagination Actions Component
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, onPageChange } = props;
@@ -84,6 +86,8 @@ const ActivityTable = ({ rows }) => {
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 10;
 
+  const isMobile = useMediaQuery('(max-width:600px)');
+
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -93,36 +97,55 @@ const ActivityTable = ({ rows }) => {
 
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table sx={{ minWidth: 500 }} aria-label="collapsible table">
+
         <TableHead>
           <TableRow className={styles.tableHeader}>
-            <TableCell className={styles.tableHeaderCell}>Date</TableCell>
-            <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
-            <TableCell className={styles.tableHeaderCell}>Start</TableCell>
-            <TableCell className={styles.tableHeaderCell}>Finish</TableCell>
-            <TableCell className={styles.tableHeaderCell}>Total Time</TableCell>
-            <TableCell className={styles.tableHeaderCell}>Points</TableCell>
-            <TableCell className={styles.tableHeaderCell}></TableCell>
+            {isMobile ? (
+              <>
+                {/* Mobile Headers */}
+                <TableCell className={styles.tableHeaderCell}></TableCell>
+                <TableCell className={styles.tableHeaderCell}>Date</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
+                <TableCell className={styles.tableHeaderCell}></TableCell>
+              </>
+            ) : (
+              <>
+                {/* Desktop Headers */}
+                <TableCell className={styles.tableHeaderCell}>Date</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Start</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Finish</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Total Time</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Points</TableCell>
+                <TableCell className={styles.tableHeaderCell}></TableCell>
+              </>
+            )}
           </TableRow>
         </TableHead>
+
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow className={styles.tableBodyRow} key={row.date}>
-              <TableCell className={styles.tableBodyCell} component="th" scope="row">
-                {row.date}
-              </TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.exercise}</TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.start}</TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.finish}</TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
-              <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
-              <TableCell className={styles.tableBodyCell}>
-                <EditExercise />
-              </TableCell>
-            </TableRow>
+            isMobile ? ( 
+              <CollapsibleRow key={row.date} row={row} /> 
+            ) : (
+              <TableRow className={styles.tableBodyRow} key={row.date}>
+                <TableCell className={styles.tableBodyCell} component="th" scope="row">
+                  {row.date}
+                </TableCell>
+                <TableCell className={styles.tableBodyCell}>{row.exercise}</TableCell>
+                <TableCell className={styles.tableBodyCell}>{row.start}</TableCell>
+                <TableCell className={styles.tableBodyCell}>{row.finish}</TableCell>
+                <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
+                <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
+                <TableCell className={styles.tableBodyCell}>
+                  <EditExercise />
+                </TableCell>
+              </TableRow>
+            )
           ))}
 
           {emptyRows > 0 && (
@@ -133,7 +156,7 @@ const ActivityTable = ({ rows }) => {
         </TableBody>
 
         <TableFooter>
-          <TableRow>
+          <TableRow >
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={7}
