@@ -1,7 +1,7 @@
 // pages/Test.js
 import React, { useEffect, useState } from 'react';
 
-function TestPage() {
+function HealthPage() {
     async function runGet() {
         const response = await fetch(`http://35.176.106.162:8081/user/getAll`);
         const json = await response.json();
@@ -18,4 +18,4 @@ function TestPage() {
     );
 }
 
-export default TestPage;
+export default HealthPage;
