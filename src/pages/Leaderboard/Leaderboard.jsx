@@ -7,6 +7,7 @@ import demonlogo from "./Static/demonlogo.jpeg";
 import kitsunelogo from "./Static/kitsunelogo.jpg";
 import LeaderboardTable from "./components/Component1/LeaderboardTable";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import styles from './components/Component1/LeaderboardTable.module.css';
 
 function Leaderboard() {
   const [value, setValue] = useState(0);
@@ -38,15 +39,16 @@ function Leaderboard() {
       <TabPanel value={1}>
         {/* Tab 1: Leaderboard with Ranking Cards */}
         <div>
-          <h1
+          <Typography
+          variant="h2"
+          className ={styles.caption}  
             style={{
               textAlign: "center",
-              color: "#6a11cb",
               marginTop: "1.5rem",
             }}
           >
             Top Teams
-          </h1>
+            </Typography>
           <Box
             display="flex"
             justifyContent="center"
