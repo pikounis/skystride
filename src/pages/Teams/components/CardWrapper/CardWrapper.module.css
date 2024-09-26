@@ -1,28 +1,35 @@
 .cardContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
-    align-items: flex-start; /* Ensure each card handles its own height */
-    gap: 20px; 
-    margin: 20px; 
+    justify-content: space-around; /* Align cards to the left by default */
+    align-items: stretch; /* Ensure all cards have the same height */
+    gap: 20px;
+    margin: 20px;
 }
 
 /* Large screens: 3 cards per row */
 .cardContainer > * {
-    flex: 1 1 calc(33.333% - 20px); /* Each card takes about 1/3 of the width */
-    max-width: 345px; 
+    flex: 1 1 calc(33.333% - 20px); /* Cards take up 1/3 of the width */
+    max-width: 345px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Medium screens (e.g., tablets): 2 cards per row, centered */
+/* Medium screens: 2 cards per row */
 @media (max-width: 1024px) {
     .cardContainer > * {
-        flex: 1 1 calc(50% - 20px); 
+        flex: 1 1 calc(50% - 20px); /* Cards take up half the width */
     }
 }
 
-/* Small screens (e.g., mobile): 1 card per row, centered */
+/* Small screens: 1 card per row, centered */
 @media (max-width: 768px) {
+    .cardContainer {
+        justify-content: center; /* Center the single card on mobile */
+    }
+    
     .cardContainer > * {
-        flex: 1 1 100%;
+        flex: 1 1 100%; /* Card takes full width on mobile */
+        max-width: 345px;
     }
 }
