@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from 'react';
 
 function TestPage() {
-    const [testState, setTestState] = useState("None");
     async function runGet() {
         const response = await fetch(`http://localhost:8081/user/getAll`);
         const json = await response.json();
-        setTestState(json);
         console.log(json);
     }
 
