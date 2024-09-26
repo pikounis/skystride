@@ -79,7 +79,7 @@
     padding: 2px 6px;
     border-radius: 3px;
     /* background: linear-gradient(145deg, #ff00a0 0%, #19a0ff 100%, #f80032 ); */
-    background: #19a0ff;
+    background: #4a70e3;
     z-index: 1;
 }
 
@@ -93,6 +93,6 @@
     width: 10px;
     z-index: -1;
     /* background: linear-gradient(145deg, #ff00a0 0%, #19a0ff 100%, #f80032 ); */
-    background: #19a0ff;
+    background: #4a70e3;
     transform: translateX(-50%) rotate(45deg);
 }
