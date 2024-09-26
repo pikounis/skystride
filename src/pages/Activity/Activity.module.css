@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+h1 {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.tableContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .tableContainer {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.highlightColumn {
+  background-color: rgb(51,72,209, 0.1);
+}
+
+.pointsCell {
+  font-size: 1.8rem !important;
+  color: #d72990 !important;
+}
+  
+.tableHeader {
+  background-color: #7c08f5 !important; 
+}
+  
+.tableHeaderCell {
+  color: #fff !important;
+  font-weight: bold !important;
+  text-align: center;
+  border-bottom: 6px solid #d72990 !important;
+  text-transform: uppercase;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;   
+  vertical-align: middle !important;
+}
+  
+.tableBodyRow:hover {
+  background-color: rgb(124, 8, 245, 0.1);
+}
+  
+.tableBodyCell {
+  font-weight: bold !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;   
+  vertical-align: middle !important;
+}
+
+.tableMobileCell {
+  text-align: left;
+  font-weight: bold !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 1rem !important;
+  text-align: left !important;   
+  vertical-align: middle !important;
+}
+
+.editExerciseButton {
+  width: 30px !important;
+  height: auto !important;
+}
+
+.leftAlignCenter { /* For mobile view */
+  text-align: left !important;      
+  vertical-align: middle !important; 
+  padding: 25px !important; 
+}
+
+.pointsColour { /* For mobile view */
+  color: #d72990 !important;
+}
+
+.datesColour, .rowOpen { /* For mobile view */
+  background-color: rgb(124, 8, 245, 0.1);
+} 
+
+.rowOpenContent { /* For mobile view */
+  background-color: rgb(124, 8, 245, 0.2);
+} 
