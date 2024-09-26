@@ -17,12 +17,12 @@ function ProgressBar({ achievementTitle, achievementProgress, progressLeft, badg
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'ce'
-        }} className={styles.achievementBox}>
+        }} className={styles.progressBarBox}>
             <img src={badgeIcon} className={styles.badgeIcon} />
             <Box sx={{width: "100%"}}>
                 <Typography variant='h6' className={styles.title} sx={{fontWeight: 'bolder'}}>{achievementTitle}</Typography>
-                <div className={styles.achievementBar}>
-                    <Box className={styles.achievementProgress} sx={{ width: `${achievementProgress}%` }}> {/* Changed span to Box as it doesn't have text in it - correct mui container class is Box -> for this, style is changed to sx */}
+                <div className={styles.progressBar}>
+                    <Box className={styles.progressBarProgress} sx={{ width: `${achievementProgress}%` }}> {/* Changed span to Box as it doesn't have text in it - correct mui container class is Box -> for this, style is changed to sx */}
                         <Typography variant='h7' className={styles.pointsLeft}>{progressLeft}pts to go!</Typography> {/* Span changed to Typography as it's the correct text MUI component. -> Typography uses variant for text size and style so we used h7*/}
                     </Box>
                 </div>

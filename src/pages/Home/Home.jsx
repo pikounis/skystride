@@ -4,7 +4,9 @@ import LeaderboardSection from './Components/LeaderboardSection/LeaderboardSecti
 import LineGraph from './Components/LineGraph/LineGraph';
 import styles from './Home.module.css';
 import { Box, Typography } from '@mui/material';
-import ProgressBar from './Components/AchievementsSection/ProgressBar';
+import ProgressBar from './Components/ProgressBar/ProgressBar';
+import BadgeBar from './Components/BadgeBar/BadgeBar';
+
 
 const mockDataName = "Jack";
 
@@ -200,7 +202,12 @@ const mockdataTeams = [
 function Home() {
   return (
     <div className={styles.container}>
-      <h1>Hello {mockDataName}!</h1>
+      {/* <h1>Hello {mockDataName}!</h1> */}
+
+      <Box sx={{}}>
+        <BadgeBar />
+      </Box>
+
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
@@ -231,7 +238,7 @@ function Home() {
             <ProgressBar
               achievementTitle="Novice Runner"
               achievementProgress={90}
-              progressLeft={10}
+              progressLeft={50}
               badgeIcon={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6kco1vTUHJToNzQBlwRoI1stXwneicJ1_g&s"}
             />
             <ProgressBar
