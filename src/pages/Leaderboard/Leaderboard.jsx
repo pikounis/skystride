@@ -1,5 +1,5 @@
 import React from 'react';
-import LeaderboardTable from './components/Component1/LeaderboardTable';
+import LeaderboardTable from './components/LeaderboardTable/LeaderboardTable';
 
 function Leaderboard() {
   return (
