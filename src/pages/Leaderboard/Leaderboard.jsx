@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Tab, Box, Typography } from "@mui/material";
 // import SwipeableViews from 'react-swipeable-views';
-import RankingCard from "./components/Component1/RankingCard";
+import RankingCard from "./components/RankingCard/RankingCard";
 import lionlogo from "./Static/lionlogo.jpeg";
 import demonlogo from "./Static/demonlogo.jpeg";
 import kitsunelogo from "./Static/kitsunelogo.jpg";
-import LeaderboardTable from "./components/Component1/LeaderboardTable";
+import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import styles from './components/Component1/LeaderboardTable.module.css';
+import styles from './components/LeaderboardTable/LeaderboardTable.module.css';
 
 function Leaderboard() {
   const [value, setValue] = useState(0);
