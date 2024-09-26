@@ -13,6 +13,7 @@ function CardWrapper() {
                     date={team.date}
                     imageUrl={team.imageUrl}
                     teamDescription={team.teamDescription}
+                    teamMembers={team.teamMembers}
                 />
             ))}
         </div>

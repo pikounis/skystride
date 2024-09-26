@@ -39,7 +39,7 @@ const ExpandMore = styled((props) => {
     ],
 }));
 
-function TeamCard({ teamName, date, imageUrl, teamDescription }) {
+function TeamCard({ teamName, date, imageUrl, teamDescription, teamMembers }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -49,11 +49,11 @@ function TeamCard({ teamName, date, imageUrl, teamDescription }) {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="team">
-                        {teamName[0]} {/* First letter of the team name */}
-                    </Avatar>
-                }
+                // avatar={
+                //     <Avatar sx={{ bgcolor: red[500] }} aria-label="team">
+                //         {teamName[0]} {/* First letter of the team name */}
+                //     </Avatar>
+                // }
                 action={
                     <IconButton aria-label="settings">
                         <MoreVertIcon />
@@ -92,8 +92,17 @@ function TeamCard({ teamName, date, imageUrl, teamDescription }) {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
-                        Additional team details here...
+                        Team Members:
                     </Typography>
+                    <ul>
+                        {teamMembers.map((member, index) => (
+                            <li key={index}>
+                                <Typography variant="body2" color="text.secondary">
+                                    {member}
+                                </Typography>
+                            </li>
+                        ))}
+                    </ul>
                 </CardContent>
             </Collapse>
         </Card>
