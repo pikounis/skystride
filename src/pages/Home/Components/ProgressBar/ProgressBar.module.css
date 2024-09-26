@@ -73,6 +73,7 @@
     position: absolute;
     right: -14px;
     top: 28px;
+    top: 28px;
     font-size: 12px;
     font-weight: bold;
     color: #fff;
@@ -88,6 +89,7 @@
     content: '';
     position: absolute;
     left: 50%;
+    bottom: 12px;
     bottom: 12px;
     height: 10px;
     width: 10px;

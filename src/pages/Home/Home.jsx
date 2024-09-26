@@ -243,7 +243,7 @@ function Home() {
             />
             <ProgressBar
               achievementTitle="Master Novice Runner"
-              achievementProgress={70}
+              achievementProgress={40}
               progressLeft={30}
               badgeIcon={"https://png.pngtree.com/png-vector/20240723/ourlarge/pngtree-athletic-runner-vintage-badge-design-png-image_12965334.png"}
             />
