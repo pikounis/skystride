@@ -9,16 +9,16 @@ h1 {
   margin: 0 auto;
 }
 
-.pointsCell {
-  font-size: 1.8rem !important;
-  color: #d72990 !important;
-}
-
 @media (max-width: 600px) {
   .tableContainer {
     max-width: 100%;
     overflow-x: auto;
   }
+}
+
+.pointsCell {
+  font-size: 1.8rem !important;
+  color: #d72990 !important;
 }
   
 .tableHeader {
@@ -27,12 +27,14 @@ h1 {
   
 .tableHeaderCell {
   color: #fff !important;
-  font-weight: bold;
+  font-weight: bold !important;
   text-align: center;
   border-bottom: 6px solid #d72990 !important;
   text-transform: uppercase;
   font-family: 'Nunito', sans-serif !important;
   font-size: 1.2rem !important;
+  text-align: center !important;   
+  vertical-align: middle !important;
 }
   
 .tableBodyRow:hover {
@@ -41,10 +43,11 @@ h1 {
   
 .tableBodyCell {
   padding: 16px;
-  text-align: center;
-  font-weight: bold;
+  font-weight: bold !important;
   font-family: 'Nunito', sans-serif !important;
   font-size: 1.2rem !important;
+  text-align: center !important;   
+  vertical-align: middle !important;
 }
 
 .tableMobileCell {
@@ -53,12 +56,11 @@ h1 {
   font-weight: bold !important;
   font-family: 'Nunito', sans-serif !important;
   font-size: 1rem !important;
+  text-align: left !important;   
+  vertical-align: middle !important;
 }
 
 .editExerciseButton {
   width: 30px !important;
   height: auto !important;
 }
-
-
-  
