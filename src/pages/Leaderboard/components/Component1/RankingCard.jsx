@@ -11,8 +11,13 @@ function RankingCard({ rank, teamName, points, profileImage }) {
       <Box className={styles.cardContent}>
         {/* <LeaderboardIcon className={styles.leaderboardIcon} /> */}
         <img src={profileImage} alt={`${teamName} logo`} className={styles.profileImage} />
-        <Typography variant='h4' className={styles.teamName}>{teamName}</Typography>
-        <Typography variant='h5' sx={{fontWeight: 'bold'}}>Points: {points}</Typography>
+        <h2 className={styles.teamName}>{teamName}</h2>
+        <Typography variant='h5' sx={{
+          fontWeight: 'bold',
+          "@media (max-width: 700px)": {
+            fontSize: '0.7rem'
+          }
+        }}>Points: {points}</Typography>
         {/* <div className={styles.pointsContainer}>
           <span className={styles.pointsLabel}>Points</span>
           <div className={styles.pointsBar}>
