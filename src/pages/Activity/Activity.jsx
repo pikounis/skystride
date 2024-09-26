@@ -1,7 +1,6 @@
 import React from 'react';
 import ActivityTable from './components/ActivityTable';
 import { Typography, Box } from '@mui/material';
-import AddExerciseButton from './components/AddExerciseButton';
 
 // function creates an array of objects with these fields for the table
 function createData(date, exercise, start, finish, total_time, points) {
@@ -37,19 +36,12 @@ const Activity = () => {
 
   return (
     <div>
+      
       <Typography variant="h3" component="h1" align="center" m={6}>
         My Activity
       </Typography>
-      
-      <Box display="flex" flexDirection="column" alignItems="stretch" mb={3}>
 
-        <Box display="flex" justifyContent="flex-end" mb={2}>
-          <AddExerciseButton />
-        </Box>
-
-        <ActivityTable rows={rows} /> {/* Pass rows as props */}
-
-      </Box>
+      <ActivityTable rows={rows} /> {/* Pass rows as props */}
 
     </div>
   );

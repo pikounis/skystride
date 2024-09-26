@@ -21,6 +21,7 @@ import {
   LastPage as LastPageIcon,
 } from '@mui/icons-material';
 import EditExercise from './EditExercise';
+import AddExerciseButton from './AddExerciseButton';
 import CollapsibleRow from './CollapsibleRow';
 import styles from '../Activity.module.css';
 
@@ -116,6 +117,11 @@ const ActivityTable = ({ rows }) => {
   
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
+
+      <Box display="flex" justifyContent="flex-end" mb={2}>
+          <AddExerciseButton />
+      </Box>
+
       <Table sx={{ width: '100%'}} aria-label="collapsible table">
 
         <TableHead>
