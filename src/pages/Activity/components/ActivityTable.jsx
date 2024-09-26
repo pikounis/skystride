@@ -151,12 +151,12 @@ const ActivityTable = ({ rows }) => {
             ) : (
               // Render a regular table row in desktop view
               <TableRow className={styles.tableBodyRow} key={row.date}>
-                <TableCell className={styles.tableBodyCell} component="th" scope="row">
+                <TableCell className={`${styles.tableBodyCell} ${styles.datesColour}`} component="th" scope="row">
                   {row.date}
                 </TableCell>
                 <TableCell className={styles.tableBodyCell}>{row.exercise}</TableCell>
-                <TableCell className={styles.tableBodyCell}>{row.start}</TableCell>
-                <TableCell className={styles.tableBodyCell}>{row.finish}</TableCell>
+                <TableCell className={`${styles.tableBodyCell} ${styles.highlightColumn}`}>{row.start}</TableCell>
+                <TableCell className={`${styles.tableBodyCell} ${styles.highlightColumn}`}>{row.finish}</TableCell>
                 <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
                 <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
                 <TableCell className={styles.tableBodyCell}>

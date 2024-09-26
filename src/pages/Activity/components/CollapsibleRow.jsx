@@ -13,7 +13,7 @@ const CollapsibleRow = ({ row }) => {
 
   return (
     <>
-      <TableRow className={styles.tableBodyRow}>
+      <TableRow className={`${styles.tableBodyRow} ${open ? styles.rowOpen : ''}`}>
 
         <TableCell>
 
@@ -35,7 +35,7 @@ const CollapsibleRow = ({ row }) => {
         
       </TableRow>
 
-      <TableRow>
+      <TableRow className={open ? styles.rowOpenContent : ''}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
