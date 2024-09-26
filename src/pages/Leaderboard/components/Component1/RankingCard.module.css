@@ -34,11 +34,13 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  animation: tilt 2s infinite ease-in-out; /* Apply the tilt animation */
+  animation: tilt 2s infinite ease-in-out; 
+  /* check if the tilt animation works - if confused go to slackoverflow tilt animation help from Anthony */
+  /* IT DOESNT WORK OMMGGGGGGGG :( */
 }
 
 .rankingCard:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
