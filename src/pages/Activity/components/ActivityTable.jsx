@@ -113,48 +113,69 @@ const ActivityTable = ({ rows }) => {
     setPage(newPage); // Update the current page
   };
 
-
+  
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
       <Table sx={{ width: '100%'}} aria-label="collapsible table">
 
         <TableHead>
           <TableRow className={styles.tableHeader}>
+
             {isMobile ? (
               <>
                 {/* Mobile Headers */}
-                <TableCell className={styles.tableHeaderCell}></TableCell>
-                <TableCell className={styles.tableHeaderCell}>Date</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
-                <TableCell className={styles.tableHeaderCell}></TableCell>
+                {[
+
+                  "", // Empty cell for mobile
+                  "Date",
+                  "Exercise",
+                  ""  // Empty cell for mobile
+
+                  ].map((header, index) => (
+                    <TableCell key={index} className={styles.tableHeaderCell}>
+                      {header}
+                    </TableCell>
+                ))}
               </>
             ) : (
               <>
                 {/* Desktop Headers */}
-                <TableCell className={styles.tableHeaderCell}>Date</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Exercise</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Start</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Finish</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Total Time</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Points</TableCell>
-                <TableCell className={styles.tableHeaderCell}></TableCell>
+                {[
+
+                  "Date",
+                  "Exercise",
+                  "Start",
+                  "Finish",
+                  "Total Time",
+                  "Points",
+                  ""  // Empty cell for desktop
+
+                  ].map((header, index) => (
+                    <TableCell key={index} className={styles.tableHeaderCell}>
+                      {header}
+                    </TableCell>
+                  ))}
               </>
             )}
           </TableRow>
         </TableHead>
 
         <TableBody>
+          
           {/* Render rows for the current page */}
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
             isMobile ? ( 
+
               // Render a collapsible row in mobile view
               <CollapsibleRow key={row.date} row={row} /> 
             ) : (
+
               // Render a regular table row in desktop view
               <TableRow className={styles.tableBodyRow} key={row.date}>
+
                 <TableCell className={`${styles.tableBodyCell} ${styles.datesColour}`} component="th" scope="row">
                   {row.date}
                 </TableCell>
@@ -166,6 +187,7 @@ const ActivityTable = ({ rows }) => {
                 <TableCell className={styles.tableBodyCell}>
                   <EditExercise />
                 </TableCell>
+
               </TableRow>
             )
           ))}
@@ -176,6 +198,7 @@ const ActivityTable = ({ rows }) => {
               <TableCell colSpan={7} />
             </TableRow>
           )}
+
         </TableBody>
 
         <TableFooter>
