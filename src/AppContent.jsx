@@ -11,6 +11,7 @@ import TestPage from './pages/TestPage/TestPage';
 import Error404 from './pages/Error404/Error404';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
+import Landing from './pages/Landing/Landing';
 
 function AppContent() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function AppContent() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path='/landing' element={<Landing />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
 
