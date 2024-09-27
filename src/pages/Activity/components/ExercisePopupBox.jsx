@@ -20,7 +20,7 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
 
   // the handleClickOpen method for the parent component
   React.useImperativeHandle(ref, () => ({
-    handleClickOpen,
+    handleClickOpen,A
   }));
 
   const handleFormSubmit = (event) => {
