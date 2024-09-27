@@ -1,35 +1,32 @@
-
-  .loginContainer {
+.loginContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh; /* Slightly less than full height to position the form lower */
-    max-width: 450px; /* Increase the width of the form */
+    height: 100vh;
+    width: 100%; /* Full width to center the container */
+    max-width: 80%; /* Limit the width to 90% of the viewport */
     margin: 0 auto;
-    padding: 20px;
+    padding: 5%;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
-    box-shadow: inset 0px 33px 25px 0 #8C28FF, 
-                        inset 0 66px 15px 0px #ccc,
-                        inset 0 99px 5px 0px #fff;
-  }
-  
+    box-shadow: inset 0px 3% 2.5% 0 #8C28FF, 
+                        inset 0 6% 1.5% 0px #ccc,
+                        inset 0 9% 0.5% 0px #fff;
+}
 
 
-  .skycolouring {
+
+
+.skycolouring {
     background-clip: text;
     background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
+}
 
-
-
-
-  
-  .headerBox {
+.headerBox {
     width: 100%;
     padding: 15px;
     background-color: #fff;
@@ -37,40 +34,41 @@
     border-bottom: 1px solid #ddd;
     border-radius: 10px 10px 0 0; /* Rounded corners at the top */
     margin-bottom: 20px; /* Space between the header and the form */
-  }
-  
-  .title {
+}
+
+.title {
     margin: 0;
     font-size: 24px;
     font-weight: bold;
     color: #333;
-  }
-  
-  .loginForm {
+}
+
+.loginForm {
     display: flex;
     flex-direction: column;
-    width: 100%;
-  }
-  
-  .formGroup {
+    width: 30%;
+    margin: 0 auto; /* Center the form horizontally */
+}
+
+.formGroup {
     margin-bottom: 20px; /* Space between form groups */
-  }
-  
-  .labelContainer {
+}
+
+.labelContainer {
     display: flex;
     align-items: center;
     margin-bottom: 5px; /* Space between the label and the input field */
-  }
-  
-  .labelContainer .MuiInputLabel-root {
+}
+
+.labelContainer .MuiInputLabel-root {
     font-weight: bold;
-  }
-  
-  .labelContainer .MuiIconButton-root {
+}
+
+.labelContainer .MuiIconButton-root {
     margin-left: 5px; /* Space between the label and the info icon */
-  }
-  
-  .submitButton {
+}
+
+.submitButton {
     padding: 12px;
     margin-top: 20px;
     background-color: #3b0bbd;
@@ -79,9 +77,8 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px; /* Slightly larger font size for the button */
-  }
-  
-  .submitButton:hover {
+}
+
+.submitButton:hover {
     background-color: #05015d;
-  }
-  
+}
