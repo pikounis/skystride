@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TableRow, TableCell, Collapse, IconButton, Box, Table, TableBody } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import EditExercise from './EditExercise';
+import EditExercise from './EditExerciseButton';
 import styles from '../Activity.module.css';
 import { useMediaQuery } from '@mui/material';
 

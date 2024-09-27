@@ -20,7 +20,7 @@ import {
   KeyboardArrowRight,
   LastPage as LastPageIcon,
 } from '@mui/icons-material';
-import EditExercise from './EditExercise';
+import EditExercise from './EditExerciseButton';
 import AddExerciseButton from './AddExerciseButton';
 import CollapsibleRow from './CollapsibleRow';
 import styles from '../Activity.module.css';
