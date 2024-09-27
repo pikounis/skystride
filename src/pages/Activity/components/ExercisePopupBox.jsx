@@ -1,11 +1,12 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import Calendar from './Calendar';
+import SportsDropDown from './SportsDropDown';
 
 const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete }, ref) => {
   const [open, setOpen] = React.useState(false);
@@ -18,7 +19,7 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
     setOpen(false);
   };
 
-  // the handleClickOpen method for the parent component
+  // the handleClickOpen method for the parent component to control
   React.useImperativeHandle(ref, () => ({
     handleClickOpen
   }));
@@ -38,23 +39,17 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
       PaperProps={{
         component: 'form',
         onSubmit: handleFormSubmit,
+        sx: { padding: 3 }
       }}
     >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{message}</DialogContentText>
         {isDelete ? null : (
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="exercise-name"
-            name="exerciseName"
-            label="Exercise Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
+          <>
+            <Calendar />
+            <SportsDropDown />
+          </>
         )}
       </DialogContent>
       <DialogActions>

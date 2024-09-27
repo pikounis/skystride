@@ -99,3 +99,8 @@ h1 {
 .rowOpenContent {
   background-color: rgba(124, 8, 245, 0.2);
 }
+
+.calendar {
+  margin: 10px 30px 0px 30px !important;
+  width: 300px !important;
+}
