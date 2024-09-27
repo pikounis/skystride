@@ -54,7 +54,7 @@ function LeaderboardTable() {
       justifyContent = 'center'
       alignItems = 'center'
       minH
-      marginTop = '7.5%'
+      marginTop = '5%'
     >
 
       <TableContainer 
