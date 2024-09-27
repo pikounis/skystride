@@ -17,7 +17,7 @@ const Login = () => {
             marginTop: "1.5rem",
           }}
         >
-          Sign Up
+          Login
         </Typography>
       </div>
       <LoginComponent />
