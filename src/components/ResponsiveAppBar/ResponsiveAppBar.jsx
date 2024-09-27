@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import TimerDialog from './components/TimerDialog/TimerDialog';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const pages = ['Home', 'Activity', 'Leaderboard', 'Teams'];
 const settings = ['Settings', 'Logout'];
@@ -21,6 +23,9 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  // State to handle the dialog open/close
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -57,8 +62,17 @@ function ResponsiveAppBar() {
     handleCloseUserMenu();
   };
 
+  // Handlers for opening and closing the dialog
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
   return (
-    <AppBar position="static" sx = {{ backgroundColor: '#ededed' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#ededed' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: { xs: 'space-between', md: 'flex-start' } }}>
           <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
@@ -95,20 +109,20 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          
-          <Link to ="/">
-            <Box 
+
+          <Link to="/">
+            <Box
               component="img"
               sx={{
-                height: 34, 
-                display: { xs: 'flex', md: 'flex' }, 
-                mx: { xs: 'auto', md: 'inherit' }, 
+                height: 34,
+                display: { xs: 'flex', md: 'flex' },
+                mx: { xs: 'auto', md: 'inherit' },
                 pr: 1,
                 mb: 0.7,
-                mt: {xs: 1, md: 0}
+                mt: { xs: 1, md: 0 },
               }}
               alt="Sky Stride Logo"
-              src='/sky_stride_no_background.png'
+              src="/sky_stride_no_background.png"
             />
           </Link>
 
@@ -117,22 +131,25 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={() => handlePageNavigation(page)}
-                sx={{ 
+                sx={{
                   my: 1,
-                  ml: 1, 
+                  ml: 1,
                   color: '#707070', // Set button text color to black
                   display: 'block',
                   textTransform: 'capitalize',
                   fontSize: '16px',
-                  '&:hover': { color: '#3348d1' } // Set hover colour
-                }} 
-                >
+                  '&:hover': { color: '#3348d1' }, // Set hover colour
+                }}
+              >
                 {page}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+          <IconButton onClick={handleDialogOpen} sx={{ p: 0 }}>
+                <AccessTimeIcon sx={{ color: 'black', fontSize: 40 }} /> {/* Set icon color to black */}
+              </IconButton>
             <Tooltip title="Account settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon sx={{ color: 'black', fontSize: 40 }} /> {/* Set icon color to black */}
@@ -156,7 +173,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={() => handleUserMenuClick(setting)}>
-                  <Typography 
+                  <Typography
                     sx={{ textAlign: 'center', color: '#707070', '&:hover': { color: '#3348d1' } }}>{setting}
                   </Typography> {/* Set menu item color */}
                 </MenuItem>
@@ -165,9 +182,11 @@ function ResponsiveAppBar() {
           </Box>
         </Toolbar>
       </Container>
+
+      {/* FullScreenDialog component */}
+      <TimerDialog open={dialogOpen} onClose={handleDialogClose} />
     </AppBar>
   );
 }
 
 export default ResponsiveAppBar;
- 

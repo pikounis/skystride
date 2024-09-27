@@ -1,0 +1,26 @@
+/* TimerDialog.module.css */
+.dialogContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .timerDisplay {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .errorMessage {
+    color: red;
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
