@@ -7,8 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
-
-const ExercisePopupBox = React.forwardRef((_, ref) => {
+const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete }, ref) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -19,16 +18,16 @@ const ExercisePopupBox = React.forwardRef((_, ref) => {
     setOpen(false);
   };
 
-
+  // the handleClickOpen method for the parent component
   React.useImperativeHandle(ref, () => ({
     handleClickOpen,
   }));
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(formData.entries());
-    console.log('Form submitted:', formJson); // Handle form data
+    if (isDelete && onConfirm) {
+      onConfirm(); // Call the confirm action for delete
+    }
     handleClose(); // Close the dialog after submission
   };
 
@@ -38,30 +37,29 @@ const ExercisePopupBox = React.forwardRef((_, ref) => {
       onClose={handleClose}
       PaperProps={{
         component: 'form',
-        onSubmit: handleFormSubmit, // Handle form submission
+        onSubmit: handleFormSubmit,
       }}
     >
-      <DialogTitle>Add Exercise</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Enter the details of the exercise you'd like to add.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          id="exerciseName"
-          name="exerciseName"
-          label="Exercise Name"
-          type="text"
-          fullWidth
-          variant="standard"
-        />
-        
+        <DialogContentText>{message}</DialogContentText>
+        {isDelete ? null : (
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="exercise-name"
+            name="exerciseName"
+            label="Exercise Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit">Add Exercise</Button>
+        <Button type="submit">{isDelete ? 'Delete' : 'Add Exercise'}</Button>
       </DialogActions>
     </Dialog>
   );
