@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import styles from "./Signup.module.css";
+import React, { useState } from 'react';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Tooltip, IconButton } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import styles from './Signup.module.css';
 
 const SignupComponent = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    office: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -18,15 +21,23 @@ const SignupComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // the formdata is to send to the backend or API
-    console.log("Form submitted:", formData);
+    console.log('Form submitted:', formData);
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.signupForm}>
       <div className={styles.formGroup}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
+        <div className={styles.labelContainer}>
+          <InputLabel htmlFor="username">Username</InputLabel>
+          <Tooltip title="Enter your desired username.">
+            <IconButton size="small">
+              <InfoIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </div>
+        <TextField
+          variant="outlined"
+          fullWidth
           id="username"
           name="username"
           value={formData.username}
@@ -34,10 +45,19 @@ const SignupComponent = () => {
           required
         />
       </div>
+
       <div className={styles.formGroup}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
+        <div className={styles.labelContainer}>
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <Tooltip title="Enter your email address.">
+            <IconButton size="small">
+              <InfoIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </div>
+        <TextField
+          variant="outlined"
+          fullWidth
           id="email"
           name="email"
           value={formData.email}
@@ -45,20 +65,47 @@ const SignupComponent = () => {
           required
         />
       </div>
+
       <div className={styles.formGroup}>
-        <label htmlFor="office">Office</label>
-        <input
-          type="office"
-          id="office"
-          name="office"
-          value={formData.office}
-          onChange={handleChange}
-          required
-        />
+        <div className={styles.labelContainer}>
+          <InputLabel htmlFor="office">Office</InputLabel>
+          <Tooltip title="Select your office location.">
+            <IconButton size="small">
+              <InfoIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </div>
+        <FormControl fullWidth variant="outlined">
+          <Select
+            labelId="office-label"
+            id="office"
+            name="office"
+            value={formData.office}
+            onChange={handleChange}
+            label="Office"
+            required
+          >
+            {/* Menu Item was the only MUI i could find to do the drop-down */}
+            <MenuItem value="Livingston">Livingston</MenuItem>
+            <MenuItem value="Osterley">Osterley</MenuItem>
+            <MenuItem value="Leeds">Leeds</MenuItem>
+  
+          </Select>
+        </FormControl>
       </div>
+
       <div className={styles.formGroup}>
-        <label htmlFor="password">Password</label>
-        <input
+        <div className={styles.labelContainer}>
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <Tooltip title="Choose a strong password.">
+            <IconButton size="small">
+              <InfoIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </div>
+        <TextField
+          variant="outlined"
+          fullWidth
           type="password"
           id="password"
           name="password"
@@ -68,9 +115,14 @@ const SignupComponent = () => {
         />
       </div>
 
-      <button type="submit" className={styles.submitButton}>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        className={styles.submitButton}
+      >
         Sign Up
-      </button>
+      </Button>
     </form>
   );
 };
