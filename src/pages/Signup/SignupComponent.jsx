@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styles from './Signup.module.css';
+import React, { useState } from "react";
+import styles from "./Signup.module.css";
 
 const SignupComponent = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -17,8 +17,8 @@ const SignupComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // the formdata is to send to the backend or API 
-    console.log('Form submitted:', formData);
+    // the formdata is to send to the backend or API
+    console.log("Form submitted:", formData);
   };
 
   return (
@@ -46,6 +46,17 @@ const SignupComponent = () => {
         />
       </div>
       <div className={styles.formGroup}>
+        <label htmlFor="office">Office</label>
+        <input
+          type="office"
+          id="office"
+          name="office"
+          value={formData.office}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className={styles.formGroup}>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -56,7 +67,10 @@ const SignupComponent = () => {
           required
         />
       </div>
-      <button type="submit" className={styles.submitButton}>Sign Up</button>
+
+      <button type="submit" className={styles.submitButton}>
+        Sign Up
+      </button>
     </form>
   );
 };
