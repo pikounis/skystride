@@ -5,14 +5,19 @@ import { Typography } from '@mui/material';
 
 const Signup = () => {
   return (
-    <div>
-    <Typography
-    variant="h2"
-    className={styles.skycolouring}
-    style={{
-      textAlign: "center",
-      marginTop: "1.5rem",
-    }}>Sign Up</Typography>
+    <div className={styles.signupContainer}>
+      <div className={styles.headerBox}>
+        <Typography
+          variant="h2"
+          className={styles.skycolouring}
+          style={{
+            textAlign: "center",
+            marginTop: "1.5rem",
+          }}
+        >
+          Sign Up
+        </Typography>
+      </div>
       <SignupComponent />
     </div>
   );
