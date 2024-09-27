@@ -1,11 +1,14 @@
 import React from 'react';
+import LoginComponent from './LoginComponent';
+import styles from './Login.module.css';
 
-function Login() {
+const Login = () => {
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.title}>Login</h2>
+      <LoginComponent />
     </div>
   );
-}
+};
 
 export default Login;
