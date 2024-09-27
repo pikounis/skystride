@@ -1,6 +1,6 @@
 import React from 'react';
 import ActivityTable from './components/ActivityTable';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 // function creates an array of objects with these fields for the table
 function createData(date, exercise, start, finish, total_time, points) {
@@ -36,10 +36,13 @@ const Activity = () => {
 
   return (
     <div>
+      
       <Typography variant="h3" component="h1" align="center" m={6}>
         My Activity
       </Typography>
+
       <ActivityTable rows={rows} /> {/* Pass rows as props */}
+
     </div>
   );
   
