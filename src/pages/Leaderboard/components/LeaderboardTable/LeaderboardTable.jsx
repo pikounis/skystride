@@ -33,20 +33,17 @@ const myPlace = [
 ];
 
 const tableCellStyle = {
-  fontSize: '2.5vw',
   fontWeight: 'bold',
   fontFamily: 'Trebuchet MS'
 };
 
 const textInTable = {
   fontFamily: 'Trebuchet MS',
-  fontSize: '2.25vw',
   fontStyle: 'italic'
 };
 
 const positionAndPointsStyle = {
   fontFamily: 'Trebuchet MS',
-  fontSize: '2.25vw',
   fontWeight: 'bold',
 };
 
@@ -57,15 +54,17 @@ function LeaderboardTable() {
       justifyContent = 'center'
       alignItems = 'center'
       minH
+      marginTop = '7.5%'
     >
 
       <TableContainer 
         sx = {{
           width: '90%',
           my: '2.5%',
+          border: 2,
           borderRadius: '5%',
-          border: 1,
         }}
+        className = {styles.tableSizing}
         component={Paper}
       >
 
@@ -85,30 +84,30 @@ function LeaderboardTable() {
         </Typography>
 
         <Table sx={{ 
-          backgroundColor: 'rgba(100, 100, 100, 0.12)',
+          backgroundColor: 'rgba(161, 129, 235, 0.15)',
           }} 
           aria-label="simple table"
         >
           
           <TableHead
             sx = {{
-              borderTop: 2,
-              borderBottom: 2,
+              borderTop: 3,
+              borderBottom: 3,
             }}>
             <TableRow>
-              <TableCell align = 'center' style = {tableCellStyle}>
+              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
                 Position
               </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>
+              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
                 Username
               </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>
+              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
                 Team
               </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>
+              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
                 Office
               </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle}>
+              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
                 Points
               </TableCell>
             </TableRow>
@@ -120,21 +119,22 @@ function LeaderboardTable() {
                 key={row.occupiedPlace}
                 sx={{ 
                   '&:last-child td, &:last-child th': { border: 0 },
+                  borderBottom: 2
                 }}
               >
-                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row">
+                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row" className = {styles.textSizingText}>
                   {row.occupiedPlace}
                 </TableCell>
-                <TableCell style = {textInTable} align="center">
+                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
                   {row.username}
                 </TableCell>
-                <TableCell className = {styles.rank} align="center">
+                <TableCell align="center">
                   {<img src={row.teamEmoji} class='img-fluid' className={styles.img}alt="team emoji"></img>}
                 </TableCell>
-                <TableCell style = {textInTable} align="center">
+                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
                   {row.officeLocation}
                 </TableCell>
-                <TableCell style = {positionAndPointsStyle} align="center">
+                <TableCell style = {positionAndPointsStyle} align="center" className = {styles.textSizingText}>
                   {row.points}
                 </TableCell>
               </TableRow>
@@ -150,23 +150,23 @@ function LeaderboardTable() {
                 key={row.occupiedPlace}
                 sx={{ 
                   '&:last-child td, &:last-child th': { border: 0 },
-                  borderTop: 1,
+                  borderTop: 2,
                 }}
                 className = {styles.userRow}
               >
-                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row">
+                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row" className = {styles.textSizingText}>
                   {row.occupiedPlace}
                 </TableCell>
-                <TableCell style = {textInTable} align="center">
+                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
                   {row.username}
                 </TableCell>
                 <TableCell align="center">
                   {<img src={row.teamEmoji} class='img-fluid' className={styles.img} alt="team emoji"></img>}
                 </TableCell>
-                <TableCell style = {textInTable} align="center">
+                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
                   {row.officeLocation}
                 </TableCell>
-                <TableCell style = {positionAndPointsStyle} align="center">
+                <TableCell style = {positionAndPointsStyle} align="center" className = {styles.textSizingText}>
                   {row.points}
                 </TableCell>
               </TableRow>

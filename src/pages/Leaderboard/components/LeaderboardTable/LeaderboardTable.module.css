@@ -1,6 +1,6 @@
  .img {
-    max-height: 2.5vw;
-    max-width: 2.5vw;
+    max-height: 2.5rem;
+    max-width: 2.5rem;
     clip-path: circle();
 }
 
@@ -17,7 +17,7 @@
 
 .dots:after {
     content: '\2807';
-    font-size: 8vw;
+    font-size: 2rem;
 }
 
 .dots {
@@ -28,5 +28,25 @@
 
 .userRow {
     background-color: rgba(100, 100, 100, 0.4);
-    padding-bottom: 10%;
+}
+
+@media only screen and (min-width: 600px) {
+  .textSizingHeader {
+    font-size: 17pt;
+  }
+
+  .textSizingText {
+    font-size: 15pt;
+  }
+
+  .tableSizing {
+    width: 87.5%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .tableSizing {
+    width: 92.5%;
+  }
 }
