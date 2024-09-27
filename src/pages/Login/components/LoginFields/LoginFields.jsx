@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Tooltip, IconButton, InputLabel } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
-import componentStyles from "./LoginComponent.module.css";
+import componentStyles from "./LoginFields.module.css";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({

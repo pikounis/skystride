@@ -16,9 +16,9 @@
   }
   
   .logo {
-    width: 250px; /* Adjust the size as necessary */
-    height: auto; /* Maintain aspect ratio */
-    margin-bottom: 20px; /* Add some space between the logo and the heading */
+    width: 250px; 
+    height: auto; 
+    margin-bottom: 20px; 
   }
   
   .title {

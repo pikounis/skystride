@@ -1,14 +1,12 @@
 import React from 'react';
-import LoginComponent from './LoginComponent';
+import LoginFields from './components/LoginFields/LoginFields';
 import styles from './Login.module.css';
 import { Typography, Paper } from '@mui/material';
-// import logo from '../../../public/sky_stride_no_background.png';
 
 const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <Paper elevation={3} className={styles.paper}>
-        {/* Add logo here */}
         <img
           src="sky_stride_no_background.png"
           alt="Logo"
@@ -20,7 +18,7 @@ const Login = () => {
         >
           Login
         </Typography>
-        <LoginComponent />
+        <LoginFields />
       </Paper>
     </div>
   );
