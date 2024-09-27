@@ -11,13 +11,12 @@ const SportsDropDown = () => {
   return (
     <div>
       {/* Autocomplete for selecting sport */}
-      <Box className={styles.dialogContainer} m={4}>
+      <Box className={styles.sportsDropDown}>
         <Autocomplete
           options={sportsData}  // Options for the dropdown
           getOptionLabel={(option) => option} 
           onChange={(event, value) => setSelectedSport(value)}  // Handle selection change
-          renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />}
-          sx={{ width: 300}} 
+          renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />} 
         />
       </Box>
     </div>

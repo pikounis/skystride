@@ -100,7 +100,18 @@ h1 {
   background-color: rgba(124, 8, 245, 0.2);
 }
 
-.calendar {
-  margin: 10px 30px 0px 30px !important;
-  width: 300px !important;
+.calendar, .sportsDropDown {
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: 10px auto auto auto !important;
+}
+
+.sportsDropDown {
+  margin-top: 30px !important;
+}
+
+@media (min-width: 700px) { /* Adjust the breakpoint as needed */
+  .calendar, .sportsDropDown {
+    min-width: 300px;
+  }
 }

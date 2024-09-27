@@ -44,18 +44,23 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
     >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
+
         <DialogContentText>{message}</DialogContentText>
+        
         {isDelete ? null : (
           <>
             <Calendar />
             <SportsDropDown />
           </>
         )}
+        
       </DialogContent>
+
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button type="submit">{isDelete ? 'Delete' : 'Add Exercise'}</Button>
       </DialogActions>
+
     </Dialog>
   );
 });
