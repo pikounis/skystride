@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Calendar from './Calendar';
 import SportsDropDown from './SportsDropDown';
+import { Typography } from '@mui/material';
 
 const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete }, ref) => {
   const [open, setOpen] = React.useState(false);
@@ -49,11 +50,15 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
         
         {isDelete ? null : (
           <>
+            <Typography variant="h4" component="h3" style={{ textAlign: 'center' }} mb={1}>
+              New Exercise
+            </Typography>
+
             <Calendar />
             <SportsDropDown />
           </>
         )}
-        
+
       </DialogContent>
 
       <DialogActions>
