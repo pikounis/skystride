@@ -16,7 +16,6 @@ h1 {
   }
 }
 
-/* Highlight Styles */
 .highlightColumn {
   background-color: rgba(51, 72, 209, 0.1);
 }
@@ -80,7 +79,6 @@ h1 {
   text-transform: none !important;
 }
 
-
 .leftAlignCenter {
   text-align: left !important;      
   vertical-align: middle !important; 
@@ -91,7 +89,7 @@ h1 {
   color: #d72990 !important;
 }
 
-/* Highlight Styles for Dates column and open mobile row */
+
 .datesColour, .rowOpen {
   background-color: rgba(124, 8, 245, 0.1);
 } 
@@ -106,7 +104,7 @@ h1 {
   margin: 10px auto auto auto !important;
 }
 
-@media (min-width: 700px) { /* Adjust the breakpoint as needed */
+@media (min-width: 700px) {
   .calendar, .sportsDropDown {
     min-width: 300px !important;
   }
