@@ -106,12 +106,42 @@ h1 {
   margin: 10px auto auto auto !important;
 }
 
-.sportsDropDown {
-  margin-top: 30px !important;
-}
-
 @media (min-width: 700px) { /* Adjust the breakpoint as needed */
   .calendar, .sportsDropDown {
-    min-width: 300px;
+    min-width: 300px !important;
   }
+
+  .timeInput {
+    width: 200px !important;
+  }
+}
+
+.endTime {
+  margin-top: 10px !important;
+}
+
+.time {
+  border: 2px solid rgba(124, 8, 245, 0.2);
+  padding: 15px;
+  max-width: 300px; 
+  margin: 20px auto auto auto; 
+  border-radius: 4px;
+}
+
+.newExerciseTitle {
+  text-align: center; 
+  color: #7c08f5;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.orText {
+  text-align: center;
+  margin: 20px auto 20px auto !important; 
+  font-weight: bold !important;
+  color:#7c08f5;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.popupButton {
+  font-family: 'Nunito', sans-serif !important;
 }
