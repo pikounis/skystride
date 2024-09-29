@@ -15,7 +15,7 @@ import styles from '../Activity.module.css';
 const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete }, ref) => {
 
   // Sample data for the sports dropdown
-  const sports = ['Soccer', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
+  const sports = ['Football', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
 
   // State to manage dialog open/close
   const [open, setOpen] = React.useState(false);
