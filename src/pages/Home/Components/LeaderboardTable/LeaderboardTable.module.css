@@ -7,6 +7,96 @@
     border: 5px solid black;
 }
 
+.tableStyle {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    width: 100%
+}
+
+.tableRow {
+    transition: all 0.2s ease-in-out;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+/* CSS specific to first row in leaderboard table */
+/* TO DO: Customise text to stand out */
+/* Add badge/card to make rank number stand out */
+/* Highlight points text */
+
+.tableRow:first-child {
+    background: linear-gradient(45deg, #FFD93D, #FF6B6B);
+    border-radius: 12px 0 0 12px;
+    color: white;
+    box-shadow: 0px 15px 11px -6px #7a7a7d
+}
+
+/* CSS that repeats Sky colours for every 7th element in team list */
+
+.tableRow:nth-child(7n+2) {
+    border-bottom: solid 3px #FF8C00;
+ }
+
+.tableRow:nth-child(7n+3) {
+    border-bottom: solid 3px #F80032;
+}
+
+.tableRow:nth-child(7n+4) {
+    border-bottom: solid 3px #FF00A0;
+}
+
+.tableRow:nth-child(7n+5) {
+    border-bottom: solid 3px #8C28FF;
+}
+
+.tableRow:nth-child(7n+6) {
+    border-bottom: solid 3px #0023FF;
+}
+
+.tableRow:nth-child(7n+7) {
+    border-bottom: solid 3px #19a0ff;
+}
+
+/* Hover action makes Row pop out and highlights with shadow */
+
+.tableRow:hover {
+    background-color: #fff;
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 5px 15px 8px #e4e7fb;
+    box-shadow: 0px 5px 15px 8px #e4e7fb;
+}
+
+/* 1st Place Crown Animation */
+
+.crownAnimation {
+    animation: wiggle 2s linear infinite;
+}
+
+@keyframes wiggle {
+0%, 7% {
+  transform: rotateZ(0);
+}
+15% {
+  transform: rotateZ(-15deg);
+}
+20% {
+  transform: rotateZ(10deg);
+}
+25% {
+  transform: rotateZ(-10deg);
+}
+30% {
+  transform: rotateZ(6deg);
+}
+35% {
+  transform: rotateZ(-4deg);
+}
+40%, 100% {
+  transform: rotateZ(0);
+}
+}
+
 /* .tableFont {
     font-size: 1.5rem;
 } */

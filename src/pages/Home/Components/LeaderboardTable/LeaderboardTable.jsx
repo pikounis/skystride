@@ -23,52 +23,72 @@ const LeaderboardTable = ({ team }) => {
                 sx={{
                     width: '100%',
                     borderCollapse: 'collapse', // No border separation
+                }} 
+            >
+<TableBody>
+    {team.leaderboard.map((person, index) => (
+        <TableRow
+            key={index} // Always provide a unique key for each row
+            sx={{ borderBottom: 'none' }}
+            className={styles.tableRow}
+        >
+            <TableCell
+                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+            >
+                {person.position}
+            </TableCell>
+            <TableCell
+                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+            >
+                {person.name}
+            </TableCell>
+            <TableCell
+                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+            >
+                {person.office}
+            </TableCell>
+            <TableCell
+                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+            >
+                {person.points}
+            </TableCell>
+            <TableCell
+                sx={{
+                    borderBottom: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}
             >
-                <TableBody>
-                    {team.leaderboard.map((person) => (
-                        <TableRow sx={{ borderBottom: 'none' }}>
-                            <TableCell
-                                sx={{  fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-                            >
-                                {person.position}
-                            </TableCell>
-                            <TableCell
-                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-                            >
-                                {person.name}
-                            </TableCell>
-                            <TableCell
-                                sx={{  fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-                            >
-                                {person.office}
-                            </TableCell>
-                            <TableCell
-                                sx={{fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-                            >
-                                {person.points}
-                            </TableCell>
-                            <TableCell
-                                sx={{
-                                    borderBottom: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >   
-                                <Avatar
-                                    src={person.imgPath}
-                                    sx={{
-                                        width: 65,
-                                        height: 'auto',
-                                        borderRadius: '50%',
-                                    }}
-                                    alt={person.name}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
+                {index === 0 ? (
+                    // Special Icon for the first row
+                    <Avatar
+                        src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image to replace Avatar for first row
+                        sx={{
+                            width: 80, // Larger size for first row
+                            height: 'auto',
+                            borderRadius: '50%',
+                            
+                        }} className={styles.crownAnimation}
+                        alt={person.name}
+                    />
+                ) : (
+                    // Default Avatar for all other rows
+                    <Avatar
+                        src={person.imgPath}
+                        sx={{
+                            width: 65,
+                            height: 'auto',
+                            borderRadius: '50%',
+                        }}
+                        alt={person.name}
+                    />
+                )}
+            </TableCell>
+        </TableRow>
+    ))}
+</TableBody>
+
             </Table>
         </Box>
     );
