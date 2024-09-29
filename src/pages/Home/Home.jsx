@@ -83,101 +83,52 @@ const mockdataTeams = [
     leaderboard: [
       {
         position: 1,
-        name: "Taso",
+        name: "Jiya",
         office: "Osterley",
         points: 300,
         imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
       },
       {
-        position: 1,
+        position: 2,
         name: "Tanya",
         office: "Osterley",
         points: 300,
         imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
       },
       {
-        position: 1,
+        position: 3,
         name: "Taso",
         office: "Osterley",
         points: 300,
         imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
       },
       {
-        position: 1,
-        name: "Tanya",
+        position: 4,
+        name: "Pallav",
         office: "Osterley",
         points: 300,
         imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
       },
       {
-        position: 1,
-        name: "Taso",
+        position: 5,
+        name: "Jen",
         office: "Osterley",
         points: 300,
         imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
       },
       {
-        position: 1,
-        name: "Tanya",
+        position: 6,
+        name: "Nicu",
         office: "Osterley",
         points: 300,
         imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
       },
       {
-        position: 1,
-        name: "Taso",
+        position: 7,
+        name: "Victoria",
         office: "Osterley",
         points: 300,
         imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 1,
-        name: "Tanya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 1,
-        name: "Taso",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 1,
-        name: "Tanya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 1,
-        name: "Taso",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 1,
-        name: "Tanya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 1,
-        name: "Taso",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 1,
-        name: "Tanya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
       }
     ]
   }
