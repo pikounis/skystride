@@ -1,168 +1,175 @@
-// BadgeBar.js
-import React, { useRef, useState, useEffect } from 'react';
-import { Box, IconButton } from '@mui/material';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import Badge from '../Badge/Badge.jsx'; // Ensure this path is correct
+import React, { useEffect, useRef, useState } from 'react';
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
+import * as THREE from 'three';
+import { Button } from '@mui/material';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { MapControls, OrbitControls } from '@react-three/drei';
 
-import boxingBadge from './static/boxing-badge.png';
-import cyclingBadge from './static/cycling-badge.png';
-import footballBadge from './static/football-badge.png';
-import racketssportsBadge from './static/racketssports-badge.png';
-import runningBadge from './static/running-badge.png';
-import strengthTrainingBadge from './static/strength-training-badge.png';
-import swimmingBadge from './static/swimming-badge.png';
-import walkingBadge from './static/walking-badge.png';
-import yogaBadge from './static/yoga-badge.png';
+// Coin component (same as before)
+const Coin = ({ index, imageFront, imageBack }) => {
+  const ref = useRef();
+  const [position] = useState([index * 1.5, 0, 0]);
 
-const mockBadges = {
-  achievementBadges: [
-    boxingBadge,
-    footballBadge,
-    runningBadge,
-    cyclingBadge,
-    racketssportsBadge,
-    swimmingBadge,
-    strengthTrainingBadge,
-    walkingBadge,
-    yogaBadge,
-
-    racketssportsBadge,
-    swimmingBadge,
-    strengthTrainingBadge,
-    walkingBadge,
-    yogaBadge,
-  ],
-};
-
-const BadgeBar = () => {
-  const badges = mockBadges.achievementBadges;
-  const scrollContainerRef = useRef(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
-
-  // Function to check arrow visibility
-  const checkForArrows = () => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
-    }
-  };
+  const frontTexture = useLoader(THREE.TextureLoader, imageFront);
+  const backTexture = useLoader(THREE.TextureLoader, imageBack);
 
   useEffect(() => {
-    checkForArrows();
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkForArrows);
-      window.addEventListener('resize', checkForArrows);
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener('scroll', checkForArrows);
-      }
-      window.removeEventListener('resize', checkForArrows);
-    };
-  }, [badges]);
+    frontTexture.rotation = Math.PI / 2;
+    frontTexture.center.set(0.5, 0.5);
+    frontTexture.needsUpdate = true;
+  }, [frontTexture]);
 
-  const scroll = (direction) => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      const scrollAmount = window.innerWidth * 1/2; // Adjust scroll amount as needed
-      const newScrollPosition =
-        direction === 'left'
-          ? container.scrollLeft - scrollAmount
-          : container.scrollLeft + scrollAmount;
-      container.scrollTo({
-        left: newScrollPosition,
-        behavior: 'smooth',
-      });
-    }
-  };
+  useFrame(() => {
+    ref.current.rotation.z += 0.012;
+  });
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        height: '100px',
-        width: '100%',
-        backgroundColor: '#f5f5f5', // Adjust background as needed
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Left Arrow */}
-      {showLeftArrow && (
-        <IconButton
-          onClick={() => scroll('left')}
-          sx={{
-            position: 'absolute',
-            left: '20px',
-            zIndex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            border: '1px solid black',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            },
-          }}
-        >
-          <AiOutlineArrowLeft />
-        </IconButton>
-      )}
+    <mesh ref={ref} rotation={[Math.PI / 2, 0, 0]} position={position}>
+      <cylinderGeometry args={[0.3, 0.3, 0.05, 12]} />
+      <meshStandardMaterial color="#FFD700" metalness={0.8} roughness={0.3} />
+      <meshBasicMaterial map={frontTexture} attachArray="material" />
+      <meshStandardMaterial color="#FFD700" metalness={0.8} roughness={0.3} attachArray="material" />
+      <meshBasicMaterial map={backTexture} attachArray="material" />
+    </mesh>
+  );
+};
 
-      {/* Scrollable Badges Container */}
-      <Box
-        ref={scrollContainerRef}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          overflowX: 'auto',
-          scrollBehavior: 'smooth',
-          padding: '0 40px', // Space for arrows
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-          '-ms-overflow-style': 'none', // IE and Edge
-          'scrollbar-width': 'none', // Firefox
-        }}
+// Coins component with internal movement logic
+const Coins = ({ badgeImages, moveLeft, moveRight }) => {
+  const ref = useRef();
+  const { width, height } = useThree(state => state.viewport)
+  const totalWidthOfCoins = (((badgeImages.length - 1) * 1.5) + 0.3);
+  // const rightOfCouns = (((badgeImages.length - 1) * 1.5) + 0.3)/2
+  const start = Math.max(-width/2 + 0.4, -0.1 - totalWidthOfCoins/2)
+  const [position, setPosition] = useState([start, 0, 0]);
+  const { size, viewport } = useThree();
+  const aspect = size.width / viewport.width;
+
+  // Update position based on left and right button clicks
+  useFrame(() => {
+    if (moveLeft) {
+      setPosition((prevPos) => [prevPos[0] + 0.1, prevPos[1], prevPos[2]]);
+    } else if (moveRight) {
+      setPosition((prevPos) => [prevPos[0] - 0.1, prevPos[1], prevPos[2]]);
+    }
+  });
+
+  return (
+    <group ref={ref} position={position}>
+      {badgeImages.map((badge, i) => (
+        <Coin key={i} index={i} imageFront={badge.front} imageBack={badge.back} />
+      ))}
+    </group>
+  );
+};
+
+
+const Controls = () => {
+  const { camera } = useThree()
+  const controlsRef = useRef()    
+  // const totalWidthOfCoins = (((9 - 1) * 1.5) + 0.3);
+  // const { width, height } = useThree(state => state.viewport)
+
+
+
+
+  useFrame(() => {
+
+    if (controlsRef.current) {
+      // Get the current target (the point the camera is looking at)
+      const target = controlsRef.current.target;
+
+      target.z = 0
+      target.y = 0
+    }
+    if (camera.position.z != 25) {
+        camera.position.z = 25
+      }
+
+    controlsRef.current.addEventListener('change', function () {
+      
+      // console.log(camera.position.x, camera.position.x > (totalWidthOfCoins - width)/2 + 0.1)
+      // if (camera.position.z != 25) {
+      //   camera.position.z = 25
+      // }
+    })
+  }, [])
+
+  return (
+    <MapControls ref={controlsRef} enableZoom={false} enableRotate={false}/>
+  )
+
+  // return (
+  //   <OrbitControls
+  //     ref={controlsRef}
+  //     enableRotate={false}       // Disable rotation
+  //     enableZoom={false}         // Disable zoom (optional, keep if you want zoom disabled)
+  //     enablePan={true}           // Enable panning
+  //     screenSpacePanning={true}  // Panning will happen in screen space
+  //     mouseButtons={{
+  //       LEFT: 2, // Assign the pan action to left mouse button (by default, it's the middle button)
+  //       RIGHT: 2, // Disable the right mouse button's action (which is rotate by default)
+  //     }}
+  //   />
+  // );
+}
+
+// BadgeBar component with arrow buttons
+const BadgeBar = () => {
+  const [moveLeft, setMoveLeft] = useState(false);
+  const [moveRight, setMoveRight] = useState(false);
+
+  const badgeImages = [
+    { front: '/images/boxing-badge.png', back: '/images/boxing-badge.png' },
+    { front: '/images/cycling-badge.png', back: '/images/cycling-badge.png' },
+    { front: '/images/football-badge.png', back: '/images/football-badge.png' },
+    { front: '/images/racketssports-badge.png', back: '/images/racketssports-badge.png' },
+    { front: '/images/running-badge.png', back: '/images/running-badge.png' },
+    { front: '/images/strength-training-badge.png', back: '/images/strength-training-badge.png' },
+    { front: '/images/swimming-badge.png', back: '/images/swimming-badge.png' },
+    { front: '/images/walking-badge.png', back: '/images/walking-badge.png' },
+    { front: '/images/yoga-badge.png', back: '/images/yoga-badge.png' },
+    
+  ];
+
+  // Handlers for button presses (start and stop movement)
+  const handleLeftPress = () => setMoveLeft(true);
+  const handleLeftRelease = () => setMoveLeft(false);
+  const handleRightPress = () => setMoveRight(true);
+  const handleRightRelease = () => setMoveRight(false);
+
+  return (
+    <div className="badge-bar" style={{ position: 'relative', width: '100%', height: '100px' }}>
+      {/* Left Button */}
+      {/* <Button
+        variant="contained"
+        style={{ position: 'absolute', left: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}
+        onMouseDown={handleLeftPress}
+        onMouseUp={handleLeftRelease}
+        onMouseLeave={handleLeftRelease}
       >
-        {badges.map((badge, index) => (
-          <Box
-            key={index}
-            sx={{
-              margin: '10px 40px',
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              '&:hover': {
-                transform: 'scale(1.1)',
-                boxShadow: '0 0 10px 2px rgba(255, 215, 0, 0.7)', // Glowing effect
-              },
-          }}>
-            <Badge achievement={badge} />
-          </Box>
-        ))}
-      </Box>
+        <ArrowBack />
+      </Button> */}
 
-      {/* Right Arrow */}
-      {showRightArrow && (
-        <IconButton
-          onClick={() => scroll('right')}
-          sx={{
-            position: 'absolute',
-            right: '20px',
-            zIndex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            border: '1px solid black',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            },
-          }}
-        >
-          <AiOutlineArrowRight />
-        </IconButton>
-      )}
-    </Box>
+      {/* Canvas containing the coins */}
+      <Canvas camera={{ position: [0, 0, 25], fov: 2 }} style={{ height: '100px', width: '100%' }}>
+        <ambientLight intensity={0.3} />
+        <pointLight position={[10, 10, 10]} />
+        <Coins badgeImages={badgeImages} moveLeft={moveLeft} moveRight={moveRight} />
+        <Controls />
+      </Canvas>
+
+      {/* Right Button */}
+      {/* <Button
+        variant="contained"
+        style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', zIndex: 1 }}
+        onMouseDown={handleRightPress}
+        onMouseUp={handleRightRelease}
+        onMouseLeave={handleRightRelease}
+      >
+        <ArrowForward />
+      </Button> */}
+    </div>
   );
 };
 
