@@ -118,7 +118,7 @@ const ActivityTable = ({ rows }) => {
   return (
     <TableContainer component={Paper} className={styles.tableContainer}>
 
-      <Box display="flex" justifyContent="flex-end" mb={2}>
+      <Box display="flex" justifyContent="flex-end" m={2}>
           <AddExerciseButton />
       </Box>
 
