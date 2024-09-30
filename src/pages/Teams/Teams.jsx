@@ -13,10 +13,6 @@ function Teams() {
         setSearchTerm(term);
     };
 
-    const handleButtonClick = () => {
-        console.log('Button clicked!');
-    };
-
     return (
         <div>
             <div className={styles.container}>
@@ -25,7 +21,7 @@ function Teams() {
             <div className={styles.controlBar}>
                 <TeamsSearch onSearch={handleSearch} />
                 <RadioButtons />
-                <CreateTeam onClick={handleButtonClick} />
+                <CreateTeam />
             </div>
             <div>
                 <CardWrapper />
