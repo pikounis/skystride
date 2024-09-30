@@ -20,6 +20,12 @@
     height: auto; 
     margin-bottom: 20px; 
   }
+
+  .emblem {
+    width: 150px; 
+    height: auto; 
+    margin-bottom: 10px; 
+  }
   
   .title {
     margin-bottom: 20px;

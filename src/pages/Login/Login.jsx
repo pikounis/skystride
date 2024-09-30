@@ -7,8 +7,14 @@ const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <Paper elevation={3} className={styles.paper}>
-        <img
-          src="sky_stride_no_background.png"
+       
+        {/* <img
+          src="skyStrideBlueLogo.png"
+          alt="Logo"
+          className={styles.emblem}
+        /> */}
+         <img
+          src="skyStrideBlock.png"
           alt="Logo"
           className={styles.logo}
         />
