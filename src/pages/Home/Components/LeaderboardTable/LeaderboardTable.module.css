@@ -13,6 +13,10 @@
     width: 100%
 }
 
+.points {
+  color:#FF00A0 !important;
+}
+
 .tableRow {
     transition: all 0.2s ease-in-out;
     border-radius: 4px;
@@ -32,6 +36,9 @@
     box-shadow: 0px 15px 11px -6px #7a7a7d
 }
 
+.tableRow:nth-child(odd):not(:first-child) {
+  background: rgb(230, 243, 251);
+}
 /* CSS that repeats Sky colours for every 7th element in team list */
 
 .tableRow:nth-child(7n+2) {

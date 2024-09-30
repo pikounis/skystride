@@ -32,7 +32,7 @@ const LeaderboardSection = ({ teams }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 2,
+          padding: '20px',
           height: '70vh',
           overflow: 'scroll'
         }}

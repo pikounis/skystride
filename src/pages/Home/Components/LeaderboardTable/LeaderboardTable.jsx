@@ -49,7 +49,7 @@ const LeaderboardTable = ({ team }) => {
             </TableCell>
             <TableCell
                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-            >
+            className={styles.points}>
                 {person.points}
             </TableCell>
             <TableCell
