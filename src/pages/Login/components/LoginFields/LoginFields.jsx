@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Tooltip, IconButton, InputLabel } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import componentStyles from "./LoginFields.module.css";
+import axios from "axios";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({
@@ -16,10 +17,21 @@ const LoginComponent = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login data:", formData);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const {email, password} = formData;
+
+  try {
+    const response = await axios.post('http://127.0.0.1:8081/login', {
+      email,
+      password,
+    });
+
+    console.log('Login successful:', response.data);
+  } catch (error) {
+      console.error('Login failed:', error.response.data);
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className={componentStyles.loginForm}>
