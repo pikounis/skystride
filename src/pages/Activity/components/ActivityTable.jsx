@@ -191,7 +191,7 @@ const ActivityTable = ({ rows }) => {
                 <TableCell className={styles.tableBodyCell}>{row.total_time}</TableCell>
                 <TableCell className={`${styles.tableBodyCell} ${styles.pointsCell}`}>{row.points}</TableCell>
                 <TableCell className={styles.tableBodyCell}>
-                  <EditExercise selectedExercise={row} /> {/* Passing the row (exercise) as selectedExercise */}
+                  <EditExercise selectedExercise={row}/> {/* Passing the row (exercise) as selectedExercise */}
                 </TableCell>
 
               </TableRow>
