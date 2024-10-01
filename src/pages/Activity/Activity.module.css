@@ -151,6 +151,15 @@ h1 {
   text-align: center;
 }
 
+.deleteTitle {
+  color: red;
+}
+
+.deleteData {
+  padding: 3px;
+  color:#7c08f5;
+}
+
 .popupButton {
   font-family: 'Nunito', sans-serif !important;
 }

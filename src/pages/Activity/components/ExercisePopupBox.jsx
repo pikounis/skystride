@@ -2,8 +2,6 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import { Typography, Box } from '@mui/material';
 import Calendar from './Calendar';
@@ -12,7 +10,7 @@ import StartEndTime from './StartEndTime';
 import Duration from './Duration';
 import styles from '../Activity.module.css';
 
-const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete }, ref) => {
+const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, exercise, date, totalTime }, ref) => {
 
   // Sample data for the sports dropdown
   const sports = ['Football', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
@@ -54,12 +52,31 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
         sx: { padding: 3 }
       }}
     >
-      <DialogTitle>{title}</DialogTitle>
+
       <DialogContent>
 
-        <DialogContentText>{message}</DialogContentText>
+        {isDelete ? ( 
 
-        {isDelete ? null : (
+          <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center">
+            
+            <Typography variant="h6" className={styles.deleteTitle} gutterBottom>
+              Delete Exercise
+            </Typography>
+            
+            <Typography variant="body1" className={styles.deleteQuestion} pb={1}>
+              Are you sure you want to delete this exercise session?
+            </Typography>
+
+            <Box mt={2} textAlign="left">
+              <Typography variant="body1" className={styles.deleteData}>Exercise: {exercise}</Typography>
+              <Typography variant="body1" className={styles.deleteData}>Date: {date}</Typography>
+              <Typography variant="body1" className={styles.deleteData}>Total Time: {totalTime}</Typography>
+            </Box>
+
+          </Box>
+
+        ) : (
+          
           <>
             <Typography variant="h5" component="h3" className={styles.newExerciseTitle}>
               New Exercise
@@ -75,6 +92,7 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
 
                 {/* Start and End Time Fields */}
                 <StartEndTime name="Start Time" />
+
                 <Box className={styles.endTime}>
                   <StartEndTime name="End Time" />
                 </Box>
@@ -83,10 +101,11 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
 
                 {/* Total Duration Field */}
                 <Duration />
+
                 <Typography variant="body2" className={styles.durationSubtitle}>
                   Total hours / minutes
                 </Typography>
-
+                
               </Box>
             </fieldset>
           </>
@@ -101,7 +120,9 @@ const ExercisePopupBox = React.forwardRef(({ title, message, onConfirm, isDelete
         
         <Button
           className={styles.popupButton}
-          sx={{ fontWeight: 'bold' }}
+          sx={{ fontWeight: 'bold',
+                color: isDelete ? 'red' : '#7c08f5',
+           }}
           type="submit">
           {isDelete ? 'Delete' : 'Add Exercise'}
         </Button>
