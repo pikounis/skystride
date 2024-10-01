@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import ExercisePopupBox from './ExercisePopupBox'; // Ensure you import the dialog component
+import ExercisePopupBox from './ExercisePopupBox';
 import styles from '../Activity.module.css';
 
 const options = [
@@ -13,7 +13,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu() {
+export default function LongMenu({ selectedExercise }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const popupRef = React.useRef();
@@ -33,8 +33,7 @@ export default function LongMenu() {
 
   const handleConfirmDelete = () => {
     // API call to delete here
-    console.log("Exercise session deleted!");
-
+    console.log("Exercise session deleted!", selectedExercise); // This logs the deleted exercise
   };
 
   return (
@@ -82,13 +81,13 @@ export default function LongMenu() {
 
       {/* Confirmation dialog for deletion */}
       <ExercisePopupBox 
-        ref={popupRef} 
-        title="Delete Exercise" 
-        message="Are you sure you want to delete this exercise session?"
+        ref={popupRef}
+        exercise={selectedExercise?.exercise} // Pass selected exercise data
+        date={selectedExercise?.date}
+        totalTime={selectedExercise?.total_time}
         onConfirm={handleConfirmDelete} 
         isDelete={true} 
       />
-    
     </div>
   );
 }
