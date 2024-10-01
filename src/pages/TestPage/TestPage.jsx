@@ -1,23 +1,31 @@
-// pages/Test.js
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import axios from 'axios';
 
-function TestPage() {
-    const [testState, setTestState] = useState("None");
-    async function runGet() {
-        const response = await fetch(`http://localhost:8081/user/getAll`);
-        const json = await response.json();
-        setTestState(json);
-        console.log(json);
-    }
+export default class TestPage extends React.Component {
+  state = {
+    users: []
+  }
 
-    useEffect(() => {
-        runGet();
-    }, [])
+  // This is an example of a get request - get data from the server
+  componentDidMount() {
+    axios.get(`http://127.0.0.1:8081/user/getAll`)
+      .then(res => {
+        const users = res.data;
+        this.setState({ users });
+      })
+  }
+
+  render() {
     return (
-        <div className='container'>
-            <h1>Welcome to the Test Page</h1>
-        </div>
-    );
+      <ul>
+        {
+          this.state.users
+            .map(user =>
+              <li key={user.id}>{user.id}
+                                {user.email}</li>
+            )
+        }
+      </ul>
+    )
+  }
 }
-
-export default TestPage;
