@@ -36,8 +36,14 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, exercise, date
   // Form submission handler
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
     if (isDelete && onConfirm) {
+
       onConfirm(); // Call the confirm action for delete
+      
+    } else {
+      
+      console.log('Exercise details submitted:', { exercise, date, totalTime }); 
     }
     handleClose(); // Close the dialog after submission
   };

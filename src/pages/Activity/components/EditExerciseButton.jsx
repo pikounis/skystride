@@ -15,6 +15,7 @@ const ITEM_HEIGHT = 48;
 
 export default function LongMenu({ selectedExercise }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isDelete, setIsDelete] = React.useState(false);
   const open = Boolean(anchorEl);
   const popupRef = React.useRef();
 
@@ -26,14 +27,21 @@ export default function LongMenu({ selectedExercise }) {
     setAnchorEl(null);
   };
 
-  const handleDeleteClick = () => {
-    handleClose(); // Close the menu
+  const handleDeleteClick = (exercise, date, totalTime) => {
+    setIsDelete(true);
+    handleClose(); 
     popupRef.current.handleClickOpen(); // Open the confirmation dialog
   };
 
   const handleConfirmDelete = () => {
     // API call to delete here
-    console.log("Exercise session deleted!", selectedExercise); // This logs the deleted exercise
+    console.log("Exercise session deleted!", selectedExercise);
+  };
+
+  const handleEditClick = () => {
+    setIsDelete(false); 
+    handleClose();
+    popupRef.current.handleClickOpen(); // Open the popup for editing
   };
 
   return (
@@ -67,7 +75,7 @@ export default function LongMenu({ selectedExercise }) {
         {options.map((option) => (
           <MenuItem 
             key={option} 
-            onClick={option === 'Delete' ? handleDeleteClick : handleClose}
+            onClick={option === 'Delete' ? handleDeleteClick : handleEditClick}
             sx={{
               '&:hover': {
                 color: '#3348d1'
@@ -85,8 +93,8 @@ export default function LongMenu({ selectedExercise }) {
         exercise={selectedExercise?.exercise} // Pass selected exercise data
         date={selectedExercise?.date}
         totalTime={selectedExercise?.total_time}
-        onConfirm={handleConfirmDelete} 
-        isDelete={true} 
+        onConfirm={handleConfirmDelete}
+        isDelete={isDelete} 
       />
     </div>
   );
