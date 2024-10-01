@@ -166,7 +166,6 @@ const handleChange = (event) => {
           <FormHelperText>Filter users based on office</FormHelperText>
         </FormControl>
 
-
       </Box>
 
     <Box
@@ -174,13 +173,11 @@ const handleChange = (event) => {
       justifyContent = 'center'
       alignItems = 'center'
       marginTop = '5%'
-    >
-      
-      </Box>
+    >  
 
       <TableContainer 
         sx = {{
-          width: '90%',
+         width: '90%',
           my: '2.5%',
           border: 2,
           borderRadius: '5%',
@@ -190,15 +187,10 @@ const handleChange = (event) => {
       >
 
         <Typography
-          level = 'h2'
-          sx = {{ flex: '1 1 100%' }}
-          id = 'tableTitle'
-          component = 'div'
           display = 'flex'
           justifyContent = 'center'
           alignItems = 'center'
           py = '1%'
-          fontSize = '4.5vw' 
           className ={styles.caption}     
         >
           Leaderboard
@@ -250,7 +242,7 @@ const handleChange = (event) => {
                   {row.username}
                 </TableCell>
                 <TableCell align="center">
-                  {<img src={row.teamEmoji} class='img-fluid' className={styles.img}alt="team emoji"></img>}
+                  {<img src={row.teamEmoji} class='img-fluid' className = {styles.img} alt="team emoji"></img>}
                 </TableCell>
                 <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
                   {row.officeLocation}
@@ -295,6 +287,7 @@ const handleChange = (event) => {
           </TableBody>
         </Table>
       </TableContainer>
+      </Box>
     </Box>
   );
 }
