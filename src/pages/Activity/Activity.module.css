@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
-/* Global Styles */
+
 h1 {
   font-family: 'Nunito', sans-serif !important;
 }
@@ -16,7 +16,6 @@ h1 {
   }
 }
 
-/* Highlight Styles */
 .highlightColumn {
   background-color: rgba(51, 72, 209, 0.1);
 }
@@ -26,7 +25,7 @@ h1 {
   color: #d72990 !important;
 }
 
-/* Header Styles */
+/* Header */
 .tableHeader {
   background-color: #7c08f5 !important;
 }
@@ -80,7 +79,6 @@ h1 {
   text-transform: none !important;
 }
 
-
 .leftAlignCenter {
   text-align: left !important;      
   vertical-align: middle !important; 
@@ -91,7 +89,6 @@ h1 {
   color: #d72990 !important;
 }
 
-/* Highlight Styles for Dates column and open mobile row */
 .datesColour, .rowOpen {
   background-color: rgba(124, 8, 245, 0.1);
 } 
@@ -106,12 +103,54 @@ h1 {
   margin: 10px auto auto auto !important;
 }
 
-.sportsDropDown {
-  margin-top: 30px !important;
+@media (min-width: 700px) {
+  .calendar, .sportsDropDown {
+    min-width: 300px !important;
+  }
+
+  .timeInput {
+    width: 200px !important;
+  }
 }
 
-@media (min-width: 700px) { /* Adjust the breakpoint as needed */
-  .calendar, .sportsDropDown {
-    min-width: 300px;
-  }
+.timeContainer {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 100%;
+}
+
+.endTime {
+  margin-top: 10px !important;
+}
+
+.time {
+  border: 2px solid rgba(124, 8, 245, 0.2);
+  padding: 15px;
+  max-width: 300px; 
+  margin: 20px auto auto auto; 
+  border-radius: 4px;
+}
+
+.newExerciseTitle {
+  text-align: center; 
+  color: #7c08f5;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.orText {
+  text-align: center;
+  margin: 20px auto 20px auto !important; 
+  font-weight: bold !important;
+  color:#7c08f5;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.durationSubtitle {
+  margin-top: 5px !important;
+  text-align: center;
+}
+
+.popupButton {
+  font-family: 'Nunito', sans-serif !important;
 }
