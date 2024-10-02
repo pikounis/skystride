@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Box, Typography } from "@mui/material";
-// import SwipeableViews from 'react-swipeable-views';
-
+import axios from "axios";
 import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Podium from "./components/Podium/Podium";
 import styles from './Leaderboard.module.css';
 import { APIPath } from "../../util";
+
+
+
+
+const logos = {
+  lion: ('/images/lionlogo.jpeg'),
+  demon: ('/images/demonlogo.jpeg'),
+  kitsune: ('/images/kitsunelogo.jpeg')
+};
+
 
 function Leaderboard() {
   const [leaderboardGroup, setleaderboardGroup] = useState("Teams");
@@ -47,17 +56,17 @@ function Leaderboard() {
         if (sortedData.length >= 3) {
           setPodiumData({
             first: {
-              img: sortedData[0].imageURL || lionlogo,
+              img: sortedData[0].imageURL || logos.lion,
               name: sortedData[0].name,
               points: sortedData[0].points
             },
             second: {
-              img: sortedData[1].imageURL || demonlogo,
+              img: sortedData[1].imageURL || logos.demon,
               name: sortedData[1].name,
               points: sortedData[1].points
             },
             third: {
-              img: sortedData[2].imageURL || kitsunelogo,
+              img: sortedData[2].imageURL || logos.kitsune,
               name: sortedData[2].name,
               points: sortedData[2].points
             }
@@ -76,6 +85,11 @@ function Leaderboard() {
 
   useEffect(() => {
     // Fetch team data by default when component mounts
+    fetchPodiumData("/team/getAll", setTeamdata);
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data by default when component mounts
     fetchPodiumData("/team/getAll", setTeamdata);
   }, []);
 
@@ -123,4 +137,19 @@ function Leaderboard() {
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 export default Leaderboard;
+
+
+
