@@ -93,7 +93,24 @@ function Leaderboard() {
     fetchPodiumData("/team/getAll", setTeamdata);
   }, []);
 
+  // LEADERBOARD TABLE
 
+  function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
+    return { occupiedPlace, username, teamEmoji, officeLocation, points };
+  }
+
+  const team = '/images/team.jpg';
+  
+  const rows = [
+    createData('4th', 'Player 1', team, 'Osterley', 200),
+    createData('5th', 'Player 2', team, 'Osterley', 180),
+    createData('6th', 'Player 3', team, 'Livingstone', 90),
+    createData('7th', 'Player 4', team, 'Leeds', 87),
+  ];
+
+  const myPlace = [
+    createData('7th', 'Player 4', team, 'Leeds', 87)
+  ];
 
   return (
     <TabContext value={value}>
@@ -122,18 +139,19 @@ function Leaderboard() {
       {!podiumData && <Typography>Loading podium...</Typography>}
 
       {/* Leaderboard Table for Teams */}
+      {/* CHECK WHERE TEAMDATA IS BEING PULLED FROM, AND ROWS FROM LEADERBOARDTABLE */}
       <TabPanel value={1}>
-        <LeaderboardTable data={teamData} loading={loading} />
+        <LeaderboardTable data={teamData} loading={loading} rows={teamData} />
       </TabPanel>
 
       {/* Leaderboard Table for Users */}
       <TabPanel value={2}>
-        <LeaderboardTable data={userData} loading={loading} />
+        <LeaderboardTable data={userData} loading={loading} rows={userData}/>
       </TabPanel>
 
       {/* Leaderboard Table for Offices */}
       <TabPanel value={3}>
-        <LeaderboardTable data={officeData} loading={loading} />
+        <LeaderboardTable data={officeData} loading={loading} rows={rows}/>
       </TabPanel>
     </TabContext>
   );
