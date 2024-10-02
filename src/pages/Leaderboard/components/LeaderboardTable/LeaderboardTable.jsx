@@ -1,4 +1,3 @@
-// All imports required for React and Material UI
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -26,10 +25,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from './LeaderboardTable.module.css';
 
 const team = '/images/team.jpg';
-
-function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
-  return { occupiedPlace, username, teamEmoji, officeLocation, points };
-}
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -72,7 +67,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
@@ -84,27 +78,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const rows = [
-  createData('4th', 'Player 1', team, 'Osterley', 200),
-  createData('5th', 'Player 2', team, 'Osterley', 180),
-  createData('6th', 'Player 3', team, 'Livingstone', 90),
-  createData('7th', 'Player 4', team, 'Leeds', 87),
-];
-
-const offices = [...new Set(rows.map(row => row.officeLocation))];
-
-const myPlace = [
-  createData('7th', 'Player 4', team, 'Leeds', 87)
-];
-
+// Styles for the table
 const tableCellStyle = {
   fontWeight: 'bold',
-  fontFamily: 'Trebuchet MS'
+  fontFamily: 'Trebuchet MS',
 };
 
 const textInTable = {
   fontFamily: 'Trebuchet MS',
-  fontStyle: 'italic'
+  fontStyle: 'italic',
 };
 
 const positionAndPointsStyle = {
@@ -112,180 +94,164 @@ const positionAndPointsStyle = {
   fontWeight: 'bold',
 };
 
-function LeaderboardTable() {
+// LeaderboardTable now accepts data and loading as props
+function LeaderboardTable({ data, loading }) {
   const [personName, setPersonName] = React.useState([]);
 
-const handleChange = (event) => {
-  const {
-    target: { value },
-  } = event;
-  setPersonName(
-    // On autofill we get a stringified value.
-    typeof value === 'string' ? value.split(',') : value,
-  );
-};
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      typeof value === 'string' ? value.split(',') : value
+    );
+  };
+
+  // Render loading state if data is still loading
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  // Check if no data is available
+  if (!data || data.length === 0) {
+    return <Typography>No data available</Typography>;
+  }
+
+  // Create a list of unique office locations from the dynamic data
+  const offices = [...new Set(data.map(row => row.officeLocation))];
 
   return (
     <Box>
-          
-      <Box
-        display = 'flex'
-        justifyContent = 'center'
-        alignItems = 'center'
-      >
+      <Box display='flex' justifyContent='center' alignItems='center'>
         <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ 'aria-label': 'search' }}
-        />
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+          />
         </Search>
 
-      <FormControl sx={{ m: 1, width: 300 }}>
-      <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {offices.map((name) => (
-          <MenuItem key={name} value={name}>
-            <Checkbox checked={personName.includes(name)} />
-            <ListItemText primary={name} />
-          </MenuItem>
-          ))}
-        </Select>
+        <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+          <Select
+            labelId="demo-multiple-checkbox-label"
+            id="demo-multiple-checkbox"
+            multiple
+            value={personName}
+            onChange={handleChange}
+            input={<OutlinedInput label="Tag" />}
+            renderValue={(selected) => selected.join(', ')}
+            MenuProps={MenuProps}
+          >
+            {offices.map((name) => (
+              <MenuItem key={name} value={name}>
+                <Checkbox checked={personName.includes(name)} />
+                <ListItemText primary={name} />
+              </MenuItem>
+            ))}
+          </Select>
           <FormHelperText>Filter users based on office</FormHelperText>
         </FormControl>
-
       </Box>
 
-    <Box
-      display = 'flex'
-      justifyContent = 'center'
-      alignItems = 'center'
-      marginTop = '5%'
-    >  
-
-      <TableContainer 
-        sx = {{
-          width: '90%',
-          my: '2.5%',
-          border: 2,
-          borderRadius: '5%',
-        }}
-        className = {styles.tableSizing}
-        component={Paper}
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        marginTop='5%'
       >
-
-        <Typography
-          display = 'flex'
-          justifyContent = 'center'
-          alignItems = 'center'
-          py = '1%'
-          className ={styles.caption}     
+        <TableContainer
+          sx={{
+            width: '90%',
+            my: '2.5%',
+            border: 2,
+            borderRadius: '5%',
+          }}
+          className={styles.tableSizing}
+          component={Paper}
         >
-          Leaderboard
-        </Typography>
+          <Typography
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            py='1%'
+            className={styles.caption}
+          >
+            Leaderboard
+          </Typography>
 
-        <Table sx={{ 
-          backgroundColor: 'rgba(161, 129, 235, 0.15)',
-          }} 
-          aria-label="simple table"
-        >
-          
-          <TableHead
-            sx = {{
-              borderTop: 3,
-              borderBottom: 3,
-            }}>
-            <TableRow>
-              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
-                Position
-              </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
-                Username
-              </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
-                Team
-              </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
-                Office
-              </TableCell>
-              <TableCell align = 'center' style = {tableCellStyle} className={styles.textSizingHeader}>
-                Points
-              </TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.occupiedPlace}
-                sx={{ 
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  borderBottom: 2
-                }}
-              >
-                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row" className = {styles.textSizingText}>
-                  {row.occupiedPlace}
+          <Table sx={{ backgroundColor: 'rgba(161, 129, 235, 0.15)' }} aria-label="simple table">
+            <TableHead
+              sx={{
+                borderTop: 3,
+                borderBottom: 3,
+              }}
+            >
+              <TableRow>
+                <TableCell align='center' style={tableCellStyle} className={styles.textSizingHeader}>
+                  Position
                 </TableCell>
-                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
-                  {row.username}
+                <TableCell align='center' style={tableCellStyle} className={styles.textSizingHeader}>
+                  Username
                 </TableCell>
-                <TableCell align="center">
-                  {<img src={row.teamEmoji} class='img-fluid' className = {styles.img} alt="team emoji"></img>}
+                <TableCell align='center' style={tableCellStyle} className={styles.textSizingHeader}>
+                  Team
                 </TableCell>
-                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
-                  {row.officeLocation}
+                <TableCell align='center' style={tableCellStyle} className={styles.textSizingHeader}>
+                  Office
                 </TableCell>
-                <TableCell style = {positionAndPointsStyle} align="center" className = {styles.textSizingText}>
-                  {row.points}
+                <TableCell align='center' style={tableCellStyle} className={styles.textSizingHeader}>
+                  Points
                 </TableCell>
               </TableRow>
-            ))}
+            </TableHead>
 
-            <TableRow >
-              <TableCell colSpan={5} className = {styles.dots} align='center'>
-              </TableCell>
-            </TableRow>
-
-            {myPlace.map((row) => (
-              <TableRow
-                key={row.occupiedPlace}
-                sx={{ 
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  borderTop: 2,
-                }}
-                className = {styles.userRow}
-              >
-                <TableCell  style = {positionAndPointsStyle} align="center" component="th" scope="row" className = {styles.textSizingText}>
-                  {row.occupiedPlace}
-                </TableCell>
-                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
-                  {row.username}
-                </TableCell>
-                <TableCell align="center">
-                  {<img src={row.teamEmoji} class='img-fluid' className={styles.img} alt="team emoji"></img>}
-                </TableCell>
-                <TableCell style = {textInTable} align="center" className = {styles.textSizingText}>
-                  {row.officeLocation}
-                </TableCell>
-                <TableCell style = {positionAndPointsStyle} align="center" className = {styles.textSizingText}>
-                  {row.points}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            <TableBody>
+              {/* Render rows dynamically based on fetched data */}
+              {data.map((row, index) => (
+                <TableRow
+                  key={index}
+                  sx={{
+                    '&:last-child td, &:last-child th': { border: 0 },
+                    borderBottom: 2,
+                  }}
+                >
+                  <TableCell
+                    style={positionAndPointsStyle}
+                    align="center"
+                    component="th"
+                    scope="row"
+                    className={styles.textSizingText}
+                  >
+                    {index + 1} {/* Position in the leaderboard */}
+                  </TableCell>
+                  <TableCell style={textInTable} align="center" className={styles.textSizingText}>
+                    {row.username || `${row.firstName} ${row.lastName}`} {/* Username or full name */}
+                  </TableCell>
+                  <TableCell align="center">
+                    <img
+                      src={row.teamEmoji || '/images/default-team.jpg'} // Use default image if teamEmoji is not available
+                      className={styles.img}
+                      alt="team emoji"
+                    />
+                  </TableCell>
+                  <TableCell style={textInTable} align="center" className={styles.textSizingText}>
+                    {row.officeLocation}
+                  </TableCell>
+                  <TableCell
+                    style={positionAndPointsStyle}
+                    align="center"
+                    className={styles.textSizingText}
+                  >
+                    {row.points}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Box>
   );
