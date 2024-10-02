@@ -100,6 +100,26 @@ function Leaderboard() {
   //   setValue(index);
   // };
 
+
+  // LEADERBOARD TABLE
+
+  function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
+    return { occupiedPlace, username, teamEmoji, officeLocation, points };
+  }
+
+  const team = '/images/team.jpg';
+  
+  const rows = [
+    createData('4th', 'Player 1', team, 'Osterley', 200),
+    createData('5th', 'Player 2', team, 'Osterley', 180),
+    createData('6th', 'Player 3', team, 'Livingstone', 90),
+    createData('7th', 'Player 4', team, 'Leeds', 87),
+  ];
+
+  const myPlace = [
+    createData('7th', 'Player 4', team, 'Leeds', 87)
+  ];
+
   return (
     <TabContext value={value}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -126,7 +146,7 @@ function Leaderboard() {
       {/* Swipeable Views for Tab Content */}
       
       <Podium podium={podiumData} />
-      <LeaderboardTable />
+      <LeaderboardTable rows={rows}/>
     </TabContext>
     
   );
