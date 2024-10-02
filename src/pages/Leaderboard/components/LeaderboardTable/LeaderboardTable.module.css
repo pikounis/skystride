@@ -38,6 +38,13 @@
   font-size: 1.75vh !important;
 }
 
+@media (min-width: 1440px) {
+  .textSizingHeader {
+      font-size: 1.5vh !important;
+      padding: 2%;
+  }
+}
+
 @media (max-width: 768px) {
   .textSizingHeader {
       font-size: 1.5vh !important;
