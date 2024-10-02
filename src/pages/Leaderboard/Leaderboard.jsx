@@ -28,12 +28,12 @@ function Leaderboard() {
   const fetchPodiumData = () => {
     setLoading(true);
     axios
-      .get(APIPath + "/team/getAll")
+      .get(APIPath + "/team/getAll") // Make sure this endpoint returns points
       .then((response) => {
         const data = response.data;
 
-        // Sort teams by their own criteria if necessary (e.g., points, created date)
-        const sortedTeams = data; // Modify sorting if needed.
+        // Sort teams by points in descending order
+        const sortedTeams = data.sort((a, b) => b.points - a.points);
 
         // Assign top 3 teams to podium
         if (sortedTeams.length >= 3) {
@@ -41,17 +41,17 @@ function Leaderboard() {
             first: {
               img: sortedTeams[0].imageURL || lionlogo, // Use team image or default
               name: sortedTeams[0].name,
-              points: 100 // Placeholder for points, replace with actual value if available
+              points: sortedTeams[0].points // Pull points directly from the response
             },
             second: {
               img: sortedTeams[1].imageURL || demonlogo,
               name: sortedTeams[1].name,
-              points: 90 // Placeholder for points
+              points: sortedTeams[1].points // Pull points directly from the response
             },
             third: {
               img: sortedTeams[2].imageURL || kitsunelogo,
               name: sortedTeams[2].name,
-              points: 80 // Placeholder for points
+              points: sortedTeams[2].points // Pull points directly from the response
             }
           });
         }
