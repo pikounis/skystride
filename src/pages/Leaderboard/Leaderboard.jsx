@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Box, Typography } from "@mui/material";
-import axios from "axios";
-import lionlogo from "./Static/lionlogo.jpeg";
-import demonlogo from "./Static/demonlogo.jpeg";
-import kitsunelogo from "./Static/kitsunelogo.jpg";
+// import SwipeableViews from 'react-swipeable-views';
+
 import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Podium from "./components/Podium/Podium";
