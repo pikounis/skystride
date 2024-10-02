@@ -8,8 +8,6 @@ import styles from './Leaderboard.module.css';
 import { APIPath } from "../../util";
 
 
-
-
 const logos = {
   lion: ('/images/lionlogo.jpeg'),
   demon: ('/images/demonlogo.jpeg'),
@@ -54,20 +52,27 @@ function Leaderboard() {
 
         // Assign top 3 for the podium, if applicable
         if (sortedData.length >= 3) {
+          // Determine how to handle name fields based on the data structure
+          let getName = (item) => item.name; // For teams or offices
+          if (endpoint.includes("/user")) {
+            // For users, concatenate firstName and lastName
+            getName = (item) => `${item.firstName} ${item.lastName}`;
+          }
+
           setPodiumData({
             first: {
               img: sortedData[0].imageURL || logos.lion,
-              name: sortedData[0].name,
+              name: getName(sortedData[0]),
               points: sortedData[0].points
             },
             second: {
               img: sortedData[1].imageURL || logos.demon,
-              name: sortedData[1].name,
+              name: getName(sortedData[1]),
               points: sortedData[1].points
             },
             third: {
               img: sortedData[2].imageURL || logos.kitsune,
-              name: sortedData[2].name,
+              name: getName(sortedData[2]),
               points: sortedData[2].points
             }
           });
@@ -88,10 +93,7 @@ function Leaderboard() {
     fetchPodiumData("/team/getAll", setTeamdata);
   }, []);
 
-  useEffect(() => {
-    // Fetch user data by default when component mounts
-    fetchPodiumData("/team/getAll", setTeamdata);
-  }, []);
+
 
   return (
     <TabContext value={value}>
@@ -137,19 +139,4 @@ function Leaderboard() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 export default Leaderboard;
-
-
-
