@@ -1,11 +1,13 @@
 // pages/Home.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LeaderboardSection from './Components/LeaderboardSection/LeaderboardSection';
 import LineGraph from './Components/LineGraph/LineGraph';
 import styles from './Home.module.css';
 import { Box, Typography } from '@mui/material';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
+import axios from 'axios';
+import { APIPath } from '../../util';
 
 
 const mockDataName = "Jack";
@@ -200,6 +202,74 @@ const mockdataTeams = [
 // }
 
 function Home() {
+  const skyUserId = 1;
+  const [pointsHistory, setPointsHistory] = useState([]);
+  const [workoutHistory, setWorkoutHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchHistoryData = async () => {
+      try {
+        // Fetch both points and workout data concurrently
+        const [pointsResponse, workoutResponse] = await Promise.all([
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${skyUserId}`),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`)
+        ]);
+
+        // Transform the points history data
+        const transformedPointsHistory = pointsResponse.data.map((entry) => {
+          const date = new Date(entry.date);
+          const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+          const dayOfMonth = date.getDate();
+          
+          // Format date into 'Mon 9th' format
+          const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
+          
+          return {
+            name: formattedDate,
+            pv: entry.points, // Points value
+          };
+        }).reverse();
+
+        // Transform the workout hours history data
+        const transformedWorkoutHistory = workoutResponse.data.map((entry) => {
+          const date = new Date(entry.date);
+          const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+          const dayOfMonth = date.getDate();
+          
+          // Format date into 'Mon 9th' format
+          const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
+          
+          return {
+            name: formattedDate,
+            pv: entry.hours, // Hours value
+          };
+        }).reverse();
+
+        // Set the transformed data in state
+        setPointsHistory(transformedPointsHistory);
+        setWorkoutHistory(transformedWorkoutHistory);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchHistoryData();
+  }, [skyUserId]); // skyUserId as dependency
+
+  // Helper function to get the day suffix (st, nd, rd, th)
+  const getDaySuffix = (day) => {
+    if (day > 3 && day < 21) return 'th'; // Covers 11th-20th
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  console.log(pointsHistory, workoutHistory);
+
   return (
     <div className={styles.container}>
       {/* <h1>Hello {mockDataName}!</h1> */}
@@ -223,12 +293,12 @@ function Home() {
           {/* Charts Section */}
           <Box className={styles.chartsSection}>
             <h4>Points earned in the last 5 days</h4>
-            <LineGraph data={mockDataPoints} />
+            <LineGraph data={pointsHistory} />
 
             <h4>Hours worked out in the last 5 days</h4>
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
-              <LineGraph data={mockDataHoursWorkedOut} />
+              <LineGraph data={workoutHistory} />
             </Box>
           </Box>
 

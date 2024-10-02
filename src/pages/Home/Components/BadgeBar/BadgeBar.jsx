@@ -63,12 +63,12 @@ const Coin = ({ index, imageFront, imageBack, position }) => {
   });
 
   const handleClick = () => {
-    setShowTooltip(!showTooltip); // Toggle tooltip visibility
+    // setShowTooltip(!showTooltip); // Toggle tooltip visibility
   };
 
-  const handleHover = (hovered) => {
-    setShowCircularText(hovered); // Show circular text on hover
-  };
+  // const handleHover = (hovered) => {
+  //   setShowCircularText(hovered); // Show circular text on hover
+  // };
 
   // Circular text generation
   const circularText = "CIRCULAR TEXT AROUND COIN"; // Customize the circular text here
