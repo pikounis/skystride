@@ -4,33 +4,23 @@ import { Box, IconButton } from '@mui/material';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import Badge from '../Badge/Badge.jsx'; // Ensure this path is correct
 
-import boxingBadge from './static/boxing-badge.png';
-import cyclingBadge from './static/cycling-badge.png';
-import footballBadge from './static/football-badge.png';
-import racketssportsBadge from './static/racketssports-badge.png';
-import runningBadge from './static/running-badge.png';
-import strengthTrainingBadge from './static/strength-training-badge.png';
-import swimmingBadge from './static/swimming-badge.png';
-import walkingBadge from './static/walking-badge.png';
-import yogaBadge from './static/yoga-badge.png';
-
 const mockBadges = {
   achievementBadges: [
-    boxingBadge,
-    footballBadge,
-    runningBadge,
-    cyclingBadge,
-    racketssportsBadge,
-    swimmingBadge,
-    strengthTrainingBadge,
-    walkingBadge,
-    yogaBadge,
+    '/images/boxing-badge.png',
+    '/images/football-badge.png',
+    '/images/running-badge.png',
+    '/images/cycling-badge.png',
+    '/images/racketssports-badge.png',
+    '/images/swimming-badge.png',
+    '/images/strength-training-badge.png',
+    '/images/walking-badge.png',
+    '/images/yoga-badge.png',
 
-    racketssportsBadge,
-    swimmingBadge,
-    strengthTrainingBadge,
-    walkingBadge,
-    yogaBadge,
+    '/images/racketssports-badge.png',
+    '/images/swimming-badge.png',
+    '/images/strength-training-badge.png',
+    '/images/walking-badge.png',
+    '/images/yoga-badge.png',
   ],
 };
 

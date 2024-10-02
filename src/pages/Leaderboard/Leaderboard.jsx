@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Tab, Box, Typography } from "@mui/material";
 // import SwipeableViews from 'react-swipeable-views';
-import lionlogo from "./Static/lionlogo.jpeg";
-import demonlogo from "./Static/demonlogo.jpeg";
-import kitsunelogo from "./Static/kitsunelogo.jpg";
 
 import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList } from "@mui/lab";
@@ -11,6 +8,9 @@ import Podium from "./components/Podium/Podium";
 import styles from './Leaderboard.module.css';
 
 function Leaderboard() {
+  const demonlogo = '/images/demonlogo.jpeg';
+  const lionlogo = '/images/lionlogo.jpeg';
+  const kitsunelogo = '/images/kitsunelogo.jpeg';
   const [leaderboardGroup, setleaderboardGroup] = useState("Teams")
   const [podiumData, setPodiumData] = useState({
     first: {
@@ -37,7 +37,7 @@ function Leaderboard() {
       // DO API CALL FOR TEAMS DATA
       setPodiumData({
         first: {
-          img: lionlogo,
+          img: demonlogo,
           name: "Sky Central Coders",
           points: 85,
         },
