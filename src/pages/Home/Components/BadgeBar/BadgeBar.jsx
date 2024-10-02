@@ -5,6 +5,8 @@ import { Button } from '@mui/material';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { MapControls, OrbitControls, Text } from '@react-three/drei';
 import gsap from 'gsap';  
+import axios from 'axios';
+import { APIPath } from '../../../../util';
 
 
 // Coin component (same as before)
@@ -215,27 +217,50 @@ const Controls = ({angleStep, badgeCount}) => {
 
 // BadgeBar component with arrow buttons
 const BadgeBar = () => {
+  const skyUserId = 1;
   const [moveLeft, setMoveLeft] = useState(false);
   const [moveRight, setMoveRight] = useState(false);
+  const [badgeImages, setBadgeImages] = useState([]);
 
-  const badgeImages = [
-    { front: '/images/boxing-badge.png', back: '/images/boxing-badge.png' },
-    { front: '/images/cycling-badge.png', back: '/images/cycling-badge.png' },
-    { front: '/images/football-badge.png', back: '/images/football-badge.png' },
-    { front: '/images/racketssports-badge.png', back: '/images/racketssports-badge.png' },
-    { front: '/images/running-badge.png', back: '/images/running-badge.png' },
-    { front: '/images/strength-training-badge.png', back: '/images/strength-training-badge.png' },
-    { front: '/images/swimming-badge.png', back: '/images/swimming-badge.png' },
-    { front: '/images/walking-badge.png', back: '/images/walking-badge.png' },
-    { front: '/images/yoga-badge.png', back: '/images/yoga-badge.png' },
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${skyUserId}`);
+        
+        // Transform the achievements data into the format required for badgeImages
+        const transformedBadges = response.data.map((achievement) => ({
+          front: achievement.img,  // Use the image from the achievement for both front and back
+          back: achievement.img
+        }));
+
+        setBadgeImages(transformedBadges);  // Update state with transformed data
+      } catch (error) {
+        console.error('Error fetching achievements:', error);
+      }
+    };
+
+    fetchAchievements();
+  }, [skyUserId]);  // Fetch data when skyUserId changes
+
+
+  // const badgeImages = [
+  //   { front: '/images/boxing-badge.png', back: '/images/boxing-badge.png' },
+  //   { front: '/images/cycling-badge.png', back: '/images/cycling-badge.png' },
+  //   { front: '/images/football-badge.png', back: '/images/football-badge.png' },
+  //   { front: '/images/racketssports-badge.png', back: '/images/racketssports-badge.png' },
+  //   { front: '/images/running-badge.png', back: '/images/running-badge.png' },
+  //   { front: '/images/strength-training-badge.png', back: '/images/strength-training-badge.png' },
+  //   { front: '/images/swimming-badge.png', back: '/images/swimming-badge.png' },
+  //   { front: '/images/walking-badge.png', back: '/images/walking-badge.png' },
+  //   { front: '/images/yoga-badge.png', back: '/images/yoga-badge.png' },
     
-  ];
+  // ];
 
   // Handlers for button presses (start and stop movement)
-  const handleLeftPress = () => setMoveLeft(true);
-  const handleLeftRelease = () => setMoveLeft(false);
-  const handleRightPress = () => setMoveRight(true);
-  const handleRightRelease = () => setMoveRight(false);
+  // const handleLeftPress = () => setMoveLeft(true);
+  // const handleLeftRelease = () => setMoveLeft(false);
+  // const handleRightPress = () => setMoveRight(true);
+  // const handleRightRelease = () => setMoveRight(false);
 
   const angleStep = (2 * Math.PI) / 45; 
   const radius = 10;
