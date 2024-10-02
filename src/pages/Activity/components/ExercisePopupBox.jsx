@@ -9,11 +9,31 @@ import SportsDropDown from './SportsDropDown';
 import StartEndTime from './StartEndTime';
 import Duration from './Duration';
 import styles from '../Activity.module.css';
+import { APIPath } from '../../../util';
+import axios from 'axios';
 
-const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
+const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
 
-  // Sample data for the sports dropdown
-  const sports = ['Football', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
+  // axios GET request to populate sports dropdown from backend
+
+  const [sportList, setSportList] = React.useState([]); // Holds sports options
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    // Axios GET request
+    axios.get(APIPath + "/sport/getAll")  // Replace with your API endpoint
+      .then((response) => {
+        setSportList(response.data);
+        setLoading(!loading);
+        setError(null);
+      })
+      .catch(() => {
+        console.error('Error fetching sports data:', error);
+        setLoading(false);
+        setError('Failed to load sports data');
+      });
+    }, [error, loading]);
 
   // State to manage dialog open/close
   const [open, setOpen] = React.useState(false);
@@ -38,12 +58,9 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
     event.preventDefault();
 
     if (isDelete && onConfirm) {
-
-      onConfirm(); // Call the confirm action for delete
-      
+      onConfirm(); // Call the confirm action for delete 
     } else {
-      
-      console.log('Exercise details submitted:', { exercise, date, totalTime }); 
+      console.log('Exercise details submitted:', { exercise, date, totalTime });
     }
     handleClose(); // Close the dialog after submission
   };
@@ -108,7 +125,7 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
                     Current Date: {date}
               </Typography>
 
-              <SportsDropDown sportsData={sports} selectedExercise={exercise}/>
+              <SportsDropDown sportsData={sportList} selectedExercise={exercise}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.editTime}>
@@ -150,7 +167,8 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
 
               {/* Custom components for the form */}
               <Calendar />
-              <SportsDropDown sportsData={sports} />
+              {/* <SportsDropDown sportsData={sports} /> */}
+              <SportsDropDown sportsData={sportList} />
 
               {/* Time selection fields */}
               <fieldset className={styles.time}>

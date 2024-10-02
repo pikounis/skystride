@@ -8,10 +8,10 @@ const SportsDropDown = ({ sportsData, selectedExercise }) => {
   const [selectedSport, setSelectedSport] = useState(selectedExercise);  // Initialise with selectedExercise
 
   // Update selectedSport if selectedExercise prop changes
-  useEffect(() => {
-    axios.get(APIPath + "/sport/getAll");
-    setSelectedSport(selectedExercise);
-  }, [selectedExercise]);
+  // useEffect(() => {
+  //   axios.get(APIPath + "/sport/getAll");
+  //   setSelectedSport(selectedExercise);
+  // }, [selectedExercise]);
 
 
   return (
