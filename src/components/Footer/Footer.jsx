@@ -29,7 +29,7 @@ function Footer() {
         <Box className={styles.centerContent}>
           <Box
             component="img"
-            src="/sky.png"
+            src="/images/sky.png"
             alt="Sky Stride Logo"
             sx={{ height: 40 }}
           />

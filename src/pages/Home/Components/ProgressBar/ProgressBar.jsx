@@ -18,6 +18,7 @@ function ProgressBar({ achievementTitle, achievementProgress, progressLeft, badg
             justifyContent: 'center',
             alignItems: 'ce'
         }} className={styles.progressBarBox}>
+            {/* TODO: REPLACE WITH BADGE COMPONENT */}
             <img src={badgeIcon} className={styles.badgeIcon} />
             <Box sx={{width: "100%"}}>
                 <Typography variant='h6' className={styles.title} sx={{fontWeight: 'bolder'}}>{achievementTitle}</Typography>
