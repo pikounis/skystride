@@ -8,9 +8,14 @@ import CardWrapper from "./components/CardWrapper/CardWrapper";
 
 function Teams() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [radioValue, setRadioValue] = useState('showAll');
 
     const handleSearch = (term) => {
         setSearchTerm(term);
+    };
+
+    const handleRadioChange = (event) => {
+        setRadioValue(event.target.value);
     };
 
     return (
@@ -20,11 +25,11 @@ function Teams() {
             </div>
             <div className={styles.controlBar}>
                 <TeamsSearch onSearch={handleSearch} />
-                <RadioButtons />
+                <RadioButtons value={radioValue} onChange={handleRadioChange} />
                 <CreateTeam />
             </div>
             <div>
-                <CardWrapper />
+                <CardWrapper radioValue={radioValue} />
             </div>
         </div>
     );
