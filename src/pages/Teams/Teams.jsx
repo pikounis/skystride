@@ -9,6 +9,7 @@ import CardWrapper from "./components/CardWrapper/CardWrapper";
 function Teams() {
     const [searchTerm, setSearchTerm] = useState('');
     const [radioValue, setRadioValue] = useState('showAll');
+    const [refreshTeams, setRefreshTeams] = useState(0);
 
     const handleSearch = (term) => {
         setSearchTerm(term);
@@ -16,6 +17,11 @@ function Teams() {
 
     const handleRadioChange = (event) => {
         setRadioValue(event.target.value);
+    };
+
+    const handleTeamCreated = () => {
+        // Increment to trigger teams list refresh
+        setRefreshTeams(prev => prev + 1);
     };
 
     return (
@@ -26,10 +32,10 @@ function Teams() {
             <div className={styles.controlBar}>
                 <TeamsSearch onSearch={handleSearch} />
                 <RadioButtons value={radioValue} onChange={handleRadioChange} />
-                <CreateTeam />
+                <CreateTeam onTeamCreated={handleTeamCreated} />
             </div>
             <div>
-                <CardWrapper radioValue={radioValue} />
+                <CardWrapper radioValue={radioValue} refreshTeams={refreshTeams} />
             </div>
         </div>
     );

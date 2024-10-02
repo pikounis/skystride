@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import styles from './CreateTeamDialog.module.css';
 
 function CreateTeamDialog({ open, onClose, onCreate }) {
@@ -48,40 +49,43 @@ function CreateTeamDialog({ open, onClose, onCreate }) {
         // If all validation passes, proceed with creating the team
         onCreate({ name, imageURL, description });
         onClose();
+
+        setName('');
+        setImageURL('');
+        setDescription('');
     };
 
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-            <DialogTitle className={styles.title} >Create Team</DialogTitle>
+            <DialogTitle className={styles.title}>Create Team</DialogTitle>
             <DialogContent>
-                <TextField
-                    className={styles.input}
-                    label="Team Name"
-                    fullWidth
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <TextField
-                    className={styles.input}
-                    label="Image URL"
-                    fullWidth
-                    value={imageURL}
-                    onChange={(e) => setImageURL(e.target.value)}
-                />
-                <TextField
-                    className={styles.input}
-                    label="Description"
-                    multiline
-                    rows={2}
-                    fullWidth
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                {imageURL && (
-                    <div className={styles.imagePreview}>
-                        <img src={imageURL} alt="Team" className={styles.previewImage} />
-                    </div>
-                )}
+                <Stack spacing={2}>
+                    <TextField
+                        label="Team Name"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <TextField
+                        label="Image URL"
+                        fullWidth
+                        value={imageURL}
+                        onChange={(e) => setImageURL(e.target.value)}
+                    />
+                    <TextField
+                        label="Description"
+                        multiline
+                        rows={2}
+                        fullWidth
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    {imageURL && (
+                        <div className={styles.imagePreview}>
+                            <img src={imageURL} alt="Team" className={styles.previewImage} />
+                        </div>
+                    )}
+                </Stack>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="secondary">
