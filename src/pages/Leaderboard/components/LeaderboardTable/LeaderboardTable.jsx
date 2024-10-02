@@ -21,12 +21,11 @@ import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 
-// Import the images of the team
-import team from './teamsImages/team.jpg';
-
 // Bootstrap CSS + CSS file import
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from './LeaderboardTable.module.css';
+
+const team = '/images/team.jpg';
 
 function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
   return { occupiedPlace, username, teamEmoji, officeLocation, points };
