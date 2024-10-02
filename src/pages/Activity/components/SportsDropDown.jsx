@@ -3,9 +3,7 @@ import { Box, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';  // Correct import
 import styles from '../Activity.module.css';
 
-const sportsData = ['Soccer', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];  // Sample data
-
-const SportsDropDown = () => {
+const SportsDropDown = ({ sportsData }) => {
   const [selectedSport, setSelectedSport] = useState(null);  // State to manage selected sport
 
   return (
