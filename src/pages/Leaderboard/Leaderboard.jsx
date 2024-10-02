@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Box, Typography } from "@mui/material";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import lionlogo from "./Static/lionlogo.jpeg";
 import demonlogo from "./Static/demonlogo.jpeg";
 import kitsunelogo from "./Static/kitsunelogo.jpg";
@@ -12,7 +12,7 @@ import { APIPath } from "../../util";
 
 function Leaderboard() {
   const [leaderboardGroup, setleaderboardGroup] = useState("Teams");
-  const [podiumData, setPodiumData] = useState(null); // Initialize podiumData as null to handle API call
+  const [podiumData, setPodiumData] = useState(null); 
   const [value, setValue] = useState(1);
   const [teamData, setTeamdata] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,67 +20,55 @@ function Leaderboard() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (newValue === 1) {
-      // Fetch teams data and podium for teams
-      fetchPodiumData("/team/getPodium"); // Replace with actual endpoint for teams podium data
+      fetchPodiumData();
       setleaderboardGroup("Teams");
-    } else if (newValue === 2) {
-      // Fetch users data and podium for users
-      fetchPodiumData("/users/getPodium"); // Replace with actual endpoint for users podium data
-      setleaderboardGroup("Users");
-    } else if (newValue === 3) {
-      // Fetch offices data and podium for offices
-      fetchPodiumData("/offices/getPodium"); // Replace with actual endpoint for offices podium data
-      setleaderboardGroup("Offices");
     }
   };
 
-  const fetchPodiumData = (apiEndpoint) => {
+  const fetchPodiumData = () => {
     setLoading(true);
     axios
-      .get(apiEndpoint) // API call for podium data
+      .get(APIPath + "/team/getAll")
       .then((response) => {
         const data = response.data;
-        if (data.length >= 3) {
+
+        // Sort teams by their own criteria if necessary (e.g., points, created date)
+        const sortedTeams = data; // Modify sorting if needed.
+
+        // Assign top 3 teams to podium
+        if (sortedTeams.length >= 3) {
           setPodiumData({
             first: {
-              img: data[0].img || lionlogo, // Set default image if none is provided
-              name: data[0].name,
-              points: data[0].points,
+              img: sortedTeams[0].imageURL || lionlogo, // Use team image or default
+              name: sortedTeams[0].name,
+              points: 100 // Placeholder for points, replace with actual value if available
             },
             second: {
-              img: data[1].img || demonlogo,
-              name: data[1].name,
-              points: data[1].points,
+              img: sortedTeams[1].imageURL || demonlogo,
+              name: sortedTeams[1].name,
+              points: 90 // Placeholder for points
             },
             third: {
-              img: data[2].img || kitsunelogo,
-              name: data[2].name,
-              points: data[2].points,
-            },
+              img: sortedTeams[2].imageURL || kitsunelogo,
+              name: sortedTeams[2].name,
+              points: 80 // Placeholder for points
+            }
           });
         }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching podium data:", error);
-        setLoading(false);
-      });
-  };
 
-  useEffect(() => {
-    // Default fetch for Teams podium on component mount
-    fetchPodiumData(APIPath + "/team/getAll");
-    axios
-      .get(APIPath + "/team/getAll") // Replace with your API endpoint to fetch the full team data
-      .then((response) => {
-        const data = response.data; // Set the received data into state
-        setTeamdata(data);
-        setLoading(false); // Set loading to false after fetching data
+        // Set all team data for the leaderboard
+        setTeamdata(sortedTeams);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching team data:", error);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    // Fetch data for Teams podium on component mount
+    fetchPodiumData();
   }, []);
 
   return (
@@ -89,8 +77,6 @@ function Leaderboard() {
         {/* Tabs Header */}
         <TabList onChange={handleChange} aria-label="Leaderboard tabs" centered>
           <Tab label="Teams" value={1} />
-          <Tab label="Users" value={2} />
-          <Tab label="Offices" value={3} />
         </TabList>
       </Box>
 
@@ -103,7 +89,7 @@ function Leaderboard() {
       </Typography>
 
       {/* Podium Component */}
-      {podiumData && <Podium podium={podiumData} />} {/* Only show podium if data is available */}
+      {podiumData && <Podium podium={podiumData} />} {/* Show podium if data is available */}
       {!podiumData && <Typography>Loading podium...</Typography>}
 
       {/* Leaderboard Table Component */}
