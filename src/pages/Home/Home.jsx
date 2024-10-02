@@ -61,7 +61,7 @@ const mockDataHoursWorkedOut = [
 const mockdataTeams = [
   {
     name: "Team 1",
-    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg", 
+    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg",
     leaderboard: [
       {
         position: 1,
@@ -81,7 +81,7 @@ const mockdataTeams = [
   },
   {
     name: "Team 2",
-    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg", 
+    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg",
     leaderboard: [
       {
         position: 1,
@@ -205,6 +205,7 @@ function Home() {
   const skyUserId = 1;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
+  const [nextAchievements, setNextAchievements] = useState([]);
 
   useEffect(() => {
     const fetchHistoryData = async () => {
@@ -220,10 +221,10 @@ function Home() {
           const date = new Date(entry.date);
           const day = date.toLocaleDateString('en-US', { weekday: 'short' });
           const dayOfMonth = date.getDate();
-          
+
           // Format date into 'Mon 9th' format
           const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
-          
+
           return {
             name: formattedDate,
             pv: entry.points, // Points value
@@ -235,19 +236,45 @@ function Home() {
           const date = new Date(entry.date);
           const day = date.toLocaleDateString('en-US', { weekday: 'short' });
           const dayOfMonth = date.getDate();
-          
+
           // Format date into 'Mon 9th' format
           const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
-          
+
           return {
             name: formattedDate,
             pv: entry.hours, // Hours value
           };
         }).reverse();
 
+        const fetchNextAchievements = async () => {
+          try {
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${skyUserId}`);
+
+            // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
+            const transformedAchievements = response.data.map((achievement) => {
+              const totalPointsNeeded = achievement.achievement.pointsNeeded;
+              const pointsLeft = achievement.pointsDifference;
+              const progressPercentage = ((totalPointsNeeded - pointsLeft) / totalPointsNeeded) * 100;
+
+              return {
+                achievementTitle: achievement.achievement.name,
+                achievementProgress: Math.round(progressPercentage),
+                progressLeft: pointsLeft,
+                badgeIcon: achievement.achievement.img // Assuming img contains the badge icon URL
+              };
+            });
+
+            setNextAchievements(transformedAchievements);
+          } catch (error) {
+            console.error('Error fetching top 3 closest achievements:', error);
+          }
+        };
+        fetchNextAchievements()
+
         // Set the transformed data in state
         setPointsHistory(transformedPointsHistory);
         setWorkoutHistory(transformedWorkoutHistory);
+
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -303,7 +330,7 @@ function Home() {
           </Box>
 
           {/* Achievement Section */}
-          <Box className={styles.achievementsSection}>
+          {/* <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{fontWeight: 'bolder'}}>Achievements In Progress</Typography>
             <ProgressBar
               achievementTitle="Novice Runner"
@@ -323,6 +350,18 @@ function Home() {
               progressLeft={35}
               badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
             />
+          </Box> */}
+          <Box className={styles.achievementsSection}>
+            <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
+            {nextAchievements.map((achievement, index) => (
+              <ProgressBar
+                key={index}
+                achievementTitle={achievement.achievementTitle}
+                achievementProgress={achievement.achievementProgress}
+                progressLeft={achievement.progressLeft}
+                badgeIcon={achievement.badgeIcon}
+              />
+            ))}
           </Box>
         </Box>
 

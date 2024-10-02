@@ -208,7 +208,7 @@ const Controls = ({angleStep, badgeCount}) => {
       screenSpacePanning={true}  
       rotateSpeed={0.1}
       minAzimuthAngle={0}         // Minimum angle
-      maxAzimuthAngle={angleStep * 8}          // Maximum angle
+      maxAzimuthAngle={angleStep * (badgeCount - 1)}          // Maximum angle
       minPolarAngle={Math.PI / 2}  // Optional, restrict up/down rotation
       maxPolarAngle={Math.PI / 2}  // Optional, restrict up/down rotation
     />
