@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Box, Typography } from "@mui/material";
-import axios from "axios";
-import lionlogo from "./Static/lionlogo.jpeg";
-import demonlogo from "./Static/demonlogo.jpeg";
-import kitsunelogo from "./Static/kitsunelogo.jpg";
+// import SwipeableViews from 'react-swipeable-views';
+
 import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList } from "@mui/lab";
 import Podium from "./components/Podium/Podium";
@@ -11,65 +9,99 @@ import styles from './Leaderboard.module.css';
 import { APIPath } from "../../util";
 
 function Leaderboard() {
-  const [leaderboardGroup, setleaderboardGroup] = useState("Teams");
-  const [podiumData, setPodiumData] = useState(null); 
+  const demonlogo = '/images/demonlogo.jpeg';
+  const lionlogo = '/images/lionlogo.jpeg';
+  const kitsunelogo = '/images/kitsunelogo.jpeg';
+  const [leaderboardGroup, setleaderboardGroup] = useState("Teams")
+  const [podiumData, setPodiumData] = useState({
+    first: {
+      img: lionlogo,
+      name: "Sky Central Coders",
+      points: 85,
+    },
+    second: {
+      img: demonlogo,
+      name: "Hub Hackers",
+      points: 75,
+    },
+    third: {
+      img: kitsunelogo,
+      name: "Pythonic Pavilion",
+      points: 65,
+    }
+  });
   const [value, setValue] = useState(1);
   const [teamData, setTeamdata] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if (newValue === 1) {
-      fetchPodiumData();
-      setleaderboardGroup("Teams");
+    if(newValue === 1) {
+      // DO API CALL FOR TEAMS DATA
+      setPodiumData({
+        first: {
+          img: demonlogo,
+          name: "Sky Central Coders",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Hub Hackers",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Pythonic Pavilion",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Teams")
+    } else if (newValue === 2) {
+      // DO API CALL FOR USER DATA
+      setPodiumData({
+        first: {
+          img: lionlogo,
+          name: "Jiya",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Taso",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Tanya",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Users")
+    } else if (newValue === 3) {
+      // DO API CALL FOR OFFICE DATA
+      setPodiumData({
+        first: {
+          img: lionlogo,
+          name: "Osterley",
+          points: 85,
+        },
+        second: {
+          img: demonlogo,
+          name: "Leeds",
+          points: 75,
+        },
+        third: {
+          img: kitsunelogo,
+          name: "Livingston",
+          points: 65,
+        }
+      })
+      setleaderboardGroup("Offices")
     }
   };
 
-  const fetchPodiumData = () => {
-    setLoading(true);
-    axios
-      .get(APIPath + "/team/getAll")
-      .then((response) => {
-        const data = response.data;
-
-        // Sort teams by their own criteria if necessary (e.g., points, created date)
-        const sortedTeams = data; // Modify sorting if needed.
-
-        // Assign top 3 teams to podium
-        if (sortedTeams.length >= 3) {
-          setPodiumData({
-            first: {
-              img: sortedTeams[0].imageURL || lionlogo, // Use team image or default
-              name: sortedTeams[0].name,
-              points: 100 // Placeholder for points, replace with actual value if available
-            },
-            second: {
-              img: sortedTeams[1].imageURL || demonlogo,
-              name: sortedTeams[1].name,
-              points: 90 // Placeholder for points
-            },
-            third: {
-              img: sortedTeams[2].imageURL || kitsunelogo,
-              name: sortedTeams[2].name,
-              points: 80 // Placeholder for points
-            }
-          });
-        }
-
-        // Set all team data for the leaderboard
-        setTeamdata(sortedTeams);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching team data:", error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    // Fetch data for Teams podium on component mount
-    fetchPodiumData();
-  }, []);
+  // const handleSwipeChange = (index) => {
+  //   setValue(index);
+  // };
 
   return (
     <TabContext value={value}>

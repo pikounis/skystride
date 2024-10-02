@@ -2,11 +2,11 @@ import React from "react";
 import Proptype from 'prop-types';
 import styles from "./Badge.module.css";
 
-const Badge = ({achievement})=>{
+const Badge = ({ achievement }) => {
     return (
         <div>
-        <img src={achievement} className={styles.badgeIcon} />
-      </div>
+            <img src={achievement} className={styles.badgeIcon} />
+        </div>
     )
 }
 

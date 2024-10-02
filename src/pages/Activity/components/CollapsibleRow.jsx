@@ -30,7 +30,7 @@ const CollapsibleRow = ({ row }) => {
         <TableCell className={styles.tableMobileCell}>{row.date}</TableCell>
         <TableCell className={styles.tableMobileCell}>{row.exercise}</TableCell>
         <TableCell className={styles.tableMobileCell}>
-            <EditExercise />
+            <EditExercise selectedExercise={row} /> {/* Passing the row (exercise) as selectedExercise */}
         </TableCell>
         
       </TableRow>

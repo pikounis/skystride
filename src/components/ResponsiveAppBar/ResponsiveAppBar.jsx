@@ -122,7 +122,7 @@ function ResponsiveAppBar() {
                 mt: { xs: 1, md: 0 },
               }}
               alt="Sky Stride Logo"
-              src="/skyStrideBlock.png"
+              src="/images/skyStrideBlock.png"
             />
           </Link>
 

@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { Box, TextField } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';  // Correct import
+import React, { useState, useEffect } from 'react';
+import { Autocomplete, TextField, Box } from '@mui/material';
 import styles from '../Activity.module.css';
 
-const sportsData = ['Soccer', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];  // Sample data
+const SportsDropDown = ({ sportsData, selectedExercise }) => {
+  const [selectedSport, setSelectedSport] = useState(selectedExercise);  // Initialise with selectedExercise
 
-const SportsDropDown = () => {
-  const [selectedSport, setSelectedSport] = useState(null);  // State to manage selected sport
+  // Update selectedSport if selectedExercise prop changes
+  useEffect(() => {
+    setSelectedSport(selectedExercise);
+  }, [selectedExercise]);
 
   return (
     <div>
-      {/* Autocomplete for selecting sport */}
+      {/* Autocomplete for selecting a sport */}
       <Box className={styles.sportsDropDown}>
         <Autocomplete
-          options={sportsData}  // Options for the dropdown
-          getOptionLabel={(option) => option} 
-          onChange={(event, value) => setSelectedSport(value)}  // Handle selection change
+          options={sportsData}  // Options for the sports dropdown
+          getOptionLabel={(option) => option}
+          value={selectedSport}
+          onChange={(event, value) => setSelectedSport(value)}
           renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />} 
         />
       </Box>

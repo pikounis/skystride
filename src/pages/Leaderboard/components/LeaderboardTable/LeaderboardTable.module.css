@@ -4,15 +4,85 @@
     clip-path: circle();
 }
 
+.img:hover {
+  transform: scale(1.2);
+}
+
 .caption {
+  font-size: 2.5vh !important;
   background-clip: text;
   background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.rank:hover {
-  transform: scale(1.2);
+@media (max-width: 768px) {
+  .caption {
+      font-size: 2vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .caption {
+      font-size: 1.75vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .caption {
+      font-size: 1.5vh !important;
+  }
+}
+
+.textSizingHeader {
+  font-size: 1.75vh !important;
+}
+
+@media (min-width: 1440px) {
+  .textSizingHeader {
+      font-size: 1.5vh !important;
+      padding: 2%;
+  }
+}
+
+@media (max-width: 768px) {
+  .textSizingHeader {
+      font-size: 1.5vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .textSizingHeader {
+      font-size: 1.25vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .textSizingHeader {
+      font-size: 1vh !important;
+  }
+}
+
+.textSizingText {
+  font-size: 1.5vh !important;
+}
+
+@media (max-width: 768px) {
+  .textSizingText {
+      font-size: 1.25vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .textSizingText {
+      font-size: 1vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .textSizingText {
+      font-size: 0.75vh !important;
+  }
 }
 
 .dots:after {
@@ -28,25 +98,4 @@
 
 .userRow {
     background-color: rgba(100, 100, 100, 0.4);
-}
-
-@media only screen and (min-width: 600px) {
-  .textSizingHeader {
-    font-size: 17pt;
-  }
-
-  .textSizingText {
-    font-size: 15pt;
-  }
-
-  .tableSizing {
-    width: 87.5%;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-
-  .tableSizing {
-    width: 92.5%;
-  }
 }
