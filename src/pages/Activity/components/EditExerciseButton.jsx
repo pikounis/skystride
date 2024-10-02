@@ -16,6 +16,8 @@ const ITEM_HEIGHT = 48;
 export default function LongMenu({ selectedExercise }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isDelete, setIsDelete] = React.useState(false);
+  const [isEdit, setIsEdit] = React.useState(false);
+
   const open = Boolean(anchorEl);
   const popupRef = React.useRef();
 
@@ -27,10 +29,11 @@ export default function LongMenu({ selectedExercise }) {
     setAnchorEl(null);
   };
 
+  // Open popup to confirm deleting an exercise session with exercise data
   const handleDeleteClick = (exercise, date, totalTime) => {
     setIsDelete(true);
     handleClose(); 
-    popupRef.current.handleClickOpen(); // Open the confirmation dialog
+    popupRef.current.handleClickOpen();
   };
 
   const handleConfirmDelete = () => {
@@ -38,10 +41,12 @@ export default function LongMenu({ selectedExercise }) {
     console.log("Exercise session deleted!", selectedExercise);
   };
 
+  // Open the popup to edit an exercise session
   const handleEditClick = () => {
-    setIsDelete(false); 
+    setIsEdit(true); 
+    setIsDelete(false);
     handleClose();
-    popupRef.current.handleClickOpen(); // Open the popup for editing
+    popupRef.current.handleClickOpen();
   };
 
   return (
@@ -87,13 +92,16 @@ export default function LongMenu({ selectedExercise }) {
         ))}
       </Menu>
 
-      {/* Confirmation dialog for deletion */}
+      {/* Confirmation dialog for deletion or editing an exercise session */}
       <ExercisePopupBox 
         ref={popupRef}
-        exercise={selectedExercise?.exercise} // Pass selected exercise data
         date={selectedExercise?.date}
+        exercise={selectedExercise?.exercise} // Passing the selected exercise's data
+        startTime = {selectedExercise?.start}
+        endTime = {selectedExercise?.finish}
         totalTime={selectedExercise?.total_time}
         onConfirm={handleConfirmDelete}
+        isEdit={isEdit} 
         isDelete={isDelete} 
       />
     </div>
