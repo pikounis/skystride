@@ -36,72 +36,57 @@ function Leaderboard() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if(newValue === 1) {
-      // DO API CALL FOR TEAMS DATA
-      setPodiumData({
-        first: {
-          img: demonlogo,
-          name: "Sky Central Coders",
-          points: 85,
-        },
-        second: {
-          img: demonlogo,
-          name: "Hub Hackers",
-          points: 75,
-        },
-        third: {
-          img: kitsunelogo,
-          name: "Pythonic Pavilion",
-          points: 65,
-        }
-      })
-      setleaderboardGroup("Teams")
-    } else if (newValue === 2) {
-      // DO API CALL FOR USER DATA
-      setPodiumData({
-        first: {
-          img: lionlogo,
-          name: "Jiya",
-          points: 85,
-        },
-        second: {
-          img: demonlogo,
-          name: "Taso",
-          points: 75,
-        },
-        third: {
-          img: kitsunelogo,
-          name: "Tanya",
-          points: 65,
-        }
-      })
-      setleaderboardGroup("Users")
-    } else if (newValue === 3) {
-      // DO API CALL FOR OFFICE DATA
-      setPodiumData({
-        first: {
-          img: lionlogo,
-          name: "Osterley",
-          points: 85,
-        },
-        second: {
-          img: demonlogo,
-          name: "Leeds",
-          points: 75,
-        },
-        third: {
-          img: kitsunelogo,
-          name: "Livingston",
-          points: 65,
-        }
-      })
-      setleaderboardGroup("Offices")
+    if (newValue === 1) {
+      fetchPodiumData();
+      setleaderboardGroup("Teams");
     }
   };
 
-  // const handleSwipeChange = (index) => {
-  //   setValue(index);
-  // };
+  const fetchPodiumData = () => {
+    setLoading(true);
+    axios
+      .get(APIPath + "/team/getAll") // Make sure this endpoint returns points
+      .then((response) => {
+        const data = response.data;
+
+        // Sort teams by points in descending order
+        const sortedTeams = data.sort((a, b) => b.points - a.points);
+
+        // Assign top 3 teams to podium
+        if (sortedTeams.length >= 3) {
+          setPodiumData({
+            first: {
+              img: sortedTeams[0].imageURL || lionlogo, // Use team image or default
+              name: sortedTeams[0].name,
+              points: sortedTeams[0].points // Pull points directly from the response
+            },
+            second: {
+              img: sortedTeams[1].imageURL || demonlogo,
+              name: sortedTeams[1].name,
+              points: sortedTeams[1].points // Pull points directly from the response
+            },
+            third: {
+              img: sortedTeams[2].imageURL || kitsunelogo,
+              name: sortedTeams[2].name,
+              points: sortedTeams[2].points // Pull points directly from the response
+            }
+          });
+        }
+
+        // Set all team data for the leaderboard
+        setTeamdata(sortedTeams);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching team data:", error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    // Fetch data for Teams podium on component mount
+    fetchPodiumData();
+  }, []);
 
   return (
     <TabContext value={value}>
