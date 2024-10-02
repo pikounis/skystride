@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -28,13 +28,16 @@ function TeamCard({
   date,
   imageUrl,
   teamDescription,
-  teamMembers,
-  isExpanded, // Received from parent component
-  onExpandClick, // Received from parent component
+  teamMembers = [],
+  isExpanded,
+  onExpandClick,
 }) {
+  // Format the date
+  const formattedDate = new Date(date).toLocaleDateString();
+
   return (
     <Card
-      sx={{ maxWidth: 345, display: 'flex', flexDirection: 'column', height: isExpanded ? 'auto' : '450px' }} // Conditional height
+      sx={{ maxWidth: 345, display: 'flex', flexDirection: 'column', height: isExpanded ? 'auto' : '450px' }}
     >
       <CardHeader
         action={
@@ -43,7 +46,7 @@ function TeamCard({
           </IconButton>
         }
         title={teamName}
-        subheader={date}
+        subheader={formattedDate}
       />
       <CardMedia
         component="img"
@@ -59,8 +62,8 @@ function TeamCard({
       <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
         <Button>Join Team</Button>
         <ExpandMore
-          expand={isExpanded} // Control the icon's rotation
-          onClick={onExpandClick} // Toggle the expansion
+          expand={isExpanded}
+          onClick={onExpandClick}
           aria-expanded={isExpanded}
           aria-label="show more"
         >
@@ -70,15 +73,21 @@ function TeamCard({
       <Collapse in={isExpanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Team Members:</Typography>
-          <ul>
-            {teamMembers.map((member, index) => (
-              <li key={index}>
-                <Typography variant="body2" color="text.secondary">
-                  {member}
-                </Typography>
-              </li>
-            ))}
-          </ul>
+          {teamMembers.length > 0 ? (
+            <ul>
+              {teamMembers.map((member) => (
+                <li key={member.id}>
+                  <Typography variant="body2" color="text.secondary">
+                    {member.firstName} {member.lastName}
+                  </Typography>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Typography variant="body2" color="text.secondary">
+              No team members available.
+            </Typography>
+          )}
         </CardContent>
       </Collapse>
     </Card>
