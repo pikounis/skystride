@@ -14,9 +14,6 @@ import axios from 'axios';
 
 const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
 
-  // Sample data for the sports dropdown
-  // const sports = ['Football', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
-
   // axios GET request to populate sports dropdown from backend
 
   const [sportList, setSportList] = React.useState([]); // Holds sports options
@@ -28,16 +25,15 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     axios.get(APIPath + "/sport/getAll")  // Replace with your API endpoint
       .then((response) => {
         setSportList(response.data);
-        setLoading(false);
+        setLoading(!loading);
         setError(null);
       })
-      .catch((error) => {
+      .catch(() => {
         console.error('Error fetching sports data:', error);
         setLoading(false);
         setError('Failed to load sports data');
       });
-    }, []);
-
+    }, [error, loading]);
 
   // State to manage dialog open/close
   const [open, setOpen] = React.useState(false);
@@ -62,12 +58,9 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     event.preventDefault();
 
     if (isDelete && onConfirm) {
-
-      onConfirm(); // Call the confirm action for delete
-      
+      onConfirm(); // Call the confirm action for delete 
     } else {
-      
-      console.log('Exercise details submitted:', { exercise, date, totalTime }); 
+      console.log('Exercise details submitted:', { exercise, date, totalTime });
     }
     handleClose(); // Close the dialog after submission
   };
