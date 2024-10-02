@@ -7,11 +7,20 @@
     height: 50%;
 }
 
+.hoursWorkedChart {
+   
+}
+
 .leaderboardSection {
     border-radius: 40px;
     height: 100%;
     width: 46%;
     background-color: aquamarine;
+}
+
+.achievementsTitle {
+    margin: 40px auto auto auto !important;
+    text-align: center;
 }
 
 /* Needs to be reconfig to not look like ass */
@@ -26,6 +35,12 @@
     margin: 0 15px;
     padding: 20px;
     height: 50%;
+}
+
+.chartsTitle {
+    text-align: center;
+    margin: 40px auto 10px auto;
+    font-weight: bold;
 }
 
 

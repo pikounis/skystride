@@ -173,10 +173,11 @@ function Home() {
         <Box className={styles.leftSection}>
           {/* Charts Section */}
           <Box className={styles.chartsSection}>
-            <h4>Points earned in the last 5 days</h4>
+
+            <h4 className={styles.chartsTitle}>Points Earned in the Last 5 Days</h4>
             <LineGraph data={mockDataPoints} />
 
-            <h4>Hours worked out in the last 5 days</h4>
+            <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
               <LineGraph data={mockDataHoursWorkedOut} />
@@ -185,7 +186,7 @@ function Home() {
 
           {/* Achievement Section */}
           <Box className={styles.achievementsSection}>
-            <Typography variant='h5' sx={{fontWeight: 'bolder'}}>Achievements In Progress</Typography>
+            <Typography variant='h5' sx={{fontWeight: 'bolder'}} className={styles.achievementsTitle}>Achievements In Progress</Typography>
             <ProgressBar
               achievementTitle="Novice Runner"
               achievementProgress={90}
