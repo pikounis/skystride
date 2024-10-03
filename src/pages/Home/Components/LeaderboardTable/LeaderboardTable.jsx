@@ -22,76 +22,60 @@ const LeaderboardTable = ({ team }) => {
             <Table
                 sx={{
                     width: '100%',
+                    height: '100%',
                     borderCollapse: 'collapse', // No border separation
+                    tableLayout: 'auto'
                 }} 
             >
-<TableBody>
-    {team.leaderboard.map((person, index) => (
-        <TableRow
-            key={index} // Always provide a unique key for each row
-            sx={{ borderBottom: 'none' }}
-            className={styles.tableRow}
-        >
-            <TableCell
-                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-            >
-                {index === 0 ? ( // Render crown image for the first row
-                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Avatar
-                                            src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
-                                            sx={{
-                                                width: 80, // Larger size for first row
-                                                height: 'auto',
-                                                borderRadius: '50%',
-                                                marginRight: 1 // Add margin for spacing
-                                            }}
-                                            className={styles.crownAnimation}
-                                            alt={person.name}
-                                        />
-                                    </Box>
-                                ) : (
-                                    person.position // Render just the position text for other rows
-                                )}
-            </TableCell>
-            <TableCell
-                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-            >
-                {person.name}
-            </TableCell>
-            <TableCell
-                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-            >
-                {person.office}
-            </TableCell>
-            <TableCell
-                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-            className={styles.points}>
-                {person.points}
-            </TableCell>
-            <TableCell
-                sx={{
-                    borderBottom: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-            >
+                <TableBody>
+                    {team.leaderboard.map((person, index) => (
+                        <TableRow
+                            key={index} // Always provide a unique key for each row
+                            sx={{ display: 'flex', width: '100%' }}
+                            className={styles.tableRow}
+                        >
+                            <TableCell
+                                sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: '100%', height: 'auto' }}
+                            >
+                                {index === 0 ? ( // Render crown image for the first row
+                                                    // <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                <Avatar
-                    src={person.imgPath}
-                    sx={{
-                        width: 65,
-                        height: 'auto',
-                        borderRadius: '50%',
-                    }}
-                    alt={person.name}
-                />
+                                                        <Avatar
+                                                            src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
+                                                            sx={{
+                                                                width: '87%',
+                                                                height: 'auto',
+                                                                }}
+                                                            className={styles.crownAnimation}
+                                                            alt={person.name}
+                                                        />
+                                                        
+                                                    // </Box>
+                                                ) : (
+                                                    person.position // Render just the position text for other rows
+                                                )}
+                            </TableCell>
 
-            </TableCell>
-        </TableRow>
-    ))}
-</TableBody>
+                            <TableCell
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
+                            >
+                                {person.name}
+                            </TableCell>
 
+                            <TableCell
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
+                            >
+                                {person.office}
+                            </TableCell>
+
+                            <TableCell
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
+                                className={styles.points}>
+                                {person.points}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
             </Table>
         </Box>
     );

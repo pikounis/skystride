@@ -313,7 +313,7 @@ function Home() {
               badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
             />
           </Box>
-          <Box className={styles.achievementsSection}>
+          {/* <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
             {nextAchievements.map((achievement, index) => (
               <ProgressBar
@@ -324,7 +324,7 @@ function Home() {
                 badgeIcon={achievement.badgeIcon}
               />
             ))}
-          </Box>
+          </Box> */}
         </Box>
 
 

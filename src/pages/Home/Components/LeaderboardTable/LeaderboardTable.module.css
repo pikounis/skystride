@@ -3,8 +3,8 @@
     max-height: 100px;
     aspect-ratio: 1;
     object-fit: cover;
-    border-radius: 30px;
-    border: 5px solid black;
+    border-radius: 100px;
+    border: 5px solid #EBEBEB;
     margin-bottom: 20px;
     right: 0px;
 }
@@ -24,6 +24,20 @@
     border-radius: 4px;
     margin-bottom: 15px;
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .tableRow {
+      align-items: center; /* Center align content */
+  }
+
+  .tableCell {
+      width: 100%; /* Make each cell full width */
+      text-align: center; /* Center the text */
+  }
+
 }
 
 /* CSS specific to first row in leaderboard table */
@@ -33,9 +47,7 @@
 
 .tableRow:first-child {
     background: linear-gradient(45deg, #FF6B6B, #FFD93D);
-    border-radius: 12px 0 0 12px;
-    color: white;
-    box-shadow: 0px 15px 11px -6px #7a7a7d
+    box-shadow: 0px 15px 11px -6px #7a7a7d;
 }
 
 .tableRow:nth-child(odd):not(:first-child) {
