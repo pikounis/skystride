@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { TextField, Button, Tooltip, IconButton, InputLabel } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
+import axios from 'axios';
+import { APIPath } from '../../../../util';
+import { useNavigate } from 'react-router-dom';
 import componentStyles from "./LoginFields.module.css";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    userPassword: "", 
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -16,9 +21,26 @@ const LoginComponent = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login data:", formData);
+
+    try {
+      const response = await axios.post(`${APIPath}/login`, formData);
+      const jwtTokenData = response.data;
+
+      if (jwtTokenData) {
+        localStorage.setItem('jwt', jwtTokenData);
+
+        console.log("JWT Token **************");
+        console.log(jwtTokenData);
+
+        navigate("/"); 
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Invalid credentials');
+    }
   };
 
   return (
@@ -57,8 +79,8 @@ const LoginComponent = () => {
           fullWidth
           type="password"
           id="password"
-          name="password"
-          value={formData.password}
+          name="userPassword" 
+          value={formData.userPassword}
           onChange={handleChange}
           required
         />
