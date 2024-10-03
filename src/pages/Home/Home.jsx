@@ -140,7 +140,7 @@ function Home() {
               {/* data=pointsHistory */}
             </Box>
 
-            <LineGraph data={mockDataPoints} /> 
+            <LineGraph data={pointsHistory} /> 
 
             <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px', marginTop: '40px'}}>
               <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
@@ -149,7 +149,7 @@ function Home() {
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
               {/* data=workoutHistory */}
-              <LineGraph data={mockDataPoints} fillColor="#B8B8FF" strokeColor="#9999FF"/>
+              <LineGraph data={workoutHistory} fillColor="#B8B8FF" strokeColor="#9999FF"/>
             </Box>
 
           </Box>

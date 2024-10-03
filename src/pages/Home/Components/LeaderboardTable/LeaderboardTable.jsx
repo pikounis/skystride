@@ -33,7 +33,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                             <TableCell
                                 sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: '100%', height: 'auto' }}
                             >
-                                {index === 0 ? ( // Render crown image for the first row
+                                {i === 0 ? ( // Render crown image for the first row
                                                     // <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
                                                         <Avatar
@@ -48,7 +48,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                                                         
                                                     // </Box>
                                                 ) : (
-                                                    person.position // Render just the position text for other rows
+                                                    i + 1 // Render just the position text for other rows
                                                 )}
                             </TableCell>
 
