@@ -377,82 +377,80 @@ const handleChangePage = (event, newPage) => {
 
 return (
   <TableContainer component={Paper} className={styles.tableContainer}>
+  <Table sx={{ width: '100%' }} aria-label="collapsible table">
+    <TableHead>
+      <TableRow className={styles.tableHeader}>
+        <>
+          {/* Desktop Headers */}
+          {["Position", "Name", "Team", "Points"].map((header, index) => (
+            <TableCell key={index} className={styles.tableHeaderCell}>
+              {header}
+            </TableCell>
+          ))}
 
-    <Table sx={{ width: '100%'}} aria-label="collapsible table">
+          {/* Conditionally render the "Office" header only if there's data */}
+          {rows.some((row) => row.officeLocation) && (
+            <TableCell className={styles.tableHeaderCell}>Office</TableCell>
+          )}
+        </>
+      </TableRow>
+    </TableHead>
 
-      <TableHead>
-        <TableRow className={styles.tableHeader}>
+    <TableBody>
+      {/* Render rows for the current page */}
+      {(rowsPerPage > 0
+        ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        : rows
+      ).map((row) => (
+        <TableRow className={styles.tableBodyRow} key={row.occupiedPlace}>
+          <TableCell className={styles.tableBodyCell} component="th" scope="row">
+            {row.occupiedPlace}
+          </TableCell>
+          <TableCell className={`${styles.tableBodyCell} ${styles.player}`}>
+            {row.username}
+          </TableCell>
+          <TableCell className={styles.tableBodyCell}>
+            <img
+              src={row.teamEmoji}
+              className={`img-fluid ${styles.img}`}
+              alt="team emoji"
+            />
+          </TableCell>
+          <TableCell className={styles.tableBodyCell}>{row.points}</TableCell>
 
-            <>
-              {/* Desktop Headers */}
-              {[
-
-                "Position",
-                "Name",
-                "Team",
-                "Office",
-                "Points",
-
-                ].map((header, index) => (
-                  <TableCell key={index} className={styles.tableHeaderCell}>
-                    {header}
-                  </TableCell>
-                ))}
-            </>
-
+          {/* Conditionally render the office column */}
+          {row.officeLocation && (
+            <TableCell className={styles.tableBodyCell}>
+              {row.officeLocation}
+            </TableCell>
+          )}
         </TableRow>
-      </TableHead>
+      ))}
 
-      <TableBody>
-        
-        {/* Render rows for the current page */}
-        {(rowsPerPage > 0
-          ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          : rows
-        ).map((row) => (
-
-            // Render a regular table row in desktop view
-            // ADD COLUMN NAME AFTER ROW, Example: row.firstname
-            <TableRow className={styles.tableBodyRow}>
-
-              <TableCell className={styles.tableBodyCell} component="th" scope="row">{row.occupiedPlace}</TableCell>
-              <TableCell className={`${styles.tableBodyCell} ${styles.player}`}>{row.firstName}</TableCell>
-              <TableCell className={styles.tableBodyCell}>
-                  {<img src={row.teamEmoji} class='img-fluid' className = {styles.img} alt="team emoji"></img>}
-              </TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.officeLocation}</TableCell>
-              <TableCell className={styles.tableBodyCell}>{row.points}</TableCell>
-
-
-            </TableRow>
-            
-        ))}
-
-        {/* Render empty rows if needed for spacing */}
-        {emptyRows > 0 && (
-          <TableRow style={{ height: 53 * emptyRows }}>
-            <TableCell colSpan={5} />
-          </TableRow>
-        )}
-
-      </TableBody>
-
-      <TableFooter>
-        <TableRow >
-          <TablePagination
-            rowsPerPageOptions={[]}
-            colSpan={5}
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            ActionsComponent={TablePaginationActions}
-          />
+      {/* Render empty rows if needed for spacing */}
+      {emptyRows > 0 && (
+        <TableRow style={{ height: 53 * emptyRows }}>
+          <TableCell colSpan={5} />
         </TableRow>
-      </TableFooter>
+      )}
+    </TableBody>
 
-    </Table>
-  </TableContainer>
+    <TableFooter>
+      <TableRow>
+        <TablePagination
+          rowsPerPageOptions={[]}
+          colSpan={5}
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          ActionsComponent={TablePaginationActions}
+        />
+      </TableRow>
+    </TableFooter>
+  </Table>
+</TableContainer>
+
 );
 };
 

@@ -15,6 +15,40 @@ const logos = {
 };
 
 
+const mapTeamData = (data) => {
+  return data.map((team, index) =>
+    createData(
+      index + 1, // occupiedPlace
+      team.name, // username
+      team.imageURL, // teamEmoji
+      "", // officeLocation (not applicable for teams)
+      team.averagePoints // points (averagePoints for teams)
+    )
+  );
+};
+
+
+const mapUserData = (data) => {
+  return data.map((user, index) =>
+    createData(
+      index + 1, // occupiedPlace
+      `${user.firstName} ${user.lastName}`, // username
+      "", // teamEmoji (not applicable for users)
+      user.office, // officeLocation
+      user.points // points
+    )
+  );
+};
+
+
+function mapOfficeData() {
+
+}
+
+function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
+  return { occupiedPlace, username, teamEmoji, officeLocation, points };
+}
+
 function Leaderboard() {
   const [leaderboardGroup, setleaderboardGroup] = useState("Teams");
   const [podiumData, setPodiumData] = useState(null);
@@ -30,7 +64,7 @@ function Leaderboard() {
     // Fetch the appropriate data based on selected tab
     if (newValue === 1) {
       setleaderboardGroup("Teams");
-      fetchPodiumData("/team/getAll", setTeamdata); // Fetch team data
+      fetchPodiumData("/team/getAllWithAveragePoints", setTeamdata); // Fetch team data
     } else if (newValue === 2) {
       setleaderboardGroup("Users");
       fetchPodiumData("/user/getAll", setUserData); // Fetch user data
@@ -39,6 +73,7 @@ function Leaderboard() {
       fetchPodiumData("/office/getAll", setOfficeData); // Fetch office data
     }
   };
+  
 
   const fetchPodiumData = (endpoint, setData) => {
     setLoading(true);
@@ -46,40 +81,44 @@ function Leaderboard() {
       .get(APIPath + endpoint)
       .then((response) => {
         const data = response.data;
-
+  
         // Sort by points in descending order
-        const sortedData = data.sort((a, b) => b.points - a.points);
-
+        const sortedData = data.sort((a, b) => b.points - a.points || b.averagePoints - a.averagePoints);
+  
         // Assign top 3 for the podium, if applicable
         if (sortedData.length >= 3) {
-          // Determine how to handle name fields based on the data structure
-          let getName = (item) => item.name; // For teams or offices
+          let getName = (item) => item.name; // Default for teams or offices
           if (endpoint.includes("/user")) {
-            // For users, concatenate firstName and lastName
             getName = (item) => `${item.firstName} ${item.lastName}`;
           }
-
+  
           setPodiumData({
             first: {
               img: sortedData[0].imageURL || logos.lion,
               name: getName(sortedData[0]),
-              points: sortedData[0].points
+              points: sortedData[0].points || sortedData[0].averagePoints,
             },
             second: {
               img: sortedData[1].imageURL || logos.demon,
               name: getName(sortedData[1]),
-              points: sortedData[1].points
+              points: sortedData[1].points || sortedData[1].averagePoints,
             },
             third: {
               img: sortedData[2].imageURL || logos.kitsune,
               name: getName(sortedData[2]),
-              points: sortedData[2].points
-            }
+              points: sortedData[2].points || sortedData[2].averagePoints,
+            },
           });
         }
-
-        // Set the fetched data
-        setData(sortedData);
+  
+        // Map the data to the required format for each group
+        if (endpoint.includes("/team")) {
+          setData(mapTeamData(sortedData));
+        } else if (endpoint.includes("/user")) {
+          setData(mapUserData(sortedData));
+        } else if (endpoint.includes("/office")) {
+          // Leave mapping logic here for offices when implemented
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -95,9 +134,7 @@ function Leaderboard() {
 
   // LEADERBOARD TABLE
 
-  function createData(occupiedPlace, username, teamEmoji, officeLocation, points) {
-    return { occupiedPlace, username, teamEmoji, officeLocation, points };
-  }
+  
 
   const team = '/images/team.jpg';
   
