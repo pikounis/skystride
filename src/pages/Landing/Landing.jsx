@@ -111,6 +111,13 @@ export default function Landing() {
         config: { tension: 120, friction: 20 }
     });
 
+    // Animation for the text coming in from the right
+    const { rightTextPosition, opacity: textOpacity } = useWebSpring({
+        rightTextPosition: clicked ? 0 : 300,  // Animate from right off-screen
+        opacity: clicked ? 1 : 0,
+        config: { tension: 120, friction: 20 }
+    });
+
     // Detect screen size
     useEffect(() => {
         const handleResize = () => {
@@ -124,7 +131,13 @@ export default function Landing() {
     }, []);
 
     return (
-        <Box className={styles.container}>
+        <Box className={styles.container} sx={{
+            // backgroundImage: "url(/images/cloud-background-image.jpg)",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            width: '100vw',
+            height: '100vh',
+        }}>
             <animatedDiv.div
                 style={{
                     position: "absolute",
@@ -174,6 +187,25 @@ export default function Landing() {
                 {/* Optional: Add controls for interactivity */}
                 {/* <OrbitControls enableZoom={false} /> */}
             </Canvas>
+
+            {/* Animated Text Section */}
+            <animatedDiv.div
+                style={{
+                    position: "absolute",
+                    right: rightTextPosition,  // Animate in from the right
+                    top: "30%",
+                    opacity: textOpacity,
+                    padding: "20px",
+                    color: "#fff",
+                    fontSize: isMobile ? "1.2rem" : "2rem",
+                    textAlign: "center ",
+                    maxWidth: isMobile ? "90%" : "40%",
+                    zIndex: 1000
+                }}
+            >
+                <h2>Overcome Challenges, Climb Higher</h2>
+                <p>Just like the mountain before you, every challenge you face brings you one step closer to achieving your goals. Climb higher, push harder, and reach the peak of your success.</p>
+            </animatedDiv.div>
         </Box>
     );
 }
