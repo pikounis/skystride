@@ -4,7 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import TeamCard from '../TeamCard/TeamCard';
 import axios from 'axios';
-import styles from './CardWrapper.module.css'; 
+import styles from './CardWrapper.module.css';
+import { APIPath } from '../../../../util';
 
 function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [teams, setTeams] = useState([]);
@@ -12,20 +13,19 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const userId = 5; // Replace with actual user ID in real application
+    const userId = 5; // Replace with actual user ID in application when we integrate spring security
 
     useEffect(() => {
         setLoading(true);
         setError(null);
         setExpandedCard(null);
-
         let url;
         if (radioValue === 'showAll') {
-            url = 'http://localhost:8081/team/getAll';
+            url = APIPath + '/team/getAll';
         } else if (radioValue === 'myTeams') {
-            url = `http://localhost:8081/team/getMyTeams/${userId}`;
+            url = APIPath + `/team/getMyTeams/${userId}`;
         } else {
-            url = 'http://localhost:8081/team/getAll';
+            url = url = APIPath + '/team/getAll';
         }
 
         axios.get(url)
@@ -45,7 +45,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     };
 
     const handleJoinTeam = (teamId) => {
-        axios.post(`http://localhost:8081/team/${teamId}/addMember/${userId}`)
+        axios.post(APIPath + `/team/${teamId}/addMember/${userId}`)
             .then(response => {
                 console.log('Successfully joined the team:', response.data);
                 // Trigger a refresh of teams
@@ -58,7 +58,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     };
 
     const handleLeaveTeam = (teamId) => {
-        axios.delete(`http://localhost:8081/team/${teamId}/removeMember/${userId}`)
+        axios.delete( APIPath + `/team/${teamId}/removeMember/${userId}`)
             .then(response => {
                 console.log('Successfully left the team:', response.data);
                 // Trigger a refresh of teams
