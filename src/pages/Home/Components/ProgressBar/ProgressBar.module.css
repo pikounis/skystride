@@ -82,6 +82,7 @@
     /* background: linear-gradient(145deg, #ff00a0 0%, #19a0ff 100%, #f80032 ); */
     background: #4a70e3;
     z-index: 1;
+    white-space: nowrap;
 }
 
 /* pointer on tooltip */

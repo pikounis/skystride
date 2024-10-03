@@ -132,9 +132,23 @@ h1 {
   border-radius: 4px;
 }
 
+.editTime {
+  border: 2px solid rgba(61, 107, 250, 0.2);
+  padding: 15px;
+  max-width: 300px; 
+  margin: 20px auto auto auto; 
+  border-radius: 4px;
+}
+
 .newExerciseTitle {
   text-align: center; 
   color: #7c08f5;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.editExerciseTitle {
+  text-align: center; 
+  color: #3d6bfa;
   font-family: 'Nunito', sans-serif !important;
 }
 
@@ -146,9 +160,49 @@ h1 {
   font-family: 'Nunito', sans-serif !important;
 }
 
+.orTextEdit {
+  text-align: center;
+  margin: 15px auto 20px auto !important; 
+  font-weight: bold !important;
+  color:#3d6bfa;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.timeSubtitle {
+  text-align: center;
+  margin-top: 5px !important;
+  color:#3d6bfa;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.dateSubtitle {
+  margin-top: 5px !important;
+  margin-bottom: 25px !important;
+  text-align: center;
+  color: #3d6bfa;
+  font-family: 'Nunito', sans-serif !important;
+}
+
 .durationSubtitle {
   margin-top: 5px !important;
   text-align: center;
+  font-family: 'Nunito', sans-serif !important;
+}
+
+.durationEditSubtitle {
+  margin-top: 5px !important;
+  text-align: center;
+  font-family: 'Nunito', sans-serif !important;
+  color:#3d6bfa;
+}
+
+.deleteTitle {
+  color: red;
+}
+
+.deleteData {
+  padding: 3px;
+  color:#7c08f5;
 }
 
 .popupButton {
