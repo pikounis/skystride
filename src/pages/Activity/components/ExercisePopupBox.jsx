@@ -53,7 +53,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   }));
 
   // Form submission handler
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     if (isDelete && onConfirm) {
@@ -61,15 +61,28 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     } else {
 
       const dataToPost = {
-        skyUserId: 1,
-        sportId: formData.sport,
-        startTime: formData.date + "T" + formData.startTime + ":00",
-        endTime: formData.date + "T" + formData.endTime + ":00",
-        pontsEarned: 20
+        skyUser: {
+          id: 1 // mock ID
+        },
+        sport: {
+          id: formData.sport // sport ID
+        },
+        startTime: formData.date + "T" + formData.startTime,
+        endTime: formData.date + "T" + formData.endTime,
+        pontsEarned: 0 // automatically calculated
+      };
+
+      try {
+        // Make the POST request to create a new activity
+        const response = await axios.post('http://127.0.0.1:8081/activity/create', dataToPost, {
+          headers: {
+            'Content-Type': 'application/json',
+            // Include any other headers if necessary, like authorization
+          }
+        });
+      } catch (error) {
+        console.error('Error creating activity:', error.response ? error.response.data : error.message);
       }
-
-      console.log(dataToPost)
-
     }
     handleClose(); // Close the dialog after submission
   };

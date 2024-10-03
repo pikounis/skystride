@@ -20,7 +20,7 @@ export default function DatePickerComponent({ onDateChange }) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} >
-      <DatePicker 
+      <DatePicker
         label="Select Date"
         value={date}
         onAccept={handleDateChange}

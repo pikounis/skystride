@@ -9,7 +9,7 @@ export default function FormPropsTimePickers({name, onTimingChange}) {
 
   const handleTimeChange = (newValue) => {
     if (newValue) {
-      const updatedValue = newValue.format('HH:mm');
+      const updatedValue = newValue.format('HH:mm:ss');
 
     // Call the parent callback with the updated value
     if (onTimingChange) {
