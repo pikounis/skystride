@@ -157,25 +157,29 @@ function Home() {
           {/* Achievement Section */}
           <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{fontWeight: 'bolder'}} className={styles.achievementsTitle}>Achievements In Progress</Typography>
-            <ProgressBar
-              achievementTitle="Novice Runner"
-              achievementProgress={90}
-              progressLeft={50}
-              badgeIcon={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6kco1vTUHJToNzQBlwRoI1stXwneicJ1_g&s"}
-            />
-            <ProgressBar
-              achievementTitle="Master Novice Runner"
-              achievementProgress={40}
-              progressLeft={30}
-              badgeIcon={"https://png.pngtree.com/png-vector/20240723/ourlarge/pngtree-athletic-runner-vintage-badge-design-png-image_12965334.png"}
-            />
-            <ProgressBar
-              achievementTitle="Walking Wonder"
-              achievementProgress={60}
-              progressLeft={35}
-              badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
-            />
+            
+            <Box className={styles.achievementsInnerContainer}>
+              <ProgressBar
+                achievementTitle="Novice Runner"
+                achievementProgress={90}
+                progressLeft={50}
+                badgeIcon={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6kco1vTUHJToNzQBlwRoI1stXwneicJ1_g&s"}
+              />
+              <ProgressBar
+                achievementTitle="Master Novice Runner"
+                achievementProgress={40}
+                progressLeft={30}
+                badgeIcon={"https://png.pngtree.com/png-vector/20240723/ourlarge/pngtree-athletic-runner-vintage-badge-design-png-image_12965334.png"}
+              />
+              <ProgressBar
+                achievementTitle="Walking Wonder"
+                achievementProgress={60}
+                progressLeft={35}
+                badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
+              />
+            </Box>
           </Box>
+
           {/* <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
             {nextAchievements.map((achievement, index) => (
@@ -188,6 +192,7 @@ function Home() {
               />
             ))}
           </Box> */}
+
         </Box>
 
 
