@@ -1,0 +1,34 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .labelContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Space between the label and input field */
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 8px; /* Space between the label and the info icon */
+  }
+  
+  .infoIcon {
+    cursor: pointer;
+  }
+  
+  .submitButton {
+    margin-top: 20px;
+    background-color: #3b0bbd;
+    color: white;
+  }
+  
+  .submitButton:hover {
+    background-color: #05015d;
+  }
+  

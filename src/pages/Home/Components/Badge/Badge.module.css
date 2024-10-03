@@ -1,0 +1,12 @@
+.badgeIcon{
+    width: 70px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    /* margin-right: 10px; */
+    transition: 0.5s;
+}
+
+.badgeIcon:hover{
+    transform: scale(1.2);
+    box-shadow: 0 0 13px rgba(232, 21, 175, 0.5);
+}

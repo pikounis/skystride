@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.img {
+    max-height: 2.5rem;
+    max-width: 2.5rem;
+    clip-path: circle();
+}
+
+.img:hover {
+  transform: scale(1.2);
+}
+
+/* .caption {
+  font-size: 2.5vh !important;
+  background-clip: text;
+  background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .caption {
+      font-size: 2vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .caption {
+      font-size: 1.75vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .caption {
+      font-size: 1.5vh !important;
+  }
+}
+
+.textSizingHeader {
+  font-size: 1.75vh !important;
+}
+
+@media (min-width: 1440px) {
+  .textSizingHeader {
+      font-size: 1.5vh !important;
+      padding: 2%;
+  }
+}
+
+@media (max-width: 768px) {
+  .textSizingHeader {
+      font-size: 1.5vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .textSizingHeader {
+      font-size: 1.25vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .textSizingHeader {
+      font-size: 1vh !important;
+  }
+}
+
+.textSizingText {
+  font-size: 1.5vh !important;
+}
+
+@media (max-width: 768px) {
+  .textSizingText {
+      font-size: 1.25vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .textSizingText {
+      font-size: 1vh !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .textSizingText {
+      font-size: 0.75vh !important;
+  }
+}
+
+.dots:after {
+    content: '\2807';
+    font-size: 2rem;
+}
+
+.dots {
+    display: 'flex';
+    justify-content: 'center';
+    align-items: 'center';
+}
+
+.userRow {
+    background-color: rgba(100, 100, 100, 0.4);
+} */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.tableContainer {
+  max-width: 1000px;
+  margin: 100px auto;
+  color: white !important;
+  background-color: #1ef0f9 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.tableHeaderCell, 
+.tableMobileCell {
+  font-family: "Bebas Neue", sans-serif !important;
+  font-size: 1.8rem !important;
+  color: #1ef0f9 !important;
+  text-align: center !important;
+  background-color: #001434 !important;
+}
+ 
+.tableBodyCell {
+  font-family: "Bebas Neue", sans-serif !important;
+  font-size: 1.3rem !important;
+  color: white !important;
+  text-align: center !important;
+}
+
+.player {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 1.2rem !important;
+}
+
+.tableBodyRow {
+  background: linear-gradient(145deg, #67068e 0%, #19a0ff 100%, #f80032);
+  border-top: 3px solid #f80777 !important;
+}
+
+p {
+ margin-bottom: 0px !important;
+}
+

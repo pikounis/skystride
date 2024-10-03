@@ -1,0 +1,9 @@
+.captions {
+    background-clip: text;
+    background: -webkit-linear-gradient(right, #FF7800 8%, #F80032 28%, #FF00A0 40%, #8C28FF 60%, #0023FF 80%, #1798FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: "center";
+    margin-top: "1.5rem";
+  }
+  
