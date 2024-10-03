@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Box } from '@mui/material';
-import styles from '../Activity.module.css';
+import styles from './SportsDropDown.module.css';
 
 const SportsDropDown = ({ sportsData, selectedExercise, onSportChange }) => {
   const [selectedSport, setSelectedSport] = useState(selectedExercise);  // Initialise with selectedExercise
