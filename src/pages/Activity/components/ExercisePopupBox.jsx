@@ -12,13 +12,18 @@ import styles from '../Activity.module.css';
 import { APIPath } from '../../../util';
 import axios from 'axios';
 
-const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
+const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime, activityId }, ref) => {
 
   // axios GET request to populate sports dropdown from backend
 
   const [sportList, setSportList] = React.useState([]); // Holds sports options
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(startTime);
+  const [error, setError] = React.useState(endTime);
+
+  // axios PUT request to hold form data
+  const [selectedSport, setSelectedSport] = React.useState(exercise);
+  const [selectedStartTime, setSelectedStartTime] = React.useState(startTime);
+  const [selectedEndTime, setSelectedEndTime] = React.useState(endTime);
 
   React.useEffect(() => {
     // Axios GET request
@@ -57,10 +62,28 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
+    // Sets up Edit Data format for API 
+    const updatedData = {
+      id: activityId,
+      sport: selectedSport,
+      startTime: selectedStartTime,
+      endTime: selectedEndTime
+    };
+
+    console.log("Updated Data:", updatedData);
+
     if (isDelete && onConfirm) {
       onConfirm(); // Call the confirm action for delete 
-    } else {
-      console.log('Exercise details submitted:', { exercise, date, totalTime });
+    } else if (isEdit) {
+      // PUT request
+      axios.put(APIPath + "/activity/update", updatedData)
+      .then((response) => {
+        console.log("Activity updated:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating activity: ", error);
+      });
+      // console.log('Exercise details submitted:', { exercise, date, totalTime });
     }
     handleClose(); // Close the dialog after submission
   };
@@ -125,33 +148,48 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
                     Current Date: {date}
               </Typography>
 
-              <SportsDropDown sportsData={sportList} selectedExercise={exercise}/>
+
+{/* UPDATED FOR EDIT ACTIVITY */}
+              <SportsDropDown sportsData={sportList} 
+              selectedExercise={selectedSport} 
+              onChange={(sport) => setSelectedSport(sport)}/>
+
+              <Typography variant="body2" className={styles.timeSubtitle}>
+                    Current Sport: {exercise}
+                  </Typography>
+
 
               {/* Time selection fields */}
               <fieldset className={styles.editTime}>
                 <Box className={styles.timeContainer}>
 
                   {/* Start and End Time Fields */}
-                  <StartEndTime name="Start Time" />
+                  <StartEndTime name="Start Time" 
+                  onChange={(time) => setSelectedStartTime(time)}/>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current Start: {startTime}
                   </Typography>
 
                   <Box className={styles.endTime}>
-                    <StartEndTime name="End Time" />
+                    <StartEndTime name="End Time" 
+                    onChange={(time) => setSelectedEndTime(time)} />
                   </Box>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current End: {endTime}
                   </Typography>
 
-                  <Typography className={styles.orTextEdit}>OR</Typography>
+
+{/* UPDATED EDIT PUT ENDS HERE */}
+
+
+                  {/* <Typography className={styles.orTextEdit}>OR</Typography> */}
 
                   {/* Total Duration Field */}
-                  <Duration />
+                  {/* <Duration />
 
                   <Typography variant="body2" className={styles.durationEditSubtitle}>
                     Current Total Time: {totalTime}
-                  </Typography>
+                  </Typography> */}
 
                 </Box>
               </fieldset>
