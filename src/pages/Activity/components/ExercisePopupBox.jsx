@@ -25,7 +25,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     axios.get(APIPath + "/sport/getAll")  // Replace with your API endpoint
       .then((response) => {
         setSportList(response.data);
-        setLoading(!loading);
+        setLoading(false);
         setError(null);
       })
       .catch(() => {
@@ -60,7 +60,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     if (isDelete && onConfirm) {
       onConfirm(); // Call the confirm action for delete 
     } else {
-      console.log('Exercise details submitted:', { exercise, date, totalTime });
+      console.log('');
     }
     handleClose(); // Close the dialog after submission
   };
