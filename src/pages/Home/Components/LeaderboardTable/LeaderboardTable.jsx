@@ -22,24 +22,44 @@ const LeaderboardTable = ({ team, skyUserId }) => {
             <Table
                 sx={{
                     width: '100%',
+                    height: '100%',
                     borderCollapse: 'collapse', // No border separation
-                }}
+                    tableLayout: 'auto'
+                }} 
             >
                 <TableBody>
                     {team.members.map((person, i) => (
-                        <TableRow sx={{ borderBottom: 'none', backgroundColor: skyUserId === person.id ? 'rgba(0, 0, 0, 0.05)' : 'transparent' }}>
+                        <TableRow className={styles.tableRow} sx={{ display: 'flex', width: '100%', borderBottom: 'none', backgroundColor: skyUserId === person.id ? 'rgba(0, 0, 0, 0.05)' : 'transparent' }}>
                             <TableCell
-                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+                                sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: '100%', height: 'auto' }}
                             >
-                                {i + 1}
+                                {i === 0 ? ( // Render crown image for the first row
+                                                    // <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
+                                                        <Avatar
+                                                            src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
+                                                            sx={{
+                                                                width: '87%',
+                                                                height: 'auto',
+                                                                }}
+                                                            className={styles.crownAnimation}
+                                                            alt={person.name}
+                                                        />
+                                                        
+                                                    // </Box>
+                                                ) : (
+                                                    i + 1 // Render just the position text for other rows
+                                                )}
                             </TableCell>
+
                             <TableCell
-                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
                             >
                                 {person.firstName} {person.lastName[0]}.
                             </TableCell>
+
                             <TableCell
-                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
                             >
                                 {/* Format the office string */}
                                 {person.office
@@ -48,9 +68,10 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                                     .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
                                     .join(' ')}   
                             </TableCell>
+
                             <TableCell
-                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
-                            >
+                                sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
+                                className={styles.points}>
                                 {person.points}
                             </TableCell>
                             {/* <TableCell

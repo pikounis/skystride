@@ -1,3 +1,14 @@
+/* @font-face {
+    font-family: 'Sky';
+    src: url('/fonts/Sky_Regular.ttf') format('regular');
+    src: url('/fonts/Sky_Bold.ttf') format('bold');
+    src: url('/fonts/Sky_Italic.ttf') format('italic');
+    src: url('/fonts/Sky_Med.ttf') format('med');
+    src: url('/fonts/SkyText_Lt.ttf') format('light');
+  } */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .leftSection {
     width:46%;
 }
@@ -7,11 +18,21 @@
     height: 50%;
 }
 
+.hoursWorkedChart {
+   
+}
+
 .leaderboardSection {
     border-radius: 40px;
     height: 100%;
     width: 46%;
     background-color: aquamarine;
+}
+
+.achievementsTitle {
+    margin: 40px auto auto auto !important;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
 }
 
 /* Needs to be reconfig to not look like ass */
@@ -28,6 +49,18 @@
     height: 50%;
 }
 
+.chartsHeader {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.chartsTitle {
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+}
+
 
 @media only screen and (max-width:1400px) {
     .leftSection {
@@ -37,4 +70,3 @@
         width: 100%;
     }
 }
-

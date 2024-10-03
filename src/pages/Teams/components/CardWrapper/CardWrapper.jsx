@@ -13,7 +13,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const userId = 5; // Replace with actual user ID in application when we integrate spring security
+    const userId = 1; // Replace with actual user ID in application when we integrate spring security
 
     useEffect(() => {
         setLoading(true);

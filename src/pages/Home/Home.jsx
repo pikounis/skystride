@@ -8,12 +8,13 @@ import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
 import axios from 'axios';
 import { APIPath } from '../../util';
+import { shadows } from '@mui/system';
 
 
 const mockDataName = "Jack";
 
 function Home() {
-  const skyUserId = 5;
+  const skyUserId = 1;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
   const [nextAchievements, setNextAchievements] = useState([]);
@@ -131,21 +132,31 @@ function Home() {
 
         {/* Left Side Section */}
         <Box className={styles.leftSection}>
+
           {/* Charts Section */}
           <Box className={styles.chartsSection}>
-            <h4>Points earned in the last 5 days</h4>
-            <LineGraph data={pointsHistory} />
+            <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px' }}>
+              <h4 className={styles.chartsTitle}>Points Earned in the Last 5 Days</h4>
+              {/* data=pointsHistory */}
+            </Box>
 
-            <h4>Hours worked out in the last 5 days</h4>
+            <LineGraph data={pointsHistory} /> 
+
+            <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px', marginTop: '40px'}}>
+              <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
+            </Box>
+
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
-              <LineGraph data={workoutHistory} />
+              {/* data=workoutHistory */}
+              <LineGraph data={workoutHistory} fillColor="#B8B8FF" strokeColor="#9999FF"/>
             </Box>
+
           </Box>
 
           {/* Achievement Section */}
-          {/* <Box className={styles.achievementsSection}>
-            <Typography variant='h5' sx={{fontWeight: 'bolder'}}>Achievements In Progress</Typography>
+          <Box className={styles.achievementsSection}>
+            <Typography variant='h5' sx={{fontWeight: 'bolder'}} className={styles.achievementsTitle}>Achievements In Progress</Typography>
             <ProgressBar
               achievementTitle="Novice Runner"
               achievementProgress={90}
@@ -164,8 +175,8 @@ function Home() {
               progressLeft={35}
               badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
             />
-          </Box> */}
-          <Box className={styles.achievementsSection}>
+          </Box>
+          {/* <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
             {nextAchievements.map((achievement, index) => (
               <ProgressBar
@@ -176,7 +187,7 @@ function Home() {
                 badgeIcon={achievement.badgeIcon}
               />
             ))}
-          </Box>
+          </Box> */}
         </Box>
 
 
