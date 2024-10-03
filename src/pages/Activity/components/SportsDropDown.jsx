@@ -19,8 +19,11 @@ const SportsDropDown = ({ sportsData, selectedExercise }) => {
         <Autocomplete
           options={sportsData}  // Options for the sports dropdown
           getOptionLabel={(option) => option.name}
-          value={selectedSport}
-          onChange={(event, value) => setSelectedSport(value)}
+          value={selectedSport || null}
+          onChange={(event, value) => {
+            setSelectedSport(value);
+            console.log(value.name); // get the sport name
+          }}
           renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />} 
         />
       </Box>
