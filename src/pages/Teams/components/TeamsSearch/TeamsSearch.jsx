@@ -1,3 +1,5 @@
+// Provides a search bar to filter teams by name (functionality to be implemented).
+
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import styles from './TeamsSearch.module.css'; 

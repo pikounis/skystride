@@ -1,3 +1,5 @@
+// Provides radio buttons to filter teams between Show All and My Teams.
+
 import React from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';

@@ -1,3 +1,5 @@
+// Displays individual team details in a card format. Shows team name, creation date, image, description, and a list of team members when expanded.
+
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -24,13 +26,17 @@ const ExpandMore = styled((props) => {
 }));
 
 function TeamCard({
+  teamId,
   teamName,
   date,
   imageUrl,
   teamDescription,
   teamMembers = [],
+  isMember,
   isExpanded,
   onExpandClick,
+  onJoinTeam,
+  onLeaveTeam,
 }) {
   // Format the date
   const formattedDate = new Date(date).toLocaleDateString();
@@ -60,7 +66,11 @@ function TeamCard({
         </Typography>
       </CardContent>
       <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-        <Button>Join Team</Button>
+        {isMember ? (
+          <Button onClick={onLeaveTeam} color="error">Leave Team</Button>
+        ) : (
+          <Button onClick={onJoinTeam}>Join Team</Button>
+        )}
         <ExpandMore
           expand={isExpanded}
           onClick={onExpandClick}
