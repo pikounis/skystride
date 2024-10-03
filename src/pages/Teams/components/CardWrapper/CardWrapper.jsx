@@ -55,7 +55,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     };
 
     const handleLeaveTeam = (teamId) => {
-        axios.post(`http://localhost:8081/team/${teamId}/removeMember/${userId}`)
+        axios.delete(`http://localhost:8081/team/${teamId}/removeMember/${userId}`)
             .then(response => {
                 console.log('Successfully left the team:', response.data);
                 // Trigger a refresh of teams
