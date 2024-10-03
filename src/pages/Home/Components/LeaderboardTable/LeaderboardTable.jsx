@@ -34,21 +34,21 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                     {team.members.map((person, i) => (
                         <TableRow className={styles.tableRow} sx={{ display: 'flex', width: '100%', borderBottom: 'none', backgroundColor: skyUserId === person.id ? 'rgba(0, 0, 0, 0.05)' : 'transparent' }}>
                             <TableCell
-                                sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: '100%', height: 'auto' }}
+                                sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: 'auto', height: '100%' }}
                             >
                                 {i === 0 ? ( // Render crown image for the first row
                                                     // <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                                                        <Avatar
-                                                            src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
-                                                            sx={{
-                                                                width: '87%',
-                                                                height: 'auto',
-                                                                }}
-                                                            className={styles.crownAnimation}
-                                                            alt={person.name}
-                                                        />
-                                                        
+                                                        // <Avatar
+                                                        //     src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
+                                                        //     sx={{
+                                                        //         width: '87%',
+                                                        //         height: 'auto',
+                                                        //         }}
+                                                        //     className={styles.crownAnimation}
+                                                        //     alt={person.name}
+                                                        // />
+                                                        i + 1 
                                                     // </Box>
                                                 ) : (
                                                     i + 1 // Render just the position text for other rows
@@ -58,7 +58,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                             <TableCell
                                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
                             >
-                                {person.firstName} {person.lastName[0]}.
+                                {isMobile ? person.firstName : `${person.firstName} ${person.lastName[0]}.`}
                             </TableCell>
 
                             <TableCell

@@ -35,6 +35,7 @@
 
 .tableCell {
     width: 100%; /* Make each cell full width */
+    height: 100%;
     text-align: center; /* Center the text */
 }
 
