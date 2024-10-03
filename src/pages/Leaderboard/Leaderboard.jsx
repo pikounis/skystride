@@ -129,7 +129,7 @@ function Leaderboard() {
 
   useEffect(() => {
     // Fetch team data by default when component mounts
-    fetchPodiumData("/team/getAll", setTeamdata);
+    fetchPodiumData("/team/getAllWithAveragePoints", setTeamdata); 
   }, []);
 
   // LEADERBOARD TABLE
