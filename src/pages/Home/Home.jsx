@@ -14,7 +14,7 @@ import { shadows } from '@mui/system';
 const mockDataName = "Jack";
 
 function Home() {
-  const skyUserId = 5;
+  const skyUserId = 1;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
   const [nextAchievements, setNextAchievements] = useState([]);
