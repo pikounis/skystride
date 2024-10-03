@@ -35,7 +35,23 @@ const LeaderboardTable = ({ team }) => {
             <TableCell
                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
             >
-                {person.position}
+                {index === 0 ? ( // Render crown image for the first row
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                        <Avatar
+                                            src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image
+                                            sx={{
+                                                width: 80, // Larger size for first row
+                                                height: 'auto',
+                                                borderRadius: '50%',
+                                                marginRight: 1 // Add margin for spacing
+                                            }}
+                                            className={styles.crownAnimation}
+                                            alt={person.name}
+                                        />
+                                    </Box>
+                                ) : (
+                                    person.position // Render just the position text for other rows
+                                )}
             </TableCell>
             <TableCell
                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold" }}
@@ -60,30 +76,17 @@ const LeaderboardTable = ({ team }) => {
                     justifyContent: 'center'
                 }}
             >
-                {index === 0 ? (
-                    // Special Icon for the first row
-                    <Avatar
-                        src="https://cdn-icons-png.flaticon.com/512/3763/3763864.png" // Crown image to replace Avatar for first row
-                        sx={{
-                            width: 80, // Larger size for first row
-                            height: 'auto',
-                            borderRadius: '50%',
-                            
-                        }} className={styles.crownAnimation}
-                        alt={person.name}
-                    />
-                ) : (
-                    // Default Avatar for all other rows
-                    <Avatar
-                        src={person.imgPath}
-                        sx={{
-                            width: 65,
-                            height: 'auto',
-                            borderRadius: '50%',
-                        }}
-                        alt={person.name}
-                    />
-                )}
+
+                <Avatar
+                    src={person.imgPath}
+                    sx={{
+                        width: 65,
+                        height: 'auto',
+                        borderRadius: '50%',
+                    }}
+                    alt={person.name}
+                />
+
             </TableCell>
         </TableRow>
     ))}
