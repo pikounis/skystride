@@ -95,7 +95,7 @@ const EditExerciseButton = ({ selectedExercise }) => {
       {/* Confirmation dialog for deletion or editing an exercise session */}
       <ExercisePopupBox 
         ref={popupRef}
-        activityId={selectedExercise?.id}
+        activityId={selectedExercise?.activityId}
         date={selectedExercise?.date}
         exercise={selectedExercise?.exercise} // Passing the selected exercise's data
         startTime = {selectedExercise?.start}

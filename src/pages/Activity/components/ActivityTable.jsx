@@ -31,12 +31,10 @@ function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, onPageChange } = props;
 
-
   // Function to handle clicking the first page button
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0); // Go to the first page
   };
-
 
   // Function to handle clicking the previous page button
   const handleBackButtonClick = (event) => {
