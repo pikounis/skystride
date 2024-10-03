@@ -3,7 +3,7 @@ import React from "react";
 import Proptype from 'prop-types';
 import styles from "./LeaderboardTable.module.css";
 
-const LeaderboardTable = ({ team }) => {
+const LeaderboardTable = ({ team, skyUserId }) => {
     return (
         <Box sx={{ width: 1.0, height: '100%' }}>
             {/* Top bar with team name and images */}
@@ -13,8 +13,8 @@ const LeaderboardTable = ({ team }) => {
                 justifyContent: "space-evenly",
                 alignItems: "center",
             }}>
-                <img className={styles.teamImg} src={team.imgPath} alt="" />
-                <Typography variant="h3" sx={{padding: "0px 30px 0px 20px", fontWeight: "bold"}}>{team.name}</Typography>
+                <img className={styles.teamImg} src={team.imageURL} alt="" />
+                <Typography variant="h3" sx={{ padding: "0px 30px 0px 20px", fontWeight: "bold" }}>{team.name}</Typography>
                 {/* <img className={styles.teamImg} src={team.imgPath} alt="" /> */}
             </Box>
 
@@ -28,12 +28,8 @@ const LeaderboardTable = ({ team }) => {
                 }} 
             >
                 <TableBody>
-                    {team.leaderboard.map((person, index) => (
-                        <TableRow
-                            key={index} // Always provide a unique key for each row
-                            sx={{ display: 'flex', width: '100%' }}
-                            className={styles.tableRow}
-                        >
+                    {team.members.map((person, i) => (
+                        <TableRow className={styles.tableRow} sx={{ display: 'flex', width: '100%', borderBottom: 'none', backgroundColor: skyUserId === person.id ? 'rgba(0, 0, 0, 0.05)' : 'transparent' }}>
                             <TableCell
                                 sx={{ alignItems: 'center', justifyContent: 'center', fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '1', width: '100%', height: 'auto' }}
                             >
@@ -59,13 +55,18 @@ const LeaderboardTable = ({ team }) => {
                             <TableCell
                                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
                             >
-                                {person.name}
+                                {person.firstName} {person.lastName[0]}.
                             </TableCell>
 
                             <TableCell
                                 sx={{ fontSize: "2vh", textAlign: "center", fontWeight: "bold", flex: '2', width: '100%' }}
                             >
-                                {person.office}
+                                {/* Format the office string */}
+                                {person.office
+                                    .toLowerCase() // Make all lowercase first
+                                    .split('_')    // Split by underscores
+                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
+                                    .join(' ')}   
                             </TableCell>
 
                             <TableCell
@@ -73,6 +74,24 @@ const LeaderboardTable = ({ team }) => {
                                 className={styles.points}>
                                 {person.points}
                             </TableCell>
+                            {/* <TableCell
+                                sx={{
+                                    borderBottom: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >   
+                                <Avatar
+                                    src={person.imgPath}
+                                    sx={{
+                                        width: 65,
+                                        height: 'auto',
+                                        borderRadius: '50%',
+                                    }}
+                                    alt={person.name}
+                                />
+                            </TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>

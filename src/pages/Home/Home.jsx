@@ -13,160 +13,23 @@ import { shadows } from '@mui/system';
 
 const mockDataName = "Jack";
 
-const mockDataPoints = [
-  {
-    name: 'Mon 9th',
-    pv: 90,
-  },
-  {
-    name: 'Tue 10th',
-    pv: 60,
-  },
-  {
-    name: 'Wed 11th',
-    pv: 70,
-  },
-  {
-    name: 'Thu 12th',
-    pv: 50,
-  },
-  {
-    name: 'Fri 13th',
-    pv: 40,
-  }
-];
-
-const mockDataHoursWorkedOut = [
-  {
-    name: 'Mon 9th',
-    pv: 10,
-  },
-  {
-    name: 'Tue 10th',
-    pv: 40,
-  },
-  {
-    name: 'Wed 11th',
-    pv: 70,
-  },
-  {
-    name: 'Thu 12th',
-    pv: 35,
-  },
-  {
-    name: 'Fri 13th',
-    pv: 40,
-  }
-];
-
-const mockdataTeams = [
-  {
-    name: "Team 1",
-    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg",
-    leaderboard: [
-      {
-        position: 1,
-        name: "Nicu",
-        office: "Osterley",
-        points: 500,
-        imgPath: "https://img.freepik.com/free-photo/androgynous-avatar-non-binary-queer-person_23-2151100270.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1727136000&semt=ais_hybrid"
-      },
-      {
-        position: 2,
-        name: "Pallav",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-photo/elevate-your-brand-with-friendly-avatar-that-reflects-professionalism-ideal-sales-managers_1283595-18531.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1727136000&semt=ais_hybrid"
-      }
-    ]
-  },
-  {
-    name: "Team 2",
-    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg",
-    leaderboard: [
-      {
-        position: 1,
-        name: "Jiya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 2,
-        name: "Tanya",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 3,
-        name: "Taso",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 4,
-        name: "Pallav",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 5,
-        name: "Jen",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      },
-      {
-        position: 6,
-        name: "Nicu",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://letstryai.com/wp-content/uploads/2023/11/stable-diffusion-avatar-prompt-example-14.jpg"
-      },
-      {
-        position: 7,
-        name: "Victoria",
-        office: "Osterley",
-        points: 300,
-        imgPath: "https://img.freepik.com/premium-vector/collection-hand-drawn-profile-icons_1323905-7.jpg"
-      }
-    ]
-  }
-]
-
-// {
-//   // list of teams
-//   teams: Proptype.arrayOf(Proptype.shape({
-//     name: Proptype.string,
-//     imgPath: Proptype.string,
-//     // list of people
-//     leaderboard: Proptype.arrayOf(Proptype.shape({
-//       position: Proptype.number,
-//       name: Proptype.string, 
-//       office: Proptype.string,
-//       points: Proptype.number,
-//       imgPath: Proptype.string
-//     }))
-//   }))
-// }
-
 function Home() {
-  const skyUserId = 1;
+  const skyUserId = 5;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
   const [nextAchievements, setNextAchievements] = useState([]);
+  const [myTeams, setMyTeams] = useState([]);
 
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
-        // Fetch both points and workout data concurrently
-        const [pointsResponse, workoutResponse] = await Promise.all([
+        // Fetch both points, workout, and leaderboard data concurrently
+        const [pointsResponse, workoutResponse, teamResponse] = await Promise.all([
           axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${skyUserId}`),
-          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`)
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`),
+          axios.get(`${APIPath}/team/getMyTeams/${skyUserId}`)
         ]);
+        setMyTeams(teamResponse.data);
 
         // Transform the points history data
         const transformedPointsHistory = pointsResponse.data.map((entry) => {
@@ -331,7 +194,7 @@ function Home() {
 
         {/* Leaderboards Section */}
         <Box className={styles.leaderboardSection}>
-          <LeaderboardSection teams={mockdataTeams} />
+          <LeaderboardSection teams={myTeams} skyUserId={skyUserId}/>
         </Box>
       </Box>
 
