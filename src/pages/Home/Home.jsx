@@ -1,11 +1,13 @@
 // pages/Home.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LeaderboardSection from './Components/LeaderboardSection/LeaderboardSection';
 import LineGraph from './Components/LineGraph/LineGraph';
 import styles from './Home.module.css';
 import { Box, Typography } from '@mui/material';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
+import axios from 'axios';
+import { APIPath } from '../../util';
 
 
 const mockDataName = "Jack";
@@ -59,7 +61,7 @@ const mockDataHoursWorkedOut = [
 const mockdataTeams = [
   {
     name: "Team 1",
-    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg", 
+    imgPath: "https://sachin-rekhi.s3-us-west-1.amazonaws.com/blog/minimum-viable-team.jpg",
     leaderboard: [
       {
         position: 1,
@@ -79,7 +81,7 @@ const mockdataTeams = [
   },
   {
     name: "Team 2",
-    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg", 
+    imgPath: "https://thumbs.dreamstime.com/b/teamwork-business-team-meeting-unity-jigsaw-puzzle-concept-47350521.jpg",
     leaderboard: [
       {
         position: 1,
@@ -151,6 +153,101 @@ const mockdataTeams = [
 // }
 
 function Home() {
+  const skyUserId = 1;
+  const [pointsHistory, setPointsHistory] = useState([]);
+  const [workoutHistory, setWorkoutHistory] = useState([]);
+  const [nextAchievements, setNextAchievements] = useState([]);
+
+  useEffect(() => {
+    const fetchHistoryData = async () => {
+      try {
+        // Fetch both points and workout data concurrently
+        const [pointsResponse, workoutResponse] = await Promise.all([
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${skyUserId}`),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`)
+        ]);
+
+        // Transform the points history data
+        const transformedPointsHistory = pointsResponse.data.map((entry) => {
+          const date = new Date(entry.date);
+          const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+          const dayOfMonth = date.getDate();
+
+          // Format date into 'Mon 9th' format
+          const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
+
+          return {
+            name: formattedDate,
+            pv: entry.points, // Points value
+          };
+        }).reverse();
+
+        // Transform the workout hours history data
+        const transformedWorkoutHistory = workoutResponse.data.map((entry) => {
+          const date = new Date(entry.date);
+          const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+          const dayOfMonth = date.getDate();
+
+          // Format date into 'Mon 9th' format
+          const formattedDate = `${day} ${dayOfMonth}${getDaySuffix(dayOfMonth)}`;
+
+          return {
+            name: formattedDate,
+            pv: entry.hours, // Hours value
+          };
+        }).reverse();
+
+        const fetchNextAchievements = async () => {
+          try {
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${skyUserId}`);
+
+            // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
+            const transformedAchievements = response.data.map((achievement) => {
+              const totalPointsNeeded = achievement.achievement.pointsNeeded;
+              const pointsLeft = achievement.pointsDifference;
+              const progressPercentage = ((totalPointsNeeded - pointsLeft) / totalPointsNeeded) * 100;
+
+              return {
+                achievementTitle: achievement.achievement.name,
+                achievementProgress: Math.round(progressPercentage),
+                progressLeft: pointsLeft,
+                badgeIcon: achievement.achievement.img // Assuming img contains the badge icon URL
+              };
+            });
+
+            setNextAchievements(transformedAchievements);
+          } catch (error) {
+            console.error('Error fetching top 3 closest achievements:', error);
+          }
+        };
+        fetchNextAchievements()
+
+        // Set the transformed data in state
+        setPointsHistory(transformedPointsHistory);
+        setWorkoutHistory(transformedWorkoutHistory);
+
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchHistoryData();
+  }, [skyUserId]); // skyUserId as dependency
+
+  // Helper function to get the day suffix (st, nd, rd, th)
+  const getDaySuffix = (day) => {
+    if (day > 3 && day < 21) return 'th'; // Covers 11th-20th
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  console.log(pointsHistory, workoutHistory);
+
   return (
     <div className={styles.container}>
       {/* <h1>Hello {mockDataName}!</h1> */}
@@ -173,20 +270,20 @@ function Home() {
         <Box className={styles.leftSection}>
           {/* Charts Section */}
           <Box className={styles.chartsSection}>
-
-            <h4 className={styles.chartsTitle}>Points Earned in the Last 5 Days</h4>
-            <LineGraph data={mockDataPoints} />
+            <h4 className={styles.chartsTitle}>Points earned in the last 5 days</h4>
+            {/* pointsHistory */}
+            <LineGraph data={mockDataPoints} /> 
 
             <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
-              <LineGraph data={mockDataHoursWorkedOut} />
+              <LineGraph data={workoutHistory} />
             </Box>
           </Box>
 
           {/* Achievement Section */}
           <Box className={styles.achievementsSection}>
-            <Typography variant='h5' sx={{fontWeight: 'bolder'}} className={styles.achievementsTitle}>Achievements In Progress</Typography>
+            <Typography variant='h5' sx={{fontWeight: 'bolder'}}>Achievements In Progress</Typography>
             <ProgressBar
               achievementTitle="Novice Runner"
               achievementProgress={90}
@@ -205,6 +302,18 @@ function Home() {
               progressLeft={35}
               badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
             />
+          </Box>
+          <Box className={styles.achievementsSection}>
+            <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
+            {nextAchievements.map((achievement, index) => (
+              <ProgressBar
+                key={index}
+                achievementTitle={achievement.achievementTitle}
+                achievementProgress={achievement.achievementProgress}
+                progressLeft={achievement.progressLeft}
+                badgeIcon={achievement.badgeIcon}
+              />
+            ))}
           </Box>
         </Box>
 
