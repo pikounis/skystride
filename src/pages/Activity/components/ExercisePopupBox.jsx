@@ -59,34 +59,43 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     if (isDelete && onConfirm) {
       onConfirm(); // Call the confirm action for delete 
     } else {
-      console.log('');
+
+      const dataToPost = {
+        skyUserId: 1,
+        sportId: formData.sport,
+        startTime: formData.date + "T" + formData.startTime + ":00",
+        endTime: formData.date + "T" + formData.endTime + ":00",
+        pontsEarned: 20
+      }
+
+      console.log(dataToPost)
+
     }
     handleClose(); // Close the dialog after submission
   };
 
+  const [formData, setFormData] = React.useState({
+    date: null,
+    sport: null,
+    startTime: null,
+    endTime: null,
+  });
+
   const handleDateSubmit = (selectedDate) => {
-    // Handle the date (e.g., send it to a database)
-    console.log('Date received from child:', selectedDate);
-    // You can perform your database logic here
+    setFormData((prevData) => ({ ...prevData, date: selectedDate }));
   };
 
   const handleSportChange = (sport) => {
-    //setSelectedSport(sport);
-    console.log('Selected Sport:', sport);
+    setFormData((prevData) => ({ ...prevData, sport }));
   };
 
   const handleStartTimeSubmit = (selectedTime) => {
-    // Handle the date (e.g., send it to a database)
-    console.log('Date received from child:', selectedTime);
-    // You can perform your database logic here
+    setFormData((prevData) => ({ ...prevData, startTime: selectedTime }));
   };
 
   const handleEndTimeSubmit = (selectedTime) => {
-    // Handle the date (e.g., send it to a database)
-    console.log('Date received from child:', selectedTime);
-    // You can perform your database logic here
+    setFormData((prevData) => ({ ...prevData, endTime: selectedTime }));
   };
-
 
   let buttonText;
 

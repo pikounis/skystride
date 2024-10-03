@@ -7,16 +7,14 @@ import styles from '../Activity.module.css';
 
 export default function FormPropsTimePickers({name, onTimingChange}) {
 
-  const [time, setTime] = React.useState(null);
-
   const handleTimeChange = (newValue) => {
-    setTime(newValue);
-    const updatedValue = newValue.format('HH:mm'); // YYYY-MM-DDTHH:MM:SS
+    if (newValue) {
+      const updatedValue = newValue.format('HH:mm');
 
     // Call the parent callback with the updated value
     if (onTimingChange) {
       onTimingChange(updatedValue); // Send the date to the parent
-    }
+    }}
   };
 
   return (
@@ -25,7 +23,7 @@ export default function FormPropsTimePickers({name, onTimingChange}) {
             <TimePicker 
               label={name}
               name="time"
-              onChange={handleTimeChange} />
+              onAccept={handleTimeChange} />
         </LocalizationProvider>
     </Box>
   );
