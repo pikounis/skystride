@@ -28,17 +28,17 @@
     flex-wrap: wrap;
 }
 
-@media (max-width: 700px) {
-  .tableRow {
-      align-items: center; /* Center align content */
-  }
 
-  .tableCell {
-      width: 100%; /* Make each cell full width */
-      text-align: center; /* Center the text */
-  }
-
+.tableRow {
+    align-items: center; /* Center align content */
 }
+
+.tableCell {
+    width: 100%; /* Make each cell full width */
+    text-align: center; /* Center the text */
+}
+
+
 
 /* CSS specific to first row in leaderboard table */
 /* TO DO: Customise text to stand out */
