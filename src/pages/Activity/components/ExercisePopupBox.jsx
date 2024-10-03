@@ -7,7 +7,6 @@ import { Typography, Box } from '@mui/material';
 import Calendar from './Calendar';
 import SportsDropDown from './SportsDropDown';
 import StartEndTime from './StartEndTime';
-import Duration from './Duration';
 import styles from '../Activity.module.css';
 import { APIPath } from '../../../util';
 import axios from 'axios';
@@ -63,6 +62,29 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
       console.log('');
     }
     handleClose(); // Close the dialog after submission
+  };
+
+  const handleDateSubmit = (selectedDate) => {
+    // Handle the date (e.g., send it to a database)
+    console.log('Date received from child:', selectedDate);
+    // You can perform your database logic here
+  };
+
+  const handleSportChange = (sport) => {
+    //setSelectedSport(sport);
+    console.log('Selected Sport:', sport);
+  };
+
+  const handleStartTimeSubmit = (selectedTime) => {
+    // Handle the date (e.g., send it to a database)
+    console.log('Date received from child:', selectedTime);
+    // You can perform your database logic here
+  };
+
+  const handleEndTimeSubmit = (selectedTime) => {
+    // Handle the date (e.g., send it to a database)
+    console.log('Date received from child:', selectedTime);
+    // You can perform your database logic here
   };
 
 
@@ -125,7 +147,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
                     Current Date: {date}
               </Typography>
 
-              <SportsDropDown sportsData={sportList} selectedExercise={exercise}/>
+              <SportsDropDown sportsData={sportList}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.editTime}>
@@ -144,15 +166,6 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
                     Current End: {endTime}
                   </Typography>
 
-                  <Typography className={styles.orTextEdit}>OR</Typography>
-
-                  {/* Total Duration Field */}
-                  <Duration />
-
-                  <Typography variant="body2" className={styles.durationEditSubtitle}>
-                    Current Total Time: {totalTime}
-                  </Typography>
-
                 </Box>
               </fieldset>
             </>
@@ -166,28 +179,19 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
               </Typography>
 
               {/* Custom components for the form */}
-              <Calendar />
+              <Calendar onDateChange={handleDateSubmit}/>
               {/* <SportsDropDown sportsData={sports} /> */}
-              <SportsDropDown sportsData={sportList} />
+              <SportsDropDown sportsData={sportList} onSportChange={handleSportChange}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.time}>
                 <Box className={styles.timeContainer}>
         
-                  <StartEndTime name="Start Time" />
+                  <StartEndTime name="Start Time" onTimingChange={handleStartTimeSubmit}/>
 
                   <Box className={styles.endTime}>
-                    <StartEndTime name="End Time" />
+                    <StartEndTime name="End Time" onTimingChange={handleEndTimeSubmit}/>
                   </Box>
-
-                  <Typography className={styles.orText}>OR</Typography>
-
-                  {/* Total Duration Field */}
-                  <Duration />
-
-                  <Typography variant="body2" className={styles.durationSubtitle}>
-                    Total hours / minutes
-                  </Typography>
 
                 </Box>
               </fieldset>

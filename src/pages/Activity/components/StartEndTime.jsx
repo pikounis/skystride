@@ -5,13 +5,18 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { Box } from '@mui/material';
 import styles from '../Activity.module.css';
 
-export default function FormPropsTimePickers({name}) {
+export default function FormPropsTimePickers({name, onTimingChange}) {
 
   const [time, setTime] = React.useState(null);
 
   const handleTimeChange = (newValue) => {
     setTime(newValue);
-    console.log(newValue.format('YYYY-MM-DDTHH:mm:ss')); // YYYY-MM-DDTHH:MM:SS
+    const updatedValue = newValue.format('HH:mm'); // YYYY-MM-DDTHH:MM:SS
+
+    // Call the parent callback with the updated value
+    if (onTimingChange) {
+      onTimingChange(updatedValue); // Send the date to the parent
+    }
   };
 
   return (

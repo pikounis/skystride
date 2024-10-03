@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Box } from '@mui/material';
 import styles from '../Activity.module.css';
 
-const SportsDropDown = ({ sportsData, selectedExercise }) => {
+const SportsDropDown = ({ sportsData, selectedExercise, onSportChange }) => {
   const [selectedSport, setSelectedSport] = useState(selectedExercise);  // Initialise with selectedExercise
 
   // Update selectedSport if selectedExercise prop changes
@@ -22,7 +22,12 @@ const SportsDropDown = ({ sportsData, selectedExercise }) => {
           value={selectedSport || null}
           onChange={(event, value) => {
             setSelectedSport(value);
-            console.log(value.name); // get the sport name
+            if (value) {
+              onSportChange(value); // Pass the selected sport back to the parent
+              //console.log(value.id); // Log the sport ID
+            } else {
+              onSportChange(null); // Handle case when selection is cleared
+            }
           }}
           renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />} 
         />
