@@ -1,3 +1,14 @@
+/* @font-face {
+    font-family: 'Sky';
+    src: url('/fonts/Sky_Regular.ttf') format('regular');
+    src: url('/fonts/Sky_Bold.ttf') format('bold');
+    src: url('/fonts/Sky_Italic.ttf') format('italic');
+    src: url('/fonts/Sky_Med.ttf') format('med');
+    src: url('/fonts/SkyText_Lt.ttf') format('light');
+  } */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .leftSection {
     width:46%;
 }
@@ -20,6 +31,7 @@
 
 .achievementsTitle {
     margin: 40px auto auto auto !important;
+    font-family: "Poppins", sans-serif;
     text-align: center;
 }
 
@@ -41,6 +53,7 @@
     text-align: center;
     margin: 40px auto 10px auto;
     font-weight: bold;
+    font-family: "Poppins", sans-serif;
 }
 
 
@@ -52,4 +65,3 @@
         width: 100%;
     }
 }
-

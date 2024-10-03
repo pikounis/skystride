@@ -38,11 +38,11 @@ export default class LineGraph extends PureComponent {
               bottom: 0,
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <CartesianGrid stroke="#ccc" strokeDasharray="2 2" />
+            <XAxis dataKey="name" tick={{ fontSize: 12, fontFamily: 'Poppins', fill: '#333' }}/>
+            <YAxis className="y-axis-custom" tick={{ fontSize: 14, fontFamily: 'Poppins', fill: '#333' }}/>  
             <Tooltip />
-            <Area type="monotone" dataKey="pv" stroke="#AFF500" fill="#DAFF7D" />
+            <Area type="monotone" dataKey="pv" stroke={this.props.strokeColor || "#AFF500"} fill={this.props.fillColor || "#DAFF7D"}  />
           </AreaChart>
         </ResponsiveContainer>
       </div>
