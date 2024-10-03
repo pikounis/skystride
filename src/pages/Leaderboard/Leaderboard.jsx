@@ -22,7 +22,7 @@ const mapTeamData = (data) => {
       team.name, // username
       team.imageURL, // teamEmoji
       "", // officeLocation (not applicable for teams)
-      team.averagePoints // points (averagePoints for teams)
+      Math.round(team.averagePoints) // points (averagePoints for teams)
     )
   );
 };
@@ -35,7 +35,7 @@ const mapUserData = (data) => {
       `${user.firstName} ${user.lastName}`, // username
       "", // teamEmoji (not applicable for users)
       user.office, // officeLocation
-      user.points // points
+      Math.round(user.points) // points
     )
   );
 };
@@ -96,17 +96,17 @@ function Leaderboard() {
             first: {
               img: sortedData[0].imageURL || logos.lion,
               name: getName(sortedData[0]),
-              points: sortedData[0].points || sortedData[0].averagePoints,
+              points: Math.round(sortedData[0].points || sortedData[0].averagePoints),
             },
             second: {
               img: sortedData[1].imageURL || logos.demon,
               name: getName(sortedData[1]),
-              points: sortedData[1].points || sortedData[1].averagePoints,
+              points: Math.round(sortedData[1].points || sortedData[1].averagePoints),
             },
             third: {
               img: sortedData[2].imageURL || logos.kitsune,
               name: getName(sortedData[2]),
-              points: sortedData[2].points || sortedData[2].averagePoints,
+              points: Math.round(sortedData[2].points || sortedData[2].averagePoints),
             },
           });
         }
@@ -159,6 +159,7 @@ function Leaderboard() {
           <Tab label="Offices" value={3} />
         </TabList>
       </Box>
+
 
       <Typography
         variant="h2"
