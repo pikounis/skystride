@@ -1,3 +1,5 @@
+// Renders a dialog that collects input for creating a new team.
+
 import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';

@@ -1,3 +1,6 @@
+// Fetches and displays a list of teams based on the selected filter (all teams or user's teams). 
+// It handles the logic for joining and leaving teams and passes necessary data to TeamCard
+
 import React, { useState, useEffect } from 'react';
 import TeamCard from '../TeamCard/TeamCard';
 import axios from 'axios';

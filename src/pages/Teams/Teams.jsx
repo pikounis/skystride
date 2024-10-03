@@ -1,3 +1,6 @@
+// Main component for the Teams page. It manages the overall state and renders child components like the search bar, 
+// radio buttons for filtering, create team button, and the list of team cards.
+
 import React, { useState } from 'react';
 import styles from './Teams.module.css';
 import Typography from "@mui/material/Typography";

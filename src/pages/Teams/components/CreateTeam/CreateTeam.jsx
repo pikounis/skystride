@@ -1,3 +1,5 @@
+// Provides a button to open a dialog for creating a new team.
+
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import CreateTeamDialog from '../CreateTeamDialog/CreateTeamDialog';

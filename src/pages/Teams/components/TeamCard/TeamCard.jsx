@@ -1,3 +1,5 @@
+// Displays individual team details in a card format. Shows team name, creation date, image, description, and a list of team members when expanded.
+
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
