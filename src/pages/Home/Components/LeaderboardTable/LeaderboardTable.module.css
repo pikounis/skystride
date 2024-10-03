@@ -5,6 +5,8 @@
     object-fit: cover;
     border-radius: 30px;
     border: 5px solid black;
+    margin-bottom: 20px;
+    right: 0px;
 }
 
 .tableStyle {
