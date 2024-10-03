@@ -1,9 +1,12 @@
-import { Box, SvgIcon, Typography, Table, TableBody, TableRow, TableCell, Avatar } from "@mui/material";
+import { Box, SvgIcon, Typography, Table, TableBody, TableRow, TableCell, Avatar, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import Proptype from 'prop-types';
 import styles from "./LeaderboardTable.module.css";
 
 const LeaderboardTable = ({ team, skyUserId }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
         <Box sx={{ width: 1.0, height: '100%' }}>
             {/* Top bar with team name and images */}
@@ -14,7 +17,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                 alignItems: "center",
             }}>
                 <img className={styles.teamImg} src={team.imageURL} alt="" />
-                <Typography variant="h3" sx={{ padding: "0px 30px 0px 20px", fontWeight: "bold" }}>{team.name}</Typography>
+                <Typography variant={isMobile ? "h4" : "h3"} sx={{ padding: "30px", fontWeight: "bold" }}>{team.name}</Typography>
                 {/* <img className={styles.teamImg} src={team.imgPath} alt="" /> */}
             </Box>
 
