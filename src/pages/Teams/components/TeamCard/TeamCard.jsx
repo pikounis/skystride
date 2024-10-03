@@ -31,6 +31,7 @@ function TeamCard({
   teamMembers = [],
   isExpanded,
   onExpandClick,
+  onJoinTeam,
 }) {
   // Format the date
   const formattedDate = new Date(date).toLocaleDateString();
@@ -60,7 +61,7 @@ function TeamCard({
         </Typography>
       </CardContent>
       <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-        <Button>Join Team</Button>
+        <Button onClick={onJoinTeam}>Join Team</Button>
         <ExpandMore
           expand={isExpanded}
           onClick={onExpandClick}

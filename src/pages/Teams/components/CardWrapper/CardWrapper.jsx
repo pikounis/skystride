@@ -3,7 +3,7 @@ import TeamCard from '../TeamCard/TeamCard';
 import axios from 'axios';
 import styles from './CardWrapper.module.css'; 
 
-function CardWrapper({ radioValue, refreshTeams }) {
+function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [teams, setTeams] = useState([]);
     const [expandedCard, setExpandedCard] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,6 +39,19 @@ function CardWrapper({ radioValue, refreshTeams }) {
         setExpandedCard(expandedCard === cardId ? null : cardId);
     };
 
+    const handleJoinTeam = (teamId) => {
+        axios.post(`http://localhost:8081/team/${teamId}/addMember/5`)
+            .then(response => {
+                console.log('Successfully joined the team:', response.data);
+                // Trigger a refresh of teams
+                onTeamsChange();
+            })
+            .catch(error => {
+                console.error('Error joining team:', error);
+                alert('Failed to join team. Please try again.');
+            });
+    };
+
     if (loading) {
         return <div>Loading teams...</div>;
     }
@@ -59,6 +72,7 @@ function CardWrapper({ radioValue, refreshTeams }) {
                     teamMembers={team.members || []}
                     isExpanded={expandedCard === team.id}
                     onExpandClick={() => handleExpand(team.id)}
+                    onJoinTeam={() => handleJoinTeam(team.id)}
                 />
             ))}
         </div>

@@ -35,7 +35,11 @@ function Teams() {
                 <CreateTeam onTeamCreated={handleTeamCreated} />
             </div>
             <div>
-                <CardWrapper radioValue={radioValue} refreshTeams={refreshTeams} />
+                <CardWrapper
+                    radioValue={radioValue}
+                    refreshTeams={refreshTeams}
+                    onTeamsChange={() => setRefreshTeams(prev => prev + 1)}
+                />
             </div>
         </div>
     );
