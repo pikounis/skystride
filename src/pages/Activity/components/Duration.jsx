@@ -12,8 +12,16 @@ export default function CustomTimeFormat() {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <TimeField
             label="Total Duration"
-            defaultValue={dayjs('2022-04-17T15:30')}
+            defaultValue={dayjs('1970-01-01T00:00')}
+            ampm={false}
             format="HH:mm"
+            onChange={(newValue) => {
+              if (newValue) {
+                const hours = newValue.hour();
+                const minutes = newValue.minute();
+                console.log(`Selected Time: ${hours}:${minutes}`);
+              }
+            }}
             />
         </LocalizationProvider>
     </Box>
