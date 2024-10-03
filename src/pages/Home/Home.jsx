@@ -8,6 +8,7 @@ import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
 import axios from 'axios';
 import { APIPath } from '../../util';
+import { shadows } from '@mui/system';
 
 
 const mockDataName = "Jack";
@@ -268,18 +269,24 @@ function Home() {
 
         {/* Left Side Section */}
         <Box className={styles.leftSection}>
+
           {/* Charts Section */}
           <Box className={styles.chartsSection}>
+            <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px' }}>
+              <h4 className={styles.chartsTitle}>Points Earned in the Last 5 Days</h4>
+              {/* data=pointsHistory */}
+            </Box>
 
-            <h4 className={styles.chartsTitle}>Points Earned in the Last 5 Days</h4>
-            {/* data=pointsHistory */}
             <LineGraph data={mockDataPoints} /> 
 
-            <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
+            <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px', marginTop: '40px'}}>
+              <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
+            </Box>
+
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
               {/* data=workoutHistory */}
-              <LineGraph data={mockDataPoints} fillColor="#B8B8FF" strokeColor="#9381FF"/>
+              <LineGraph data={mockDataPoints} fillColor="#B8B8FF" strokeColor="#9999FF"/>
             </Box>
 
           </Box>

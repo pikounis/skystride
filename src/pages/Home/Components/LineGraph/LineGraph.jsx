@@ -42,7 +42,7 @@ export default class LineGraph extends PureComponent {
             <XAxis dataKey="name" tick={{ fontSize: 12, fontFamily: 'Poppins', fill: '#333' }}/>
             <YAxis className="y-axis-custom" tick={{ fontSize: 14, fontFamily: 'Poppins', fill: '#333' }}/>  
             <Tooltip />
-            <Area type="monotone" dataKey="pv" stroke={this.props.strokeColor || "#AFF500"} fill={this.props.fillColor || "#DAFF7D"}  />
+            <Area type="monotone" dataKey="pv" stroke={this.props.strokeColor || "#92CC00"} fill={this.props.fillColor || "#AFF500"}  />
           </AreaChart>
         </ResponsiveContainer>
       </div>

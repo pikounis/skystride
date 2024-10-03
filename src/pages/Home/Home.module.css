@@ -49,11 +49,16 @@
     height: 50%;
 }
 
-.chartsTitle {
+.chartsHeader {
+    width: 100%;
+    height: auto;
     text-align: center;
-    margin: 40px auto 10px auto;
+}
+
+.chartsTitle {
     font-weight: bold;
     font-family: "Poppins", sans-serif;
+    padding: 10px;
 }
 
 
