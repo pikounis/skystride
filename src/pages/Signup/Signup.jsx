@@ -8,7 +8,7 @@ const Signup = () => {
     <div className={styles.signupContainer}>
       <Paper elevation={3} className={styles.paper}>
         <img
-          src="sky_stride_no_background.png"
+          src="/images/skyStrideBlock.png"
           alt="Logo"
           className={styles.logo}
         />

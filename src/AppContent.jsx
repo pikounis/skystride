@@ -12,14 +12,26 @@ import Error404 from './pages/Error404/Error404';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
 
+// Import the PrivateRoute component
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
 function AppContent() {
   const location = useLocation();
 
-  // paths where the AppBar and Footer should not be displayed
+  // Paths where the AppBar and Footer should not be displayed
   const hideAppBarAndFooter = ['/login', '/signup'];
 
   // Check if it's a wildcard route to show Error404
-  const isErrorPage = location.pathname !== '/' && !hideAppBarAndFooter.includes(location.pathname) && location.pathname !== '/settings' && location.pathname !== '/teams' && location.pathname !== '/activity' && location.pathname !== '/settings' && location.pathname !== '/leaderboard';
+  const isErrorPage =
+    location.pathname !== '/' &&
+    !hideAppBarAndFooter.includes(location.pathname) &&
+    ![
+      '/settings',
+      '/teams',
+      '/activity',
+      '/leaderboard',
+      '/test',
+    ].includes(location.pathname);
 
   return (
     <div>
@@ -27,18 +39,65 @@ function AppContent() {
       {!hideAppBarAndFooter.includes(location.pathname) && !isErrorPage && <ResponsiveAppBar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/activity" element={<Activity />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+        {/* Public Routes */}
         <Route path="/login" element={<Login />} />
-        <Route path="/settings" element={<Settings />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/teams" element={<Teams />} />
-        <Route path="/test" element={<TestPage />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/activity"
+          element={
+            <PrivateRoute>
+              <Activity />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/leaderboard"
+          element={
+            <PrivateRoute>
+              <Leaderboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/teams"
+          element={
+            <PrivateRoute>
+              <Teams />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/test"
+          element={
+            <PrivateRoute>
+              <TestPage />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Catch-all route for 404 errors */}
         <Route path="*" element={<Error404 />} />
       </Routes>
 
-        {/* and Footer based on the current route */}
+      {/* Conditionally render Footer */}
       {!hideAppBarAndFooter.includes(location.pathname) && !isErrorPage && <Footer />}
     </div>
   );

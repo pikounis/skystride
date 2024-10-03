@@ -52,10 +52,24 @@ function ResponsiveAppBar() {
     }
   };
 
+  const handleLogout = () => {
+    if (localStorage.getItem('jwt') !== null) {
+      console.log("JWT Token exists. Logging out...");
+      localStorage.removeItem('jwt');
+      navigate('/login'); // Adjust the path to your login route
+      console.log("User has been logged out.");
+    } else {
+      console.log("No JWT Token found.");
+      navigate('/login');
+    }
+  };
+
+
   const handleUserMenuClick = (setting) => {
     if (setting === 'Logout') {
       // logout functionality here after we do Spring booooot
       console.log('Logout clicked');
+      handleLogout();
     } else if (setting === 'Settings') {
       navigate('/settings');
     }
