@@ -1,0 +1,15 @@
+.calendar, .sportsDropDown {
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 10px auto auto auto !important;
+  }
+  
+  @media (min-width: 700px) {
+    .calendar, .sportsDropDown {
+      min-width: 300px !important;
+    }
+  
+    .timeInput {
+      width: 200px !important;
+    }
+  }
