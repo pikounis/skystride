@@ -24,6 +24,10 @@ function Teams() {
         setRefreshTeams(prev => prev + 1);
     };
 
+    const handleTeamsChange = () => {
+        setRefreshTeams(prev => prev + 1);
+    };
+
     return (
         <div>
             <div className={styles.container}>
@@ -38,7 +42,7 @@ function Teams() {
                 <CardWrapper
                     radioValue={radioValue}
                     refreshTeams={refreshTeams}
-                    onTeamsChange={() => setRefreshTeams(prev => prev + 1)}
+                    onTeamsChange={handleTeamsChange}
                 />
             </div>
         </div>

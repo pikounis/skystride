@@ -24,14 +24,17 @@ const ExpandMore = styled((props) => {
 }));
 
 function TeamCard({
+  teamId,
   teamName,
   date,
   imageUrl,
   teamDescription,
   teamMembers = [],
+  isMember,
   isExpanded,
   onExpandClick,
   onJoinTeam,
+  onLeaveTeam,
 }) {
   // Format the date
   const formattedDate = new Date(date).toLocaleDateString();
@@ -61,7 +64,11 @@ function TeamCard({
         </Typography>
       </CardContent>
       <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-        <Button onClick={onJoinTeam}>Join Team</Button>
+        {isMember ? (
+          <Button onClick={onLeaveTeam} color="error">Leave Team</Button>
+        ) : (
+          <Button onClick={onJoinTeam}>Join Team</Button>
+        )}
         <ExpandMore
           expand={isExpanded}
           onClick={onExpandClick}
