@@ -8,7 +8,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <Box sx={{ width: 1.0, height: '100%' }}>
+        <Box sx={{ width: 1.0, height: '100%' }} className={styles.tableBackground}>
             {/* Top bar with team name and images */}
             <Box sx={{
                 display: "flex",
@@ -77,24 +77,7 @@ const LeaderboardTable = ({ team, skyUserId }) => {
                                 className={styles.points}>
                                 {person.points}
                             </TableCell>
-                            {/* <TableCell
-                                sx={{
-                                    borderBottom: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >   
-                                <Avatar
-                                    src={person.imgPath}
-                                    sx={{
-                                        width: 65,
-                                        height: 'auto',
-                                        borderRadius: '50%',
-                                    }}
-                                    alt={person.name}
-                                />
-                            </TableCell> */}
+
                         </TableRow>
                     ))}
                 </TableBody>
