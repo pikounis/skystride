@@ -11,9 +11,7 @@ import styles from '../Activity.module.css';
 import { APIPath } from '../../../util';
 import axios from 'axios';
 
-const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
-
-  // axios GET request to populate sports dropdown from backend
+const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime, activityId}, ref) => {
 
   const [sportList, setSportList] = React.useState([]); // Holds sports options
   const [loading, setLoading] = React.useState(true);
@@ -56,6 +54,8 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(formData);
+
     if (isDelete && onConfirm) {
       onConfirm(); // Call the confirm action for delete 
     } else {
@@ -74,7 +74,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
       try {
         // Make the POST request to create a new activity
-        const response = await axios.post('http://127.0.0.1:8081/activity/create', dataToPost, {
+        await axios.post('http://127.0.0.1:8081/activity/create', dataToPost, {
           headers: {
             'Content-Type': 'application/json',
             // Include any other headers if necessary, like authorization
@@ -88,6 +88,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   };
 
   const [formData, setFormData] = React.useState({
+    activityId: activityId,
     date: null,
     sport: null,
     startTime: null,
@@ -164,25 +165,25 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
                 Edit Exercise
               </Typography>
 
-              <Calendar />
+              <Calendar onDateChange={handleDateSubmit}/>
               <Typography variant="body2" className={styles.dateSubtitle}>
                     Current Date: {date}
               </Typography>
 
-              <SportsDropDown sportsData={sportList}/>
+              <SportsDropDown sportsData={sportList} onSportChange={handleSportChange}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.editTime}>
                 <Box className={styles.timeContainer}>
 
                   {/* Start and End Time Fields */}
-                  <StartEndTime name="Start Time" />
+                  <StartEndTime name="Start Time" onTimingChange={handleStartTimeSubmit}/>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current Start: {startTime}
                   </Typography>
 
                   <Box className={styles.endTime}>
-                    <StartEndTime name="End Time" />
+                    <StartEndTime name="End Time" onTimingChange={handleEndTimeSubmit}/>
                   </Box>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current End: {endTime}
