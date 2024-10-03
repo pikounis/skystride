@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Box } from '@mui/material';
 import styles from '../Activity.module.css';
-import axios from 'axios';
-import { APIPath } from '../../../util';
+
 
 const SportsDropDown = ({ sportsData, selectedExercise }) => {
   const [selectedSport, setSelectedSport] = useState(selectedExercise);  // Initialise with selectedExercise
@@ -20,7 +19,7 @@ const SportsDropDown = ({ sportsData, selectedExercise }) => {
         <Autocomplete
           options={sportsData}  // Options for the sports dropdown
           getOptionLabel={(option) => option.name}
-          value={selectedSport}
+          value={selectedSport || null}
           onChange={(event, value) => setSelectedSport(value)}
           renderInput={(params) => <TextField {...params} label="Select Sport" variant="outlined" />} 
         />

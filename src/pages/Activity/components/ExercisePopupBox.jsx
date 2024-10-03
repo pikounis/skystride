@@ -151,7 +151,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
 {/* UPDATED FOR EDIT ACTIVITY */}
               <SportsDropDown sportsData={sportList} 
-              selectedExercise={selectedSport} 
+              // selectedExercise={selectedSport} 
               onChange={(sport) => setSelectedSport(sport)}/>
 
               <Typography variant="body2" className={styles.timeSubtitle}>
