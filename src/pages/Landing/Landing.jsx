@@ -208,7 +208,7 @@ export default function Landing() {
                     <Button variant="contained" onClick={() => navigate("/signup")} style={{ marginRight: '1rem', borderRadius: '20px', backgroundColor: '#ff7b5f' }}>
                         Join
                     </Button>
-                    <Button variant="outlined" onClick={() => navigate("/login")} style={{ borderRadius: '20px', color: '#ff7b5f', borderColor: '#ff7b5f' }}>
+                    <Button variant="outlined" onClick={() => navigate("/login")} style={{ borderRadius: '20px', color: '#ff7b5f', borderColor: '#ff7b5f', backgroundColor: '#ffffff'}}>
                         Login
                     </Button>
                 </div>
@@ -218,7 +218,7 @@ export default function Landing() {
             <animatedDiv.div
                 style={{
                     position: "absolute",
-                    top: isMobile ? "20px" : "100px",  // Add top padding for desktop
+                    top: isMobile ? "130px" : "100px",  // Add top padding for desktop
                     left: "50%",
                     transform: "translateX(-50%)",  // Center horizontally
                     opacity: imageOpacity,
