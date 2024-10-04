@@ -175,12 +175,16 @@ export default function Landing() {
     };
 
     return (
-        <Box className={styles.container} sx={{
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+        <Box className={styles.container} 
+        sx={{
+            backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/004/782/942/original/blue-sky-gradient-watercolor-background-free-vector.jpg)',  // Ensure path is correct
+            backgroundSize: 'cover',  // Ensures the image covers the entire container
+            backgroundPosition: 'center',  // Centers the image
+            backgroundRepeat: 'no-repeat',  // Prevents the image from repeating
             width: '100vw',
             height: '100vh',
-        }}>
+        }}
+        >
             {/* Back Icon (only show when clicked === true) */}
             {clicked && (
                 <div
