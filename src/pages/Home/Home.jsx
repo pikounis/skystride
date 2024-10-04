@@ -44,7 +44,7 @@ function Home() {
 
           return {
             name: formattedDate,
-            pv: entry.points, // Points value
+            points: entry.points, // Points value
           };
         }).reverse();
 
@@ -59,7 +59,7 @@ function Home() {
 
           return {
             name: formattedDate,
-            pv: entry.hours, // Hours value
+            minutes: entry.minutes, // Hours value
           };
         }).reverse();
 
@@ -142,16 +142,16 @@ function Home() {
               {/* data=pointsHistory */}
             </Box>
 
-            <LineGraph data={pointsHistory} /> 
+            <LineGraph data={pointsHistory} dataKey={"points"} /> 
 
             <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px', marginTop: '40px'}}>
-              <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
+              <h4 className={styles.chartsTitle}>Daily Workout Time in the Last 5 Days</h4>
             </Box>
 
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
               {/* data=workoutHistory */}
-              <LineGraph data={workoutHistory} fillColor="#B8B8FF" strokeColor="#9999FF"/>
+              <LineGraph data={workoutHistory} dataKey={"minutes"} fillColor="#B8B8FF" strokeColor="#9999FF"/>
             </Box>
 
           </Box>
