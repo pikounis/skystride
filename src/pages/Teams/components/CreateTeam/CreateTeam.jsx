@@ -5,9 +5,13 @@ import Button from '@mui/material/Button';
 import CreateTeamDialog from '../CreateTeamDialog/CreateTeamDialog';
 import styles from './CreateTeam.module.css'; 
 import axios from 'axios';
+import { APIPath, getHeader, getUserId } from '../../../../util';
 
 function CreateTeam({ onTeamCreated }) {
     const [dialogOpen, setDialogOpen] = useState(false);
+
+    const userId = getUserId();
+    const headers = getHeader();
 
     const handleOpenDialog = () => {
         setDialogOpen(true);
@@ -18,7 +22,7 @@ function CreateTeam({ onTeamCreated }) {
     };
 
     const handleCreateTeam = (teamData) => {
-        axios.post('http://localhost:8081/team/create/5', teamData)
+        axios.post(`${APIPath}/team/create/${userId}`, teamData, {headers})
             .then(response => {
                 console.log('Team successfully created:', response.data);
                 // Close the dialog

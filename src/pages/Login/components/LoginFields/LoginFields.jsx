@@ -27,13 +27,14 @@ const LoginComponent = () => {
 
     try {
       const response = await axios.post(`${APIPath}/login`, formData);
-      const jwtTokenData = response.data;
+      const { jwt, userId } = response.data;  
 
-      if (jwtTokenData) {
-        localStorage.setItem('jwt', jwtTokenData);
-
-        console.log("JWT Token **************");
-        console.log(jwtTokenData);
+      if (jwt) {
+        localStorage.setItem('jwt', jwt);
+        localStorage.setItem('userId', userId);
+  
+        console.log("JWT Token:", jwt);
+        console.log("User ID:", userId);
 
         navigate("/"); 
       }

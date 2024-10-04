@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import TeamCard from '../TeamCard/TeamCard';
 import axios from 'axios';
 import styles from './CardWrapper.module.css';
-import { APIPath } from '../../../../util';
+import { APIPath, getHeader, getUserId } from '../../../../util';
 
 function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [teams, setTeams] = useState([]);
@@ -13,7 +13,8 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const userId = 5; // Replace with actual user ID in application when we integrate spring security
+    const userId = getUserId();
+    const headers = getHeader();
 
     useEffect(() => {
         setLoading(true);
@@ -28,7 +29,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
             url = url = APIPath + '/team/getAll';
         }
 
-        axios.get(url)
+        axios.get(url, {headers})
             .then(response => {
                 setTeams(response.data);
                 setLoading(false);
@@ -45,7 +46,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     };
 
     const handleJoinTeam = (teamId) => {
-        axios.post(APIPath + `/team/${teamId}/addMember/${userId}`)
+        axios.post(APIPath + `/team/${teamId}/addMember/${userId}`, {}, {headers})
             .then(response => {
                 console.log('Successfully joined the team:', response.data);
                 // Trigger a refresh of teams
@@ -58,7 +59,7 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     };
 
     const handleLeaveTeam = (teamId) => {
-        axios.delete( APIPath + `/team/${teamId}/removeMember/${userId}`)
+        axios.delete(APIPath + `/team/${teamId}/removeMember/${userId}`, {headers})
             .then(response => {
                 console.log('Successfully left the team:', response.data);
                 // Trigger a refresh of teams
@@ -81,7 +82,8 @@ function CardWrapper({ radioValue, refreshTeams, onTeamsChange }) {
     return (
         <div className={styles.cardContainer}>
             {teams.map((team) => {
-                const isMember = team.members && team.members.some(member => member.id === userId);
+                const isMember = team.members && team.members.some(member => member.id == userId);
+                console.log(team.name, team.members, team.members.some(member => member.id == userId))
                 return (
                     <TeamCard
                         key={team.id}
