@@ -1,7 +1,7 @@
 // Local
-// export const APIPath = "http://localhost:8081";
+export const APIPath = "http://localhost:8081";
 // SERVER
-export const APIPath = "http://18.135.129.187:8081"; 
+// export const APIPath = "http://18.135.129.187:8081"; 
 
 export const getHeader = () => {
     // Get the JWT token and userId from localStorage

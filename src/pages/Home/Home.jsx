@@ -156,13 +156,18 @@ function Home() {
 
           </Box>
 
+          {/* achievementTitle: achievement.achievement.name,
+                achievementProgress: Math.round(progressPercentage),
+                progressLeft: pointsLeft,
+                badgeIcon: achievement.achievement.img */}
+
           {/* Achievement Section */}
-          <Box className={styles.achievementsSection}>
+          {/* <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{fontWeight: 'bolder'}} className={styles.achievementsTitle}>Achievements In Progress</Typography>
             
             <Box className={styles.achievementsInnerContainer}>
               <ProgressBar
-                achievementTitle="Novice Runner"
+                achievementTitle={"Novice Runner"}
                 achievementProgress={90}
                 progressLeft={50}
                 badgeIcon={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6kco1vTUHJToNzQBlwRoI1stXwneicJ1_g&s"}
@@ -180,9 +185,9 @@ function Home() {
                 badgeIcon={"https://img.freepik.com/premium-vector/young-girl-hiking-backpack-with-walking-stick-badge_18591-5527.jpg"}
               />
             </Box>
-          </Box>
+          </Box> */}
 
-          {/* <Box className={styles.achievementsSection}>
+          <Box className={styles.achievementsSection}>
             <Typography variant='h5' sx={{ fontWeight: 'bolder' }}>Achievements In Progress</Typography>
             {nextAchievements.map((achievement, index) => (
               <ProgressBar
@@ -193,7 +198,7 @@ function Home() {
                 badgeIcon={achievement.badgeIcon}
               />
             ))}
-          </Box> */}
+          </Box>
 
         </Box>
 
