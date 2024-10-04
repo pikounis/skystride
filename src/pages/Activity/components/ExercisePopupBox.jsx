@@ -21,7 +21,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
   React.useEffect(() => {
     // Axios GET request
-    axios.get(APIPath + "/sport/getAll", {getHeader})  // Replace with your API endpoint
+    axios.get(APIPath + "/sport/getAll", {headers})  // Replace with your API endpoint
       .then((response) => {
         setSportList(response.data);
         setLoading(false);
@@ -58,7 +58,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
     if (isDelete && onConfirm) {
       try {
-        const response = await axios.delete(`${APIPath}/activity/delete/${activityId}`, {getHeader});
+        const response = await axios.delete(`${APIPath}/activity/delete/${activityId}`, {headers});
       }
       catch (error) {
         console.error('Error deleting activity:', error.response ? error.response.data : error.message);
@@ -82,7 +82,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
       };
 
       try {
-        await axios.put(`${APIPath}/activity/update`, dataToPut, {getHeader});
+        await axios.put(`${APIPath}/activity/update`, dataToPut, {headers});
       } catch (error) {
         console.error('Error saving activity:', error.response ? error.response.data : error.message);
       }
@@ -102,7 +102,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
       try {
         // Make the POST request to create a new activity
-        await axios.post(`${APIPath}/activity/create`, dataToPost, {getHeader});
+        await axios.post(`${APIPath}/activity/create`, dataToPost, {headers});
       } catch (error) {
         console.error('Error creating activity:', error.response ? error.response.data : error.message);
       }

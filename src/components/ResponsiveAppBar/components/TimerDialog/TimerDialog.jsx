@@ -25,9 +25,12 @@ export default function TimerDialog({ open, onClose }) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [sportList, setSportList] = React.useState([]);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   // Function to fetch the current timer status when the component loads
   const fetchTimerStatus = () => {
-    axios.get(`${APIPath}/user/${getUserId}/getTimer`, {getHeader})
+    axios.get(`${APIPath}/user/${userId}/getTimer`, {headers})
       .then((response) => {
         const { timerStartTime, currentTimerRunning, startedSport } = response.data;
 

@@ -27,9 +27,9 @@ function Home() {
       try {
         // Fetch both points, workout, and leaderboard data concurrently
         const [pointsResponse, workoutResponse, teamResponse] = await Promise.all([
-          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {getHeader}),
-          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {getHeader}),
-          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {getHeader})
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {headers})
         ]);
         setMyTeams(teamResponse.data);
 
@@ -65,7 +65,7 @@ function Home() {
 
         const fetchNextAchievements = async () => {
           try {
-            const response = await axios.get(`${APIPath}/achievement/getTopThree/${getUserId}`, {getHeader});
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${userId}`, {headers});
 
             // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
             const transformedAchievements = response.data.map((achievement) => {

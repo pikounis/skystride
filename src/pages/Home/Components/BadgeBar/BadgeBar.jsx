@@ -220,10 +220,13 @@ const BadgeBar = () => {
   const [moveRight, setMoveRight] = useState(false);
   const [badgeImages, setBadgeImages] = useState([]);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${getUserId}`, {getHeader});
+        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${userId}`, {headers});
         
         // Transform the achievements data into the format required for badgeImages
         const transformedBadges = response.data.map((achievement) => ({
@@ -238,7 +241,7 @@ const BadgeBar = () => {
     };
 
     fetchAchievements();
-  }, [getUserId]);  // Fetch data when skyUserId changes
+  }, [userId]);  // Fetch data when skyUserId changes
 
 
   // const badgeImages = [
