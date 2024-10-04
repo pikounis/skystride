@@ -74,11 +74,13 @@ function Leaderboard() {
     }
   };
   
+  const headers = getHeader();
 
   const fetchPodiumData = (endpoint, setData) => {
+    
     setLoading(true);
     axios
-      .get(APIPath + endpoint)
+      .get(APIPath + endpoint, {headers})
       .then((response) => {
         const data = response.data;
   

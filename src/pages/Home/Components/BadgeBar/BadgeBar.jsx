@@ -217,15 +217,17 @@ const Controls = ({angleStep, badgeCount}) => {
 
 // BadgeBar component with arrow buttons
 const BadgeBar = () => {
-  const skyUserId = 1;
   const [moveLeft, setMoveLeft] = useState(false);
   const [moveRight, setMoveRight] = useState(false);
   const [badgeImages, setBadgeImages] = useState([]);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${skyUserId}`);
+        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${userId}`, {headers});
         
         // Transform the achievements data into the format required for badgeImages
         const transformedBadges = response.data.map((achievement) => ({

@@ -13,20 +13,22 @@ import { APIPath } from '../../util';
 const mockDataName = "Jack";
 
 function Home() {
-  const skyUserId = 5;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
   const [nextAchievements, setNextAchievements] = useState([]);
   const [myTeams, setMyTeams] = useState([]);
+
+  const userId = getUserId();
+  const headers = getHeader();
 
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
         // Fetch both points, workout, and leaderboard data concurrently
         const [pointsResponse, workoutResponse, teamResponse] = await Promise.all([
-          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${skyUserId}`),
-          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`),
-          axios.get(`${APIPath}/team/getMyTeams/${skyUserId}`)
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {headers})
         ]);
         setMyTeams(teamResponse.data);
 
@@ -62,7 +64,7 @@ function Home() {
 
         const fetchNextAchievements = async () => {
           try {
-            const response = await axios.get(`${APIPath}/achievement/getTopThree/${skyUserId}`);
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${userId}`, {headers});
 
             // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
             const transformedAchievements = response.data.map((achievement) => {
