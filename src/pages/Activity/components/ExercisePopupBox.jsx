@@ -8,7 +8,7 @@ import Calendar from './Calendar';
 import SportsDropDown from '../../../components/SportsDropDown/SportsDropDown';
 import StartEndTime from './StartEndTime';
 import styles from '../Activity.module.css';
-import { APIPath, getHeader } from '../../../util';
+import { APIPath, getHeader, getUserId } from '../../../util';
 import axios from 'axios';
 
 const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime, activityId}, ref) => {
@@ -18,6 +18,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   const [error, setError] = React.useState(null);
   
   const headers = getHeader();
+  const userId = getUserId();
 
   React.useEffect(() => {
     // Axios GET request
@@ -69,7 +70,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
       const dataToPut = {
         id: formData.activityId,
         skyUser: {
-          id: 1 // mock ID
+          id: userId
         },
         sport: {
           id: formData.sport.id,
@@ -90,7 +91,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
       const dataToPost = {
         skyUser: {
-          id: 1 // mock ID
+          id: userId
         },
         sport: {
           id: formData.sport.id // sport ID
