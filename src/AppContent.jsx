@@ -7,7 +7,7 @@ import Login from './pages/Login/Login';
 import Settings from './pages/Settings/Settings';
 import Signup from './pages/Signup/Signup';
 import Teams from './pages/Teams/Teams';
-import TestPage from './pages/TestPage/TestPage';
+import HealthPage from './pages/TestPage/HealthPage';
 import Error404 from './pages/Error404/Error404';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
