@@ -55,6 +55,15 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
     event.preventDefault();
 
     if (isDelete && onConfirm) {
+      try {
+        const response = await axios.delete(`http://127.0.0.1:8081/activity/delete/${activityId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+      } catch (error) {
+        console.error('Error deleting activity:', error.response ? error.response.data : error.message);
+      }
       onConfirm(); // Call the confirm action for delete 
     } else if (isEdit) {
 
