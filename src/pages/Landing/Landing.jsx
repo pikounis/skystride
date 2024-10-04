@@ -2,10 +2,10 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Environment, Html, useProgress, Text } from "@react-three/drei";
 import { Box, Button } from "@mui/material";
-import { useSpring, animated as animatedThree } from "@react-spring/three";
+import { useSpring, animated as animatedThree, to } from "@react-spring/three";
 import { animated as animatedDiv, useSpring as useWebSpring } from "@react-spring/web";
 import { AiOutlineArrowLeft } from "react-icons/ai";  // Import the back arrow icon
-import { useNavigate } from "react-router-dom";  // For navigation
+import { Navigate, useNavigate } from "react-router-dom";  // For navigation
 import styles from "./Landing.module.css";
 
 function Loader() {
@@ -112,11 +112,12 @@ function BoxingRingModel({ clicked, isMobile }) {
         </group>
     );
 }
-
 export default function Landing() {
     const [clicked, setClicked] = useState(false);  
     const [isMobile, setIsMobile] = useState(false);
     const [page, setPage] = useState(1);  // Controls the page number (1, 2, or 3)
+    const navigate = new useNavigate();
+
 
     // Animation for the garden and button moving down
     const { position: gardenPosition } = useSpring({
@@ -126,7 +127,7 @@ export default function Landing() {
 
     // Animation for the mountain (second page) or boxing ring (third page)
     const { position: modelPosition } = useSpring({
-        position: clicked ? (isMobile ? [0, 8, 0] : page === 2 ? [-16, -1, 0] : [11, -1, 0]) : (isMobile ? [0, -50, 0] : page === 2 ? [-18, -50, 0] : [18, -50, 0]),
+        position: clicked ? (isMobile ? [0, 8, 0] : page === 2 ? [-17, -1, 0] : [9, -1, 0]) : (isMobile ? [0, -50, 0] : page === 2 ? [-18, -50, 0] : [18, -50, 0]),
         config: { tension: 120, friction: 20 }
     });
 
@@ -146,7 +147,7 @@ export default function Landing() {
 
     // Text animation for the third page (left for desktop, bottom for mobile)
     const { leftTextPosition, opacity: thirdPageTextOpacity } = useWebSpring({
-        leftTextPosition: clicked && page === 3 ? 100 : -500,
+        leftTextPosition: clicked && page === 3 ? 160 : -500,
         opacity: clicked && page === 3 ? 1 : 0,
         config: { tension: 120, friction: 20 }
     });
@@ -194,6 +195,18 @@ export default function Landing() {
                     }}
                 >
                     <AiOutlineArrowLeft size={30} />
+                </div>
+            )}
+
+            {/* Join and Login Buttons on the First Page */}
+            {page === 1 && (
+                <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 2000 }}>
+                    <Button variant="contained" onClick={() => navigate("/signup")}  style={{ marginRight: '1rem', borderRadius: '20px', backgroundColor: '#ff7b5f'}}>
+                        Join
+                    </Button>
+                    <Button variant="outlined" onClick={() => navigate("/login")} style={{ borderRadius: '20px', color: '#ff7b5f', borderColor: '#ff7b5f' }}>
+                        Login
+                    </Button>
                 </div>
             )}
 
@@ -279,7 +292,7 @@ export default function Landing() {
                 <Button 
                     variant="contained" 
                     onClick={() => setPage(3)} 
-                    style={{ marginTop: '1rem', backgroundColor: '#ff7b5f' }}
+                    style={{ marginTop: '1rem', backgroundColor: '#ff7b5f', borderRadius: '20px' }}
                 >
                     Next
                 </Button>
@@ -305,6 +318,13 @@ export default function Landing() {
             >
                 <h2 style={{ fontWeight: 'bolder', paddingBottom: '1rem' }}>Fun, Competition, and Friends</h2>
                 <p>Battle your friends and compete to see who’s the best. Enjoy friendly competition and healthy fun as you strive to improve and become the ultimate champion!</p>
+                <Button 
+                    variant="contained" 
+                    onClick={() => navigate("/signup")} 
+                    style={{ marginTop: '1rem', backgroundColor: '#ff7b5f', borderRadius: '20px' }}
+                >   
+                    Get Started Now!
+                </Button>
             </animatedDiv.div>
         </Box>
     );
