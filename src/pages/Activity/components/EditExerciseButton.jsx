@@ -13,7 +13,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu({ selectedExercise }) {
+const EditExerciseButton = ({ selectedExercise }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isDelete, setIsDelete] = React.useState(false);
   const [isEdit, setIsEdit] = React.useState(false);
@@ -95,6 +95,7 @@ export default function LongMenu({ selectedExercise }) {
       {/* Confirmation dialog for deletion or editing an exercise session */}
       <ExercisePopupBox 
         ref={popupRef}
+        activityId={selectedExercise?.activityId}
         date={selectedExercise?.date}
         exercise={selectedExercise?.exercise} // Passing the selected exercise's data
         startTime = {selectedExercise?.start}
@@ -106,4 +107,6 @@ export default function LongMenu({ selectedExercise }) {
       />
     </div>
   );
-}
+};
+
+export default EditExerciseButton;

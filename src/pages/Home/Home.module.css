@@ -1,5 +1,17 @@
+/* @font-face {
+    font-family: 'Sky';
+    src: url('/fonts/Sky_Regular.ttf') format('regular');
+    src: url('/fonts/Sky_Bold.ttf') format('bold');
+    src: url('/fonts/Sky_Italic.ttf') format('italic');
+    src: url('/fonts/Sky_Med.ttf') format('med');
+    src: url('/fonts/SkyText_Lt.ttf') format('light');
+  } */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .leftSection {
     width:46%;
+    height: 100%;
 }
 
 .chartsSection {
@@ -7,25 +19,44 @@
     height: 50%;
 }
 
+.hoursWorkedChart {
+   
+}
+
 .leaderboardSection {
     border-radius: 40px;
     height: 100%;
     width: 46%;
-    background-color: aquamarine;
+}
+
+.achievementsTitle {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #083D77 !important;
 }
 
 /* Needs to be reconfig to not look like ass */
 .achievementsSection{
     position: relative;
-    /* max-width: 500px; */
     width: 100%;
-    /* border-radius: 5px; */
-    /* border-style: solid; */
-    /* border-color: black; */
-    /* background: rgb(241, 241, 241); */
-    margin: 0 15px;
+    /* border-radius: 10px;
+    border-style: solid;
+    border-color: #41EAD4;
+    border-width: 3px; */
+    margin-top: 30px;
     padding: 20px;
-    height: 50%;
+}
+
+.chartsHeader {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.chartsTitle {
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
 }
 
 
@@ -37,4 +68,3 @@
         width: 100%;
     }
 }
-

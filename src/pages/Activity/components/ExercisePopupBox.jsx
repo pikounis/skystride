@@ -5,15 +5,32 @@ import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import { Typography, Box } from '@mui/material';
 import Calendar from './Calendar';
-import SportsDropDown from './SportsDropDown';
+import SportsDropDown from '../../../components/SportsDropDown/SportsDropDown';
 import StartEndTime from './StartEndTime';
-import Duration from './Duration';
 import styles from '../Activity.module.css';
+import { APIPath } from '../../../util';
+import axios from 'axios';
 
-const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime }, ref) => {
+const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime, activityId}, ref) => {
 
-  // Sample data for the sports dropdown
-  const sports = ['Football', 'Basketball', 'Tennis', 'Baseball', 'Cricket'];
+  const [sportList, setSportList] = React.useState([]); // Holds sports options
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    // Axios GET request
+    axios.get(APIPath + "/sport/getAll")  // Replace with your API endpoint
+      .then((response) => {
+        setSportList(response.data);
+        setLoading(false);
+        setError(null);
+      })
+      .catch(() => {
+        console.error('Error fetching sports data:', error);
+        setLoading(false);
+        setError('Failed to load sports data');
+      });
+    }, [error, loading]);
 
   // State to manage dialog open/close
   const [open, setOpen] = React.useState(false);
@@ -34,20 +51,99 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
   }));
 
   // Form submission handler
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     if (isDelete && onConfirm) {
+      try {
+        const response = await axios.delete(`http://127.0.0.1:8081/activity/delete/${activityId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+      } catch (error) {
+        console.error('Error deleting activity:', error.response ? error.response.data : error.message);
+      }
+      onConfirm(); // Call the confirm action for delete 
+    } else if (isEdit) {
 
-      onConfirm(); // Call the confirm action for delete
-      
+      const dataToPut = {
+        id: formData.activityId,
+        skyUser: {
+          id: 1 // mock ID
+        },
+        sport: {
+          id: formData.sport.id,
+          name: formData.sport.name,
+          ppm: formData.sport.ppm
+        },
+        startTime: formData.date + "T" + formData.startTime,
+        endTime: formData.date + "T" + formData.endTime,
+        pontsEarned: 0 // automatically calculated
+      };
+
+      try {
+      await axios.put(`http://127.0.0.1:8081/activity/update`, dataToPut, {
+        headers: {
+          'Content-Type': 'application/json',
+          // Include any other headers if necessary
+        }
+      });
+      } catch (error) {
+        console.error('Error saving activity:', error.response ? error.response.data : error.message);
+      }
     } else {
-      
-      console.log('Exercise details submitted:', { exercise, date, totalTime }); 
+
+      const dataToPost = {
+        skyUser: {
+          id: 1 // mock ID
+        },
+        sport: {
+          id: formData.sport.id // sport ID
+        },
+        startTime: formData.date + "T" + formData.startTime,
+        endTime: formData.date + "T" + formData.endTime,
+        pontsEarned: 0 // automatically calculated
+      };
+
+      try {
+        // Make the POST request to create a new activity
+        await axios.post('http://127.0.0.1:8081/activity/create', dataToPost, {
+          headers: {
+            'Content-Type': 'application/json',
+            // Include any other headers if necessary, like authorization
+          }
+        });
+      } catch (error) {
+        console.error('Error creating activity:', error.response ? error.response.data : error.message);
+      }
     }
     handleClose(); // Close the dialog after submission
   };
 
+  const [formData, setFormData] = React.useState({
+    activityId: activityId,
+    date: null,
+    sport: null,
+    startTime: null,
+    endTime: null,
+  });
+
+  const handleDateSubmit = (selectedDate) => {
+    setFormData((prevData) => ({ ...prevData, date: selectedDate }));
+  };
+
+  const handleSportChange = (sport) => {
+    setFormData((prevData) => ({ ...prevData, sport }));
+  };
+
+  const handleStartTimeSubmit = (selectedTime) => {
+    setFormData((prevData) => ({ ...prevData, startTime: selectedTime }));
+  };
+
+  const handleEndTimeSubmit = (selectedTime) => {
+    setFormData((prevData) => ({ ...prevData, endTime: selectedTime }));
+  };
 
   let buttonText;
 
@@ -103,37 +199,28 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
                 Edit Exercise
               </Typography>
 
-              <Calendar />
+              <Calendar onDateChange={handleDateSubmit}/>
               <Typography variant="body2" className={styles.dateSubtitle}>
                     Current Date: {date}
               </Typography>
 
-              <SportsDropDown sportsData={sports} selectedExercise={exercise}/>
+              <SportsDropDown sportsData={sportList} onSportChange={handleSportChange}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.editTime}>
                 <Box className={styles.timeContainer}>
 
                   {/* Start and End Time Fields */}
-                  <StartEndTime name="Start Time" />
+                  <StartEndTime name="Start Time" onTimingChange={handleStartTimeSubmit}/>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current Start: {startTime}
                   </Typography>
 
                   <Box className={styles.endTime}>
-                    <StartEndTime name="End Time" />
+                    <StartEndTime name="End Time" onTimingChange={handleEndTimeSubmit}/>
                   </Box>
                   <Typography variant="body2" className={styles.timeSubtitle}>
                     Current End: {endTime}
-                  </Typography>
-
-                  <Typography className={styles.orTextEdit}>OR</Typography>
-
-                  {/* Total Duration Field */}
-                  <Duration />
-
-                  <Typography variant="body2" className={styles.durationEditSubtitle}>
-                    Current Total Time: {totalTime}
                   </Typography>
 
                 </Box>
@@ -149,27 +236,19 @@ const ExercisePopupBox = React.forwardRef(({ onConfirm, isDelete, isEdit, date, 
               </Typography>
 
               {/* Custom components for the form */}
-              <Calendar />
-              <SportsDropDown sportsData={sports} />
+              <Calendar onDateChange={handleDateSubmit}/>
+              {/* <SportsDropDown sportsData={sports} /> */}
+              <SportsDropDown sportsData={sportList} onSportChange={handleSportChange}/>
 
               {/* Time selection fields */}
               <fieldset className={styles.time}>
                 <Box className={styles.timeContainer}>
         
-                  <StartEndTime name="Start Time" />
+                  <StartEndTime name="Start Time" onTimingChange={handleStartTimeSubmit}/>
 
                   <Box className={styles.endTime}>
-                    <StartEndTime name="End Time" />
+                    <StartEndTime name="End Time" onTimingChange={handleEndTimeSubmit}/>
                   </Box>
-
-                  <Typography className={styles.orText}>OR</Typography>
-
-                  {/* Total Duration Field */}
-                  <Duration />
-
-                  <Typography variant="body2" className={styles.durationSubtitle}>
-                    Total hours / minutes
-                  </Typography>
 
                 </Box>
               </fieldset>

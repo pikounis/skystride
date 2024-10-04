@@ -5,11 +5,25 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { Box } from '@mui/material';
 import styles from '../Activity.module.css';
 
-export default function FormPropsTimePickers({name}) {
+export default function FormPropsTimePickers({name, onTimingChange}) {
+
+  const handleTimeChange = (newValue) => {
+    if (newValue) {
+      const updatedValue = newValue.format('HH:mm:ss');
+
+    // Call the parent callback with the updated value
+    if (onTimingChange) {
+      onTimingChange(updatedValue); // Send the date to the parent
+    }}
+  };
+
   return (
     <Box className={styles.timeInput}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <TimePicker label={name} name="time" />
+            <TimePicker 
+              label={name}
+              name="time"
+              onAccept={handleTimeChange} />
         </LocalizationProvider>
     </Box>
   );
