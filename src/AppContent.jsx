@@ -11,6 +11,7 @@ import TestPage from './pages/TestPage/TestPage';
 import Error404 from './pages/Error404/Error404';
 import ResponsiveAppBar from './components/ResponsiveAppBar/ResponsiveAppBar';
 import Footer from './components/Footer/Footer';
+import Landing from './pages/Landing/Landing';
 
 // Import the PrivateRoute component
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -42,6 +43,7 @@ function AppContent() {
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/landing" element={<Landing />} />
 
         {/* Protected Routes */}
         <Route
