@@ -38,15 +38,15 @@ function timeDifferenceInMinutes(start, end) {
 }
 
 // function creates an array of objects with these fields for the table
-function createData(start, end, sport, points) {
+function createData(start, end, sport, points, id) {
   const startDate = new Date(start);
   const endDate = new Date(end);
-  return {date: formatDate(startDate), exercise: sport, start: formatTime(startDate), finish: formatTime(endDate), total_time: timeDifferenceInMinutes(startDate, endDate), points}
+  return {date: formatDate(startDate), exercise: sport, start: formatTime(startDate), finish: formatTime(endDate), total_time: timeDifferenceInMinutes(startDate, endDate), points, activityId: id}
   // return { date, exercise, start, finish, total_time, points };
 }
 
 var getRows = (data) => {
-  return data.map((activity) => createData(activity.startTime, activity.endTime, activity.sport.name, activity.pointsEarned))
+  return data.map((activity) => createData(activity.startTime, activity.endTime, activity.sport.name, activity.pointsEarned, activity.id));
 }
 
 const Activity = () => {
