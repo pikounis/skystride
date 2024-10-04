@@ -5,7 +5,7 @@ import LeaderboardTable from "./components/LeaderboardTable/LeaderboardTable";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Podium from "./components/Podium/Podium";
 import styles from './Leaderboard.module.css';
-import { APIPath } from "../../util";
+import { getHeader, APIPath } from "../../util";
 
 
 const logos = {
@@ -73,12 +73,14 @@ function Leaderboard() {
       fetchPodiumData("/office/getAll", setOfficeData); // Fetch office data
     }
   };
-  
 
   const fetchPodiumData = (endpoint, setData) => {
+
+    const headers = getHeader();
+    
     setLoading(true);
     axios
-      .get(APIPath + endpoint)
+      .get(APIPath + endpoint, {headers})
       .then((response) => {
         const data = response.data;
   

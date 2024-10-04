@@ -8,6 +8,7 @@ import RadioButtons from "./components/RadioButtons/RadioButtons";
 import TeamsSearch from './components/TeamsSearch/TeamsSearch';
 import CreateTeam from './components/CreateTeam/CreateTeam';
 import CardWrapper from "./components/CardWrapper/CardWrapper";
+import { Box } from '@mui/material';
 
 function Teams() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +38,8 @@ function Teams() {
                 <Typography className={styles.title} variant="h3">Teams</Typography>
             </div>
             <div className={styles.controlBar}>
-                <TeamsSearch onSearch={handleSearch} />
+                <Box sx={{width: '150px'}} />
+                {/* <TeamsSearch onSearch={handleSearch} /> */}
                 <RadioButtons value={radioValue} onChange={handleRadioChange} />
                 <CreateTeam onTeamCreated={handleTeamCreated} />
             </div>

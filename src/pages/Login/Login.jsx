@@ -14,7 +14,7 @@ const Login = () => {
           className={styles.emblem}
         /> */}
          <img
-          src="skyStrideBlock.png"
+          src="/images/skyStrideBlock.png"
           alt="Logo"
           className={styles.logo}
         />

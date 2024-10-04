@@ -7,27 +7,29 @@ import { Box, Typography } from '@mui/material';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
 import axios from 'axios';
-import { APIPath } from '../../util';
+import { getUserId, getHeader, APIPath } from '../../util';
 import { shadows } from '@mui/system';
 
 
 const mockDataName = "Jack";
 
 function Home() {
-  const skyUserId = 1;
   const [pointsHistory, setPointsHistory] = useState([]);
   const [workoutHistory, setWorkoutHistory] = useState([]);
   const [nextAchievements, setNextAchievements] = useState([]);
   const [myTeams, setMyTeams] = useState([]);
+
+  const userId = getUserId();
+  const headers = getHeader();
 
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
         // Fetch both points, workout, and leaderboard data concurrently
         const [pointsResponse, workoutResponse, teamResponse] = await Promise.all([
-          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${skyUserId}`),
-          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${skyUserId}`),
-          axios.get(`${APIPath}/team/getMyTeams/${skyUserId}`)
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {headers}),
+          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {headers})
         ]);
         setMyTeams(teamResponse.data);
 
@@ -42,7 +44,7 @@ function Home() {
 
           return {
             name: formattedDate,
-            pv: entry.points, // Points value
+            points: entry.points, // Points value
           };
         }).reverse();
 
@@ -57,13 +59,13 @@ function Home() {
 
           return {
             name: formattedDate,
-            pv: entry.hours, // Hours value
+            minutes: entry.minutes, // Hours value
           };
         }).reverse();
 
         const fetchNextAchievements = async () => {
           try {
-            const response = await axios.get(`${APIPath}/achievement/getTopThree/${skyUserId}`);
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${userId}`, {headers});
 
             // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
             const transformedAchievements = response.data.map((achievement) => {
@@ -97,7 +99,7 @@ function Home() {
     };
 
     fetchHistoryData();
-  }, [skyUserId]); // skyUserId as dependency
+  }, [getUserId]); // skyUserId as dependency
 
   // Helper function to get the day suffix (st, nd, rd, th)
   const getDaySuffix = (day) => {
@@ -140,16 +142,16 @@ function Home() {
               {/* data=pointsHistory */}
             </Box>
 
-            <LineGraph data={pointsHistory} /> 
+            <LineGraph data={pointsHistory} dataKey={"points"} /> 
 
             <Box className={styles.chartsHeader} sx={{ boxShadow: 3, borderRadius: '4px', marginTop: '40px'}}>
-              <h4 className={styles.chartsTitle}>Daily Workout Hours in the Last 5 Days</h4>
+              <h4 className={styles.chartsTitle}>Daily Workout Time in the Last 5 Days</h4>
             </Box>
 
             <Box className={styles.hoursWorkedChart}>
               {/* Add filtering component here */}
               {/* data=workoutHistory */}
-              <LineGraph data={workoutHistory} fillColor="#B8B8FF" strokeColor="#9999FF"/>
+              <LineGraph data={workoutHistory} dataKey={"minutes"} fillColor="#B8B8FF" strokeColor="#9999FF"/>
             </Box>
 
           </Box>
@@ -199,7 +201,7 @@ function Home() {
 
         {/* Leaderboards Section */}
         <Box className={styles.leaderboardSection}>
-          <LeaderboardSection teams={myTeams} skyUserId={skyUserId}/>
+          <LeaderboardSection teams={myTeams} skyUserId={getUserId}/>
         </Box>
       </Box>
 
