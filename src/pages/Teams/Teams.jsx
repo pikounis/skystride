@@ -1,3 +1,6 @@
+// Main component for the Teams page. It manages the overall state and renders child components like the search bar, 
+// radio buttons for filtering, create team button, and the list of team cards.
+
 import React, { useState } from 'react';
 import styles from './Teams.module.css';
 import Typography from "@mui/material/Typography";
@@ -8,9 +11,24 @@ import CardWrapper from "./components/CardWrapper/CardWrapper";
 
 function Teams() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [radioValue, setRadioValue] = useState('showAll');
+    const [refreshTeams, setRefreshTeams] = useState(0);
 
     const handleSearch = (term) => {
         setSearchTerm(term);
+    };
+
+    const handleRadioChange = (event) => {
+        setRadioValue(event.target.value);
+    };
+
+    const handleTeamCreated = () => {
+        // Increment to trigger teams list refresh
+        setRefreshTeams(prev => prev + 1);
+    };
+
+    const handleTeamsChange = () => {
+        setRefreshTeams(prev => prev + 1);
     };
 
     return (
@@ -20,11 +38,15 @@ function Teams() {
             </div>
             <div className={styles.controlBar}>
                 <TeamsSearch onSearch={handleSearch} />
-                <RadioButtons />
-                <CreateTeam />
+                <RadioButtons value={radioValue} onChange={handleRadioChange} />
+                <CreateTeam onTeamCreated={handleTeamCreated} />
             </div>
             <div>
-                <CardWrapper />
+                <CardWrapper
+                    radioValue={radioValue}
+                    refreshTeams={refreshTeams}
+                    onTeamsChange={handleTeamsChange}
+                />
             </div>
         </div>
     );

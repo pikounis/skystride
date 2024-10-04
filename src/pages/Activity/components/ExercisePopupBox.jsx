@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import { Typography, Box } from '@mui/material';
 import Calendar from './Calendar';
-import SportsDropDown from './SportsDropDown';
+import SportsDropDown from '../../../components/SportsDropDown/SportsDropDown';
 import StartEndTime from './StartEndTime';
 import styles from '../Activity.module.css';
 import { APIPath } from '../../../util';

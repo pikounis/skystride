@@ -1,9 +1,12 @@
+// Provides a button to open a dialog for creating a new team.
+
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import CreateTeamDialog from '../CreateTeamDialog/CreateTeamDialog';
 import styles from './CreateTeam.module.css'; 
+import axios from 'axios';
 
-function CreateTeam() {
+function CreateTeam({ onTeamCreated }) {
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleOpenDialog = () => {
@@ -15,8 +18,20 @@ function CreateTeam() {
     };
 
     const handleCreateTeam = (teamData) => {
-        console.log('Team Created:', teamData);
-        // add logic to save the created team
+        axios.post('http://localhost:8081/team/create/5', teamData)
+            .then(response => {
+                console.log('Team successfully created:', response.data);
+                // Close the dialog
+                handleCloseDialog();
+                // Notify parent component that a team was created
+                if (onTeamCreated) {
+                    onTeamCreated();
+                }
+            })
+            .catch(error => {
+                console.error('Error creating team:', error);
+                alert('Failed to create team. Please try again.');
+            });
     };
 
     return (

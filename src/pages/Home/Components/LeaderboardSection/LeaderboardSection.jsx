@@ -5,7 +5,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Proptype from 'prop-types';
 import LeaderboardTable from '../LeaderboardTable/LeaderboardTable';
 
-const LeaderboardSection = ({ teams }) => {
+const LeaderboardSection = ({ teams, skyUserId }) => {
   const [page, setPage] = useState(1);
   const totalPages = teams.length >= 1 ? teams.length : 1; 
 
@@ -32,7 +32,7 @@ const LeaderboardSection = ({ teams }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 2,
+          padding: '20px',
           height: '70vh',
           overflow: 'scroll'
         }}
@@ -40,7 +40,7 @@ const LeaderboardSection = ({ teams }) => {
         {teams.length == 0 ? 
           <Typography variant="h6">Please join teams to see your teams here!</Typography>
           :
-          <LeaderboardTable team={teams[page - 1]}/>
+          <LeaderboardTable team={teams[page - 1]} skyUserId={skyUserId}/>
         }
         
       </Box>
