@@ -16,10 +16,12 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   const [sportList, setSportList] = React.useState([]); // Holds sports options
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+  
+  const headers = getHeader();
 
   React.useEffect(() => {
     // Axios GET request
-    axios.get(APIPath + "/sport/getAll")  // Replace with your API endpoint
+    axios.get(APIPath + "/sport/getAll", {headers})  // Replace with your API endpoint
       .then((response) => {
         setSportList(response.data);
         setLoading(false);
@@ -56,12 +58,9 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
     if (isDelete && onConfirm) {
       try {
-        const response = await axios.delete(`http://127.0.0.1:8081/activity/delete/${activityId}`, {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-      } catch (error) {
+        const response = await axios.delete(`${APIPath}/activity/delete/${activityId}`, {headers});
+      }
+      catch (error) {
         console.error('Error deleting activity:', error.response ? error.response.data : error.message);
       }
       onConfirm(); // Call the confirm action for delete 
@@ -83,12 +82,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
       };
 
       try {
-      await axios.put(`http://127.0.0.1:8081/activity/update`, dataToPut, {
-        headers: {
-          'Content-Type': 'application/json',
-          // Include any other headers if necessary
-        }
-      });
+        await axios.put(`${APIPath}/activity/update`, dataToPut, {headers});
       } catch (error) {
         console.error('Error saving activity:', error.response ? error.response.data : error.message);
       }
@@ -108,12 +102,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
       try {
         // Make the POST request to create a new activity
-        await axios.post('http://127.0.0.1:8081/activity/create', dataToPost, {
-          headers: {
-            'Content-Type': 'application/json',
-            // Include any other headers if necessary, like authorization
-          }
-        });
+        await axios.post(`${APIPath}/activity/create`, dataToPost, {headers});
       } catch (error) {
         console.error('Error creating activity:', error.response ? error.response.data : error.message);
       }
