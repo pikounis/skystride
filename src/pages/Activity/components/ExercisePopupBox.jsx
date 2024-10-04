@@ -54,10 +54,35 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(formData);
-
     if (isDelete && onConfirm) {
       onConfirm(); // Call the confirm action for delete 
+    } else if (isEdit) {
+
+      const dataToPut = {
+        id: formData.activityId,
+        skyUser: {
+          id: 1 // mock ID
+        },
+        sport: {
+          id: formData.sport.id,
+          name: formData.sport.name,
+          ppm: formData.sport.ppm
+        },
+        startTime: formData.date + "T" + formData.startTime,
+        endTime: formData.date + "T" + formData.endTime,
+        pontsEarned: 0 // automatically calculated
+      };
+
+      try {
+      await axios.put(`http://127.0.0.1:8081/activity/update`, dataToPut, {
+        headers: {
+          'Content-Type': 'application/json',
+          // Include any other headers if necessary
+        }
+      });
+      } catch (error) {
+        console.error('Error saving activity:', error.response ? error.response.data : error.message);
+      }
     } else {
 
       const dataToPost = {
@@ -65,7 +90,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
           id: 1 // mock ID
         },
         sport: {
-          id: formData.sport // sport ID
+          id: formData.sport.id // sport ID
         },
         startTime: formData.date + "T" + formData.startTime,
         endTime: formData.date + "T" + formData.endTime,
