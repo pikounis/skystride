@@ -86,14 +86,6 @@ function AppContent() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/test"
-          element={
-            <PrivateRoute>
-              <TestPage />
-            </PrivateRoute>
-          }
-        />
 
         {/* Catch-all route for 404 errors */}
         <Route path="*" element={<Error404 />} />
