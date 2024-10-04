@@ -11,14 +11,13 @@ import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import { APIPath } from '../../../../util';
+import { getHeader, getUserId, APIPath } from '../../../../util';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function TimerDialog({ open, onClose }) {
-  const skyUserId = 1;  // Assuming the user ID is 1 for this example
   const [seconds, setSeconds] = React.useState(0);
   const [isActive, setIsActive] = React.useState(false);
   const intervalRef = React.useRef(null);  // Use useRef to track interval ID
@@ -28,7 +27,7 @@ export default function TimerDialog({ open, onClose }) {
 
   // Function to fetch the current timer status when the component loads
   const fetchTimerStatus = () => {
-    axios.get(`${APIPath}/user/${skyUserId}/getTimer`)
+    axios.get(`${APIPath}/user/${getUserId}/getTimer`, {getHeader})
       .then((response) => {
         const { timerStartTime, currentTimerRunning, startedSport } = response.data;
 
@@ -73,7 +72,7 @@ export default function TimerDialog({ open, onClose }) {
       startInterval();
 
       // API call to start the backend timer
-      axios.post(`${APIPath}/user/${skyUserId}/startTimer/${selectedSport}`)
+      axios.post(`${APIPath}/user/${getUserId}/startTimer/${selectedSport}`, {}, {getHeader})
         .catch((e) => {
           console.error("Error starting timer on server: " + e);
         });
@@ -88,7 +87,7 @@ export default function TimerDialog({ open, onClose }) {
     stopInterval();  // Ensure the interval is cleared
 
     // API call to stop the backend timer
-    axios.post(`${APIPath}/user/${skyUserId}/endTimer`)
+    axios.post(`${APIPath}/user/${getUserId}/endTimer`, {}, {getHeader})
       .catch((e) => {
         console.error("Error stopping timer on server: " + e);
       });

@@ -8,7 +8,7 @@ import Calendar from './Calendar';
 import SportsDropDown from '../../../components/SportsDropDown/SportsDropDown';
 import StartEndTime from './StartEndTime';
 import styles from '../Activity.module.css';
-import { APIPath } from '../../../util';
+import { APIPath, getHeader } from '../../../util';
 import axios from 'axios';
 
 const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, exercise, startTime, endTime, totalTime, activityId}, ref) => {
@@ -21,7 +21,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
   React.useEffect(() => {
     // Axios GET request
-    axios.get(APIPath + "/sport/getAll", {headers})  // Replace with your API endpoint
+    axios.get(APIPath + "/sport/getAll", {getHeader})  // Replace with your API endpoint
       .then((response) => {
         setSportList(response.data);
         setLoading(false);
@@ -58,7 +58,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
     if (isDelete && onConfirm) {
       try {
-        const response = await axios.delete(`${APIPath}/activity/delete/${activityId}`, {headers});
+        const response = await axios.delete(`${APIPath}/activity/delete/${activityId}`, {getHeader});
       }
       catch (error) {
         console.error('Error deleting activity:', error.response ? error.response.data : error.message);
@@ -82,7 +82,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
       };
 
       try {
-        await axios.put(`${APIPath}/activity/update`, dataToPut, {headers});
+        await axios.put(`${APIPath}/activity/update`, dataToPut, {getHeader});
       } catch (error) {
         console.error('Error saving activity:', error.response ? error.response.data : error.message);
       }
@@ -102,7 +102,7 @@ const ExercisePopupBox = React.forwardRef(({onConfirm, isDelete, isEdit, date, e
 
       try {
         // Make the POST request to create a new activity
-        await axios.post(`${APIPath}/activity/create`, dataToPost, {headers});
+        await axios.post(`${APIPath}/activity/create`, dataToPost, {getHeader});
       } catch (error) {
         console.error('Error creating activity:', error.response ? error.response.data : error.message);
       }

@@ -7,7 +7,7 @@ import { Box, Typography } from '@mui/material';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import BadgeBar from './Components/BadgeBar/BadgeBar';
 import axios from 'axios';
-import { APIPath } from '../../util';
+import { getUserId, getHeader, APIPath } from '../../util';
 import { shadows } from '@mui/system';
 
 
@@ -27,9 +27,9 @@ function Home() {
       try {
         // Fetch both points, workout, and leaderboard data concurrently
         const [pointsResponse, workoutResponse, teamResponse] = await Promise.all([
-          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {headers}),
-          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {headers}),
-          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {headers})
+          axios.get(`${APIPath}/activity/getPointsHistoryForLast5Days/${userId}`, {getHeader}),
+          axios.get(`${APIPath}/activity/getWorkoutHoursHistoryForLast5Days/${userId}`, {getHeader}),
+          axios.get(`${APIPath}/team/getMyTeams/${userId}`, {getHeader})
         ]);
         setMyTeams(teamResponse.data);
 
@@ -65,7 +65,7 @@ function Home() {
 
         const fetchNextAchievements = async () => {
           try {
-            const response = await axios.get(`${APIPath}/achievement/getTopThree/${userId}`, {headers});
+            const response = await axios.get(`${APIPath}/achievement/getTopThree/${getUserId}`, {getHeader});
 
             // Assuming the response is an array of achievements with their respective pointsDiff and pointsNeeded
             const transformedAchievements = response.data.map((achievement) => {
@@ -99,7 +99,7 @@ function Home() {
     };
 
     fetchHistoryData();
-  }, [skyUserId]); // skyUserId as dependency
+  }, [getUserId]); // skyUserId as dependency
 
   // Helper function to get the day suffix (st, nd, rd, th)
   const getDaySuffix = (day) => {
@@ -201,7 +201,7 @@ function Home() {
 
         {/* Leaderboards Section */}
         <Box className={styles.leaderboardSection}>
-          <LeaderboardSection teams={myTeams} skyUserId={skyUserId}/>
+          <LeaderboardSection teams={myTeams} skyUserId={getUserId}/>
         </Box>
       </Box>
 
