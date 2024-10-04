@@ -75,7 +75,7 @@ export default function TimerDialog({ open, onClose }) {
       startInterval();
 
       // API call to start the backend timer
-      axios.post(`${APIPath}/user/${getUserId}/startTimer/${selectedSport}`, {}, {getHeader})
+      axios.post(`${APIPath}/user/${userId}/startTimer/${selectedSport}`, {}, {headers})
         .catch((e) => {
           console.error("Error starting timer on server: " + e);
         });
@@ -90,7 +90,7 @@ export default function TimerDialog({ open, onClose }) {
     stopInterval();  // Ensure the interval is cleared
 
     // API call to stop the backend timer
-    axios.post(`${APIPath}/user/${getUserId}/endTimer`, {}, {getHeader})
+    axios.post(`${APIPath}/user/${userId}/endTimer`, {}, {headers})
       .catch((e) => {
         console.error("Error stopping timer on server: " + e);
       });
@@ -106,7 +106,7 @@ export default function TimerDialog({ open, onClose }) {
 
   // Fetch sports list and timer status on component mount
   React.useEffect(() => {
-    axios.get(`${APIPath}/sport/getAll`)
+    axios.get(`${APIPath}/sport/getAll`, {headers})
       .then((response) => {
         setSportList(response.data);
       })

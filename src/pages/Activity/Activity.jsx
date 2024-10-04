@@ -58,7 +58,7 @@ const Activity = () => {
 
   useEffect(() => {
     // Axios GET request
-    axios.get(APIPath + `/activity/getMyActivities/${userId}`, {headers})  // Replace with your API endpoint
+    axios.get(`${APIPath}/activity/getMyActivities/${userId}`, {headers})  // Replace with your API endpoint
       .then((response) => {
         var data = getRows(response.data);
         setActivitydata(data);  // Set the received data into state
