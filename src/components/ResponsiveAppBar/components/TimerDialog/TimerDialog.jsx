@@ -11,14 +11,13 @@ import Box from '@mui/material/Box';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import { APIPath } from '../../../../util';
+import { getHeader, getUserId, APIPath } from '../../../../util';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function TimerDialog({ open, onClose }) {
-  const skyUserId = 1;  // Assuming the user ID is 1 for this example
   const [seconds, setSeconds] = React.useState(0);
   const [isActive, setIsActive] = React.useState(false);
   const intervalRef = React.useRef(null);  // Use useRef to track interval ID
@@ -26,9 +25,12 @@ export default function TimerDialog({ open, onClose }) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [sportList, setSportList] = React.useState([]);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   // Function to fetch the current timer status when the component loads
   const fetchTimerStatus = () => {
-    axios.get(`${APIPath}/user/${skyUserId}/getTimer`)
+    axios.get(`${APIPath}/user/${userId}/getTimer`, {headers})
       .then((response) => {
         const { timerStartTime, currentTimerRunning, startedSport } = response.data;
 
@@ -73,7 +75,7 @@ export default function TimerDialog({ open, onClose }) {
       startInterval();
 
       // API call to start the backend timer
-      axios.post(`${APIPath}/user/${skyUserId}/startTimer/${selectedSport}`)
+      axios.post(`${APIPath}/user/${userId}/startTimer/${selectedSport}`, {}, {headers})
         .catch((e) => {
           console.error("Error starting timer on server: " + e);
         });
@@ -88,7 +90,7 @@ export default function TimerDialog({ open, onClose }) {
     stopInterval();  // Ensure the interval is cleared
 
     // API call to stop the backend timer
-    axios.post(`${APIPath}/user/${skyUserId}/endTimer`)
+    axios.post(`${APIPath}/user/${userId}/endTimer`, {}, {headers})
       .catch((e) => {
         console.error("Error stopping timer on server: " + e);
       });
@@ -104,7 +106,7 @@ export default function TimerDialog({ open, onClose }) {
 
   // Fetch sports list and timer status on component mount
   React.useEffect(() => {
-    axios.get(`${APIPath}/sport/getAll`)
+    axios.get(`${APIPath}/sport/getAll`, {headers})
       .then((response) => {
         setSportList(response.data);
       })

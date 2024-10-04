@@ -20,7 +20,7 @@ const SportsDropDown = ({ sportsData, selectedExercise, onSportChange, disabled 
           onChange={(event, value) => {
             setSelectedSport(value);
             if (value) {
-              onSportChange(value.id); // Pass the selected sport back to the parent
+              onSportChange(value); // Pass the selected sport back to the parent
             } else {
               onSportChange(null); // Handle case when selection is cleared
             }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ActivityTable from './components/ActivityTable';
 import { Typography } from '@mui/material';
-import { APIPath } from '../../util';
+import { getHeader, getUserId, APIPath } from '../../util';
 import axios from 'axios';
 
 
@@ -38,24 +38,27 @@ function timeDifferenceInMinutes(start, end) {
 }
 
 // function creates an array of objects with these fields for the table
-function createData(start, end, sport, points) {
+function createData(start, end, sport, points, id) {
   const startDate = new Date(start);
   const endDate = new Date(end);
-  return {date: formatDate(startDate), exercise: sport, start: formatTime(startDate), finish: formatTime(endDate), total_time: timeDifferenceInMinutes(startDate, endDate), points}
+  return {date: formatDate(startDate), exercise: sport, start: formatTime(startDate), finish: formatTime(endDate), total_time: timeDifferenceInMinutes(startDate, endDate), points, activityId: id}
   // return { date, exercise, start, finish, total_time, points };
 }
 
 var getRows = (data) => {
-  return data.map((activity) => createData(activity.startTime, activity.endTime, activity.sport.name, activity.pointsEarned))
+  return data.map((activity) => createData(activity.startTime, activity.endTime, activity.sport.name, activity.pointsEarned, activity.id));
 }
 
 const Activity = () => {
   const [activityData, setActivitydata] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   useEffect(() => {
     // Axios GET request
-    axios.get(APIPath + "/activity/getMyActivities/1")  // Replace with your API endpoint
+    axios.get(`${APIPath}/activity/getMyActivities/${userId}`, {headers})  // Replace with your API endpoint
       .then((response) => {
         var data = getRows(response.data);
         setActivitydata(data);  // Set the received data into state

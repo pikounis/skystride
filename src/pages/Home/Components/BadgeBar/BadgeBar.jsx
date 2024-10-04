@@ -6,8 +6,7 @@ import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { MapControls, OrbitControls, Text } from '@react-three/drei';
 import gsap from 'gsap';  
 import axios from 'axios';
-import { APIPath } from '../../../../util';
-
+import { getUserId, getHeader, APIPath } from '../../../../util';
 
 // Coin component (same as before)
 // const Coin = ({ index, imageFront, imageBack, position}) => {
@@ -217,15 +216,17 @@ const Controls = ({angleStep, badgeCount}) => {
 
 // BadgeBar component with arrow buttons
 const BadgeBar = () => {
-  const skyUserId = 1;
   const [moveLeft, setMoveLeft] = useState(false);
   const [moveRight, setMoveRight] = useState(false);
   const [badgeImages, setBadgeImages] = useState([]);
 
+  const userId = getUserId();
+  const headers = getHeader();
+
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${skyUserId}`);
+        const response = await axios.get(`${APIPath}/achievement/getMyAchievements/${userId}`, {headers});
         
         // Transform the achievements data into the format required for badgeImages
         const transformedBadges = response.data.map((achievement) => ({
@@ -240,7 +241,7 @@ const BadgeBar = () => {
     };
 
     fetchAchievements();
-  }, [skyUserId]);  // Fetch data when skyUserId changes
+  }, [userId]);  // Fetch data when skyUserId changes
 
 
   // const badgeImages = [
